@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 const Card3D = dynamic(() => import('./Card3D'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[500px] md:h-[600px] flex items-center justify-center">
+    <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center">
       <div className="w-16 h-16 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
     </div>
   ),
@@ -27,7 +27,7 @@ export default function Hero() {
       {/* Grid background */}
       <div className="absolute inset-0 grid-bg opacity-50" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-12 sm:pb-16 w-full">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left: Copy */}
           <div className="space-y-6">
@@ -97,20 +97,20 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="flex items-center gap-6 pt-6 border-t border-white/5"
+              className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-white/5"
             >
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl text-txt">275+</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-txt">275+</p>
                 <p className="text-dim text-xs">Leads identified</p>
               </div>
               <div className="w-px h-8 bg-white/10" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl text-txt">4</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-txt">4</p>
                 <p className="text-dim text-xs">Cities covered</p>
               </div>
               <div className="w-px h-8 bg-white/10" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl text-accent">48hr</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-accent">48hr</p>
                 <p className="text-dim text-xs">Setup time</p>
               </div>
             </motion.div>

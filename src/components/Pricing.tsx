@@ -65,7 +65,7 @@ export default function Pricing() {
       {/* Subtle glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ export default function Pricing() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className={`relative rounded-2xl border p-7 flex flex-col ${
                 tier.popular
-                  ? 'bg-bg-card border-accent-2/30 scale-[1.02] md:scale-105'
+                  ? 'bg-bg-card border-accent-2/30 md:scale-[1.03]'
                   : 'bg-bg-card border-white/[0.06]'
               }`}
             >

@@ -164,8 +164,8 @@ export default function Card3D() {
   // Fallback for no WebGL
   if (error) {
     return (
-      <div className="w-full h-[400px] md:h-[500px] flex items-center justify-center relative">
-        <div className="w-[340px] h-[210px] rounded-2xl bg-bg-card border border-accent/20 relative overflow-hidden glow-accent">
+      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center relative">
+        <div className="w-[280px] sm:w-[340px] h-[175px] sm:h-[210px] rounded-2xl bg-bg-card border border-accent/20 relative overflow-hidden glow-accent">
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent to-accent-2" />
           <div className="p-6 flex flex-col justify-between h-full">
             <div>
@@ -187,7 +187,7 @@ export default function Card3D() {
   }
 
   return (
-    <div className="w-full h-[400px] md:h-[500px] relative">
+    <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative">
       {!loaded && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="w-12 h-12 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />

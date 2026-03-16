@@ -47,7 +47,7 @@ export default function Contact() {
       {/* Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.04] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="relative max-w-2xl mx-auto px-6">
+      <div className="relative max-w-2xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
