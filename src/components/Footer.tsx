@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.04] py-10">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <Link href="/" className="font-[family-name:var(--font-syne)] font-extrabold text-lg">
           Tap<span className="text-accent">Tech</span>
         </Link>

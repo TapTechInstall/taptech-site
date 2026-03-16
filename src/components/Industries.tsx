@@ -50,7 +50,7 @@ const industries = [
 export default function Industries() {
   return (
     <section id="industries" className="relative py-28 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

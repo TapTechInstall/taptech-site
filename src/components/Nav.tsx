@@ -33,7 +33,7 @@ export default function Nav() {
             : 'py-5 bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-1">
             <span className="font-[family-name:var(--font-syne)] font-extrabold text-xl tracking-tight">
               Tap<span className="text-accent">Tech</span>

@@ -27,7 +27,7 @@ export default function Hero() {
       {/* Grid background */}
       <div className="absolute inset-0 grid-bg opacity-50" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 w-full">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left: Copy */}
           <div className="space-y-6">
