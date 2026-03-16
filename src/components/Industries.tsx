@@ -2,83 +2,46 @@
 
 import { motion } from 'framer-motion';
 
-const industries = [
+const categories = [
   {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-    name: 'Real Estate',
-    pitch: 'Open house attendees tap your card and instantly save your contact + see listings.',
-    recommended: 'Growth',
-    color: '#00b8ff',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="6" cy="6" r="3" />
-        <path d="M8.12 8.12L12 12" />
-        <path d="M20 4L8.12 15.88" />
-        <circle cx="6" cy="18" r="3" />
-        <path d="M14.8 14.8L20 20" />
-      </svg>
-    ),
-    name: 'Barbers & Stylists',
-    pitch: 'Tap stand at the station. After every cut: book the next one and leave a review.',
-    recommended: 'Growth',
-    color: '#00e5a0',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M18 20V10M12 20V4M6 20v-6" />
-      </svg>
-    ),
-    name: 'Personal Trainers',
-    pitch: 'Hand your card at the gym. They tap, see your transformations, book a session.',
-    recommended: 'Starter',
-    color: '#ff8c42',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 19l7-7 3 3-7 7-3-3z" />
-        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-        <path d="M2 2l7.586 7.586" />
-        <circle cx="11" cy="11" r="2" />
-      </svg>
-    ),
-    name: 'Tattoo Artists',
-    pitch: 'Full portfolio loads instantly. No more "check my IG." Request booking right there.',
-    recommended: 'Growth',
-    color: '#b388ff',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="1" y="3" width="15" height="13" rx="2" />
-        <polygon points="16 8 22 4 22 16 16 12 16 8" />
-      </svg>
-    ),
-    name: 'Car Sales',
-    pitch: 'Every person who walks the lot gets your card. When they buy in 2 weeks, you are the call.',
-    recommended: 'Starter',
-    color: '#ffd600',
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 18V5l12-2v13" />
-        <circle cx="6" cy="18" r="3" />
-        <circle cx="18" cy="16" r="3" />
-      </svg>
-    ),
-    name: 'DJs & Photographers',
-    pitch: 'At every gig, hand out cards. They tap, hear your mixes or see photos, and book.',
-    recommended: 'Growth',
+    group: 'Beauty & Personal Care',
     color: '#ff6ec7',
+    industries: ['Barbershops', 'Salons', 'Nail Techs', 'Med Spas', 'Tattoo Artists', 'Lash & Brow Studios'],
+  },
+  {
+    group: 'Health & Wellness',
+    color: '#00e5a0',
+    industries: ['Dentists', 'Chiropractors', 'Yoga & Pilates Studios', 'Personal Trainers', 'Gyms & Fitness Studios', 'Massage Therapists'],
+  },
+  {
+    group: 'Home Services',
+    color: '#00b8ff',
+    industries: ['Contractors', 'Roofers', 'Electricians', 'Plumbers', 'Cleaning Services', 'Landscapers'],
+  },
+  {
+    group: 'Food & Hospitality',
+    color: '#ff8c42',
+    industries: ['Restaurants', 'Cafes & Coffee Shops', 'Catering', 'Food Trucks', 'Bakeries', 'Event Venues'],
+  },
+  {
+    group: 'Real Estate & Finance',
+    color: '#ffd600',
+    industries: ['Realtors', 'Loan Officers', 'Insurance Agents', 'Mortgage Brokers', 'Property Managers', 'Financial Advisors'],
+  },
+  {
+    group: 'Automotive',
+    color: '#b388ff',
+    industries: ['Auto Detailers', 'Auto Shops', 'Car Sales', 'Tire Shops', 'Body Shops', 'Mobile Mechanics'],
+  },
+  {
+    group: 'Creative & Events',
+    color: '#ff3366',
+    industries: ['Photographers', 'DJs', 'Videographers', 'Event Planners', 'Florists', 'Wedding Vendors'],
+  },
+  {
+    group: 'Pets & More',
+    color: '#00e5a0',
+    industries: ['Pet Groomers', 'Dog Walkers', 'Tutors & Coaches', 'Music Teachers', 'Dance Studios', 'Martial Arts'],
   },
 ];
 
@@ -90,6 +53,7 @@ export default function Industries() {
       {/* RGB section glows */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(179,136,255,0.05),transparent_60%)] pointer-events-none" />
       <div className="absolute top-[30%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(255,51,102,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
@@ -105,58 +69,59 @@ export default function Industries() {
           <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1] mb-5">
             Built for <span className="gradient-text">every local business</span>
           </h2>
-          <p className="text-dim text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-            Different industries, same result: more customers finding you, booking you, and reviewing you.
+          <p className="text-dim text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            If you hand out business cards, shake hands, or meet customers face-to-face --
+            <span className="text-accent font-semibold"> this is built for you.</span>
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {industries.map((ind, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {categories.map((cat, i) => (
             <motion.div
-              key={ind.name}
+              key={cat.group}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease }}
-              className="group card-premium rounded-2xl p-7 hover:translate-y-[-2px] relative overflow-hidden"
+              transition={{ duration: 0.5, delay: i * 0.06, ease }}
+              className="card-premium rounded-2xl p-6 relative overflow-hidden group hover:translate-y-[-2px]"
             >
-              {/* Left accent bar */}
+              {/* Top accent line */}
               <div
-                className="absolute left-0 top-6 bottom-6 w-[2px] rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-300"
-                style={{ background: ind.color }}
+                className="absolute top-0 left-4 right-4 h-[2px] rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(90deg, transparent, ${cat.color}60, transparent)` }}
               />
 
-              <div className="flex items-start justify-between mb-4 pl-3">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: `linear-gradient(135deg, ${ind.color}15, ${ind.color}08)`,
-                      color: ind.color,
-                      boxShadow: `0 0 0 1px ${ind.color}20`,
-                    }}
-                  >
-                    {ind.icon}
-                  </div>
-                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-base text-txt">
-                    {ind.name}
-                  </h3>
-                </div>
-                <span
-                  className="text-[10px] font-bold px-2.5 py-1 rounded-full tracking-wider uppercase shrink-0"
-                  style={{
-                    background: `${ind.color}10`,
-                    color: ind.color,
-                    border: `1px solid ${ind.color}20`,
-                  }}
-                >
-                  {ind.recommended}
-                </span>
-              </div>
-              <p className="text-dim text-sm leading-[1.7] pl-3">{ind.pitch}</p>
+              <h3
+                className="font-[family-name:var(--font-syne)] font-bold text-xs tracking-[0.15em] uppercase mb-4"
+                style={{ color: cat.color }}
+              >
+                {cat.group}
+              </h3>
+
+              <ul className="space-y-2">
+                {cat.industries.map((ind) => (
+                  <li key={ind} className="flex items-center gap-2 text-sm text-dim">
+                    <div
+                      className="w-1 h-1 rounded-full shrink-0"
+                      style={{ background: cat.color, opacity: 0.6 }}
+                    />
+                    {ind}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3, ease }}
+          className="text-center text-dim text-sm mt-10"
+        >
+          Don&apos;t see your industry? <a href="#contact" className="text-accent hover:underline">We probably work with it. Ask us.</a>
+        </motion.p>
       </div>
     </section>
   );

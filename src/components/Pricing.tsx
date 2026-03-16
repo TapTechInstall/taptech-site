@@ -9,7 +9,7 @@ const tiers = [
     monthly: '$29/mo',
     description: 'Perfect for solo pros who want a digital card that works.',
     features: [
-      '1 NFC card + custom tap page',
+      '1 smart tap card + custom tap page',
       'Contact, socials & bio',
       'Google review link on page',
       'Basic support Mon-Fri',
@@ -24,8 +24,8 @@ const tiers = [
     monthly: '$59/mo',
     description: 'Full system: cards + booking + Google. Most businesses start here.',
     features: [
-      '2 NFC cards + branded tap page',
-      'Booking system setup',
+      '2 tap cards + branded tap page',
+      'Booking page setup',
       'Google Business optimization',
       'Review collection system',
       'Review response templates',
@@ -40,7 +40,7 @@ const tiers = [
     monthly: '$99/mo',
     description: 'Everything. The complete client connection machine.',
     features: [
-      '5 NFC cards + tap stand',
+      '5 tap cards + review stand',
       'Premium tap page + portfolio',
       'Full booking system + service menu',
       'Complete Google ranking package',
@@ -53,8 +53,8 @@ const tiers = [
 ];
 
 const addons = [
-  { name: 'Extra NFC cards', price: '$25 each' },
-  { name: 'NFC tap stand', price: '$40' },
+  { name: 'Extra tap cards', price: '$25 each' },
+  { name: 'Review stand', price: '$40' },
   { name: 'Custom domain', price: '$15/yr' },
   { name: 'QR code package', price: '$35' },
 ];
@@ -86,6 +86,38 @@ export default function Pricing() {
           <p className="text-dim text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
             One new customer from Google covers the monthly fee.
             <span className="text-accent font-semibold"> The system pays for itself.</span>
+          </p>
+        </motion.div>
+
+        {/* ROI math callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease }}
+          className="card-premium rounded-2xl p-6 sm:p-8 mb-12 max-w-3xl mx-auto text-center"
+        >
+          <p className="text-xs font-semibold tracking-[0.15em] uppercase text-accent-2 mb-4">Do the math</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">
+            <div className="card-premium rounded-xl px-5 py-3">
+              <p className="text-dim text-xs mb-1">Avg haircut</p>
+              <p className="font-[family-name:var(--font-syne)] font-bold text-xl text-txt">$35</p>
+            </div>
+            <span className="text-dim text-lg">x</span>
+            <div className="card-premium rounded-xl px-5 py-3">
+              <p className="text-dim text-xs mb-1">New clients/mo</p>
+              <p className="font-[family-name:var(--font-syne)] font-bold text-xl text-accent">2</p>
+            </div>
+            <span className="text-dim text-lg">=</span>
+            <div className="card-premium rounded-xl px-5 py-3">
+              <p className="text-dim text-xs mb-1">Extra revenue</p>
+              <p className="font-[family-name:var(--font-syne)] font-bold text-xl gradient-text">$70/mo</p>
+            </div>
+          </div>
+          <p className="text-dim text-sm mt-5 leading-relaxed">
+            Growth plan costs <span className="text-accent font-semibold">$59/mo</span>. Two new customers and you&apos;re profitable.
+            <br className="hidden sm:block" />
+            Everything after that is <span className="text-txt font-semibold">pure profit</span>.
           </p>
         </motion.div>
 
@@ -154,7 +186,7 @@ export default function Pricing() {
                     : 'border border-white/[0.08] text-txt hover:border-accent/20 hover:bg-accent/[0.04]'
                 }`}
               >
-                Get Started
+                Book a Free Call
               </a>
             </motion.div>
           ))}

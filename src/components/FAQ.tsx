@@ -22,15 +22,15 @@ const faqs = [
   },
   {
     q: 'How fast is setup?',
-    a: 'Most clients are fully set up within 48 hours. We build your tap page, program your NFC cards, set up booking, and optimize your Google listing. You can be live by end of week.',
+    a: 'Most clients are fully set up within 48 hours. We build your tap page, program your cards, set up booking, and optimize your Google listing. You can be live by end of week.',
   },
   {
     q: 'What if I cancel?',
-    a: 'No contracts. Cancel anytime. Your NFC cards still work as regular cards, but the tap page goes offline. Most clients stay because the reviews and bookings more than cover the monthly fee.',
+    a: 'No contracts. Cancel anytime. Your cards still work, but the tap page goes offline. Most clients stay because the reviews and bookings more than cover the monthly fee.',
   },
   {
     q: 'How do the Google reviews work?',
-    a: 'We create a direct link to your Google review form and embed it on your tap page and NFC stand. After a service, you tell the customer "tap here to leave a review" -- takes them 10 seconds. No searching, no fumbling.',
+    a: 'We create a direct link to your Google review form and embed it on your tap page and review stand. After a service, you tell the customer "tap here to leave a review" -- takes them 10 seconds. No searching, no fumbling.',
   },
 ];
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
+  { href: '#demo', label: 'Demo' },
   { href: '#features', label: 'Features' },
   { href: '#pricing', label: 'Pricing' },
   { href: '#industries', label: 'Industries' },
@@ -57,7 +58,7 @@ export default function Nav() {
               href="#contact"
               className="ml-4 text-sm font-semibold px-6 py-2.5 rounded-full gradient-btn text-bg"
             >
-              Get Started
+              Free Mockup
             </a>
           </div>
 
@@ -103,10 +104,20 @@ export default function Nav() {
                 onClick={() => setMobileOpen(false)}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, ease }}
+                transition={{ delay: 0.4, ease }}
                 className="text-lg font-semibold px-6 py-4 rounded-full gradient-btn text-bg text-center mt-6"
               >
-                Get Started
+                Get Your Free Mockup
+              </motion.a>
+              <motion.a
+                href="sms:+15105700690?body=Hey%20TapTech%2C%20I%27m%20interested!"
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45, ease }}
+                className="text-base font-medium text-center text-accent mt-2"
+              >
+                Or text us directly
               </motion.a>
             </div>
           </motion.div>

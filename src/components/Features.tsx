@@ -22,7 +22,7 @@ const features = [
       </svg>
     ),
     title: 'Book Instantly',
-    description: 'One tap to schedule. We set up Calendly, Booksy, or Square Appointments and link it to your card.',
+    description: 'One tap to schedule. We build your booking page and link it right to your card. No third-party apps.',
     color: '#00b8ff',
   },
   {
@@ -32,7 +32,7 @@ const features = [
       </svg>
     ),
     title: '5-Star Reviews',
-    description: 'NFC stand at checkout drives Google reviews on autopilot. More reviews = higher ranking = more customers.',
+    description: 'Review stand at checkout drives Google reviews on autopilot. More reviews = higher ranking = more customers.',
     color: '#ffd600',
   },
   {
@@ -70,7 +70,7 @@ const features = [
 ];
 
 const flowSteps = [
-  { label: 'NFC Card', sub: 'Physical trigger', color: '#00e5a0' },
+  { label: 'Tap Card', sub: 'Physical trigger', color: '#00e5a0' },
   { label: 'Tap Page', sub: 'Digital identity', color: '#00b8ff' },
   { label: 'Booking', sub: 'Convert to appointment', color: '#ff8c42' },
   { label: 'Review', sub: 'Build social proof', color: '#ffd600' },
@@ -103,7 +103,7 @@ export default function Features() {
             The complete <span className="gradient-text">client connection</span> system
           </h2>
           <p className="text-dim text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Every piece feeds the next. The card drives people to the tap page. The tap page drives bookings and reviews. The reviews drive Google ranking.
+            Every piece feeds the next. The card drives people to your page. The page drives bookings and reviews. The reviews drive Google ranking.
             <span className="text-accent font-semibold"> It&apos;s a flywheel.</span>
           </p>
         </motion.div>

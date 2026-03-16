@@ -69,7 +69,7 @@ export default function Hero() {
               animate="visible"
               className="text-dim text-lg md:text-xl max-w-xl leading-[1.7]"
             >
-              Smart NFC cards that instantly share your contact, boost your Google reviews, and turn every handshake into a client.
+              Smart tap cards that instantly share your contact, boost your Google reviews, and turn every handshake into a client.
               <span className="text-accent font-semibold"> No app needed.</span>
             </motion.p>
 
@@ -84,22 +84,20 @@ export default function Hero() {
                 href="#contact"
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-full gradient-btn text-bg font-semibold text-base"
               >
-                Get Started
+                Book a Free Call
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
               <a
-                href="https://pages.taptechconnect.com/jordan-cuts"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#demo"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/[0.08] bg-white/[0.02] text-txt font-semibold text-base hover:border-accent/20 hover:bg-accent/[0.04] transition-all duration-300"
               >
-                See a Demo
+                See It In Action
               </a>
             </motion.div>
 
-            {/* Social proof */}
+            {/* Value props */}
             <motion.div
               custom={4}
               variants={fadeUp}
@@ -108,18 +106,18 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-5 sm:gap-8 pt-10 border-t border-white/5"
             >
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">275+</p>
-                <p className="text-dim text-xs mt-0.5">Leads identified</p>
-              </div>
-              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-              <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">4</p>
-                <p className="text-dim text-xs mt-0.5">Cities covered</p>
-              </div>
-              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-              <div>
                 <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl gradient-text-rgb">48hr</p>
                 <p className="text-dim text-xs mt-0.5">Setup time</p>
+              </div>
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+              <div>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">0 apps</p>
+                <p className="text-dim text-xs mt-0.5">For your customers</p>
+              </div>
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+              <div>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">10 sec</p>
+                <p className="text-dim text-xs mt-0.5">To leave a review</p>
               </div>
             </motion.div>
           </div>
