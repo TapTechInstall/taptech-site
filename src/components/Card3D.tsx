@@ -1,24 +1,115 @@
 'use client';
 
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { RoundedBox, Float, MeshDistortMaterial, Environment } from '@react-three/drei';
 import * as THREE from 'three';
+
+const dragConfig = {
+  dragSensitivityX: 0.01,
+  dragSensitivityY: 0.008,
+  damping: 0.12,
+  friction: 0.96,
+  maxTiltX: 0.45,
+  minVelocityCutoff: 0.0001,
+  autoRotateSpeed: 0.003,
+};
 
 function NFCCard({ scrollProgress }: { scrollProgress: number }) {
   const groupRef = useRef<THREE.Group>(null);
 
-  useFrame((state) => {
-    if (!groupRef.current) return;
-    const t = state.clock.elapsedTime;
+  const dragState = useRef({
+    dragging: false,
+    lastX: 0,
+    lastY: 0,
+    velocityX: 0,
+    velocityY: 0,
+    rotationX: 0,
+    rotationY: 0,
+    pointerId: null as number | null,
+  });
 
-    // Base gentle animation + scroll-driven rotation
+  const targetRotation = useRef({ x: 0, y: 0 });
+
+  const onPointerDown = useCallback((e: THREE.Event & { stopPropagation: () => void; pointerId: number; clientX: number; clientY: number; target: { setPointerCapture?: (id: number) => void } }) => {
+    e.stopPropagation();
+    if (e.target.setPointerCapture) {
+      e.target.setPointerCapture(e.pointerId);
+    }
+    const state = dragState.current;
+    state.dragging = true;
+    state.pointerId = e.pointerId;
+    state.lastX = e.clientX;
+    state.lastY = e.clientY;
+    state.velocityX = 0;
+    state.velocityY = 0;
+  }, []);
+
+  const onPointerMove = useCallback((e: THREE.Event & { pointerId: number; clientX: number; clientY: number }) => {
+    const state = dragState.current;
+    if (!state.dragging) return;
+    if (state.pointerId !== null && e.pointerId !== state.pointerId) return;
+
+    const deltaX = e.clientX - state.lastX;
+    const deltaY = e.clientY - state.lastY;
+    state.lastX = e.clientX;
+    state.lastY = e.clientY;
+
+    state.velocityX = deltaX * dragConfig.dragSensitivityX;
+    state.velocityY = deltaY * dragConfig.dragSensitivityY;
+
+    targetRotation.current.y += state.velocityX;
+    targetRotation.current.x = Math.max(
+      -dragConfig.maxTiltX,
+      Math.min(dragConfig.maxTiltX, targetRotation.current.x + state.velocityY)
+    );
+  }, []);
+
+  const endDrag = useCallback((e: THREE.Event & { pointerId: number }) => {
+    const state = dragState.current;
+    if (state.pointerId !== null && e.pointerId !== state.pointerId) return;
+    state.dragging = false;
+    state.pointerId = null;
+  }, []);
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const state = dragState.current;
+
+    if (!state.dragging) {
+      // Apply momentum
+      targetRotation.current.y += state.velocityX;
+      targetRotation.current.x += state.velocityY;
+
+      state.velocityX *= dragConfig.friction;
+      state.velocityY *= dragConfig.friction;
+
+      if (Math.abs(state.velocityX) < dragConfig.minVelocityCutoff) state.velocityX = 0;
+      if (Math.abs(state.velocityY) < dragConfig.minVelocityCutoff) state.velocityY = 0;
+
+      // Resume auto-rotate when momentum settles
+      if (state.velocityX === 0 && state.velocityY === 0) {
+        targetRotation.current.y += dragConfig.autoRotateSpeed;
+      }
+    }
+
+    // Clamp X
+    targetRotation.current.x = Math.max(
+      -dragConfig.maxTiltX,
+      Math.min(dragConfig.maxTiltX, targetRotation.current.x)
+    );
+
+    // Smooth interpolation
+    state.rotationX += (targetRotation.current.x - state.rotationX) * dragConfig.damping;
+    state.rotationY += (targetRotation.current.y - state.rotationY) * dragConfig.damping;
+
+    // Apply scroll offset on top of drag rotation
     const scrollRotY = scrollProgress * Math.PI * 0.6;
     const scrollRotX = scrollProgress * 0.3;
 
-    groupRef.current.rotation.y = Math.sin(t * 0.4) * 0.12 + scrollRotY;
-    groupRef.current.rotation.x = Math.cos(t * 0.3) * 0.06 - scrollRotX;
-    groupRef.current.rotation.z = Math.sin(t * 0.2) * 0.03;
+    groupRef.current.rotation.x = state.rotationX - scrollRotX;
+    groupRef.current.rotation.y = state.rotationY + scrollRotY;
+    groupRef.current.rotation.z = Math.sin(state.rotationY * 0.3) * 0.03;
 
     // Scroll-driven scale and position
     const s = 1 + scrollProgress * 0.15;
@@ -28,7 +119,14 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
 
   return (
     <Float speed={2} rotationIntensity={0.08} floatIntensity={0.4}>
-      <group ref={groupRef}>
+      <group
+        ref={groupRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        onPointerCancel={endDrag}
+      >
         {/* RGB glow planes behind card */}
         <mesh position={[-0.4, 0.2, -0.08]}>
           <planeGeometry args={[3.2, 2.2]} />
@@ -54,6 +152,12 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
             envMapIntensity={1.5}
           />
         </RoundedBox>
+
+        {/* Invisible larger hit area for easier dragging */}
+        <mesh visible={false}>
+          <planeGeometry args={[4, 2.8]} />
+          <meshBasicMaterial transparent opacity={0} />
+        </mesh>
 
         {/* Top RGB accent line */}
         <RGBLine position={[0, 0.72, 0.04]} width={2.8} />
@@ -286,7 +390,10 @@ export default function Card3D() {
   }
 
   return (
-    <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative">
+    <div
+      className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative"
+      style={{ touchAction: 'none' }}
+    >
       {!loaded && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="w-12 h-12 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
@@ -296,7 +403,7 @@ export default function Card3D() {
         camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: 'default' }}
-        style={{ background: 'transparent' }}
+        style={{ background: 'transparent', touchAction: 'none' }}
         onCreated={() => setLoaded(true)}
       >
         <ScrollHandler onScroll={handleScroll} />
