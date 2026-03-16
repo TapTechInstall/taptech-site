@@ -82,10 +82,12 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="#features"
+                href="https://taptech-pages.vercel.app/jordan-cuts"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/10 text-txt font-semibold text-sm hover:bg-white/[0.04] transition-all duration-200"
               >
-                See how it works
+                See a Demo
               </a>
             </motion.div>
 
@@ -108,8 +110,8 @@ export default function Hero() {
               </div>
               <div className="w-px h-8 bg-white/10" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl text-accent">$0.33</p>
-                <p className="text-dim text-xs">Per card cost</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl text-accent">48hr</p>
+                <p className="text-dim text-xs">Setup time</p>
               </div>
             </motion.div>
           </div>
