@@ -64,8 +64,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Pricing() {
   return (
     <section id="pricing" className="relative py-28 sm:py-36 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-accent-2/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      {/* RGB background glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(255,51,102,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[radial-gradient(circle,rgba(0,255,136,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div

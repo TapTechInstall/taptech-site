@@ -9,6 +9,10 @@
   --color-dim: #7c7c99;
   --color-accent: #00e5a0;
   --color-accent-2: #00b8ff;
+  --color-neon-red: #ff3366;
+  --color-neon-green: #00ff88;
+  --color-neon-blue: #00aaff;
+  --color-neon-purple: #b388ff;
   --color-red: #ef4444;
   --color-green: #22c55e;
   --color-purple: #b388ff;
@@ -47,7 +51,7 @@
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
 
-/* Gradient text utility */
+/* Gradient text - green to blue */
 .gradient-text {
   background: linear-gradient(135deg, #00e5a0 0%, #00b8ff 100%);
   -webkit-background-clip: text;
@@ -55,8 +59,17 @@
   background-clip: text;
 }
 
+/* RGB gradient text - full spectrum neon */
 .gradient-text-rgb {
-  background: linear-gradient(135deg, #ef4444, #22c55e, #00b8ff);
+  background: linear-gradient(135deg, #ff3366 0%, #00ff88 40%, #00aaff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon gradient text - warm to cool */
+.gradient-text-neon {
+  background: linear-gradient(135deg, #ff3366 0%, #ff6ec7 25%, #b388ff 50%, #00b8ff 75%, #00e5a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,6 +95,39 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 0 40px rgba(0, 229, 160, 0.05);
+}
+
+/* RGB border card - animated gradient border on hover */
+.card-rgb {
+  background: linear-gradient(180deg, rgba(20, 20, 32, 0.8), rgba(13, 13, 22, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  position: relative;
+}
+.card-rgb::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.card-rgb:hover::before {
+  background: linear-gradient(135deg, #ff336640, #00ff8840, #00aaff40);
+  opacity: 1;
+}
+.card-rgb:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 30px rgba(255, 51, 102, 0.04),
+    0 0 30px rgba(0, 255, 136, 0.04),
+    0 0 30px rgba(0, 170, 255, 0.04);
 }
 
 /* Gradient CTA button */
@@ -112,6 +158,30 @@
   transform: translateX(100%);
 }
 
+/* RGB gradient button */
+.gradient-btn-rgb {
+  background: linear-gradient(135deg, #ff3366, #b388ff, #00b8ff);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  box-shadow:
+    0 0 20px rgba(255, 51, 102, 0.15),
+    0 0 40px rgba(0, 184, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gradient-btn-rgb:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 0 30px rgba(255, 51, 102, 0.25),
+    0 0 60px rgba(0, 184, 255, 0.15);
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Glow effects */
 .glow-accent {
   box-shadow:
@@ -125,6 +195,13 @@
     0 0 30px rgba(0, 184, 255, 0.2),
     0 0 80px rgba(0, 184, 255, 0.08),
     0 0 120px rgba(0, 184, 255, 0.04);
+}
+
+.glow-rgb {
+  box-shadow:
+    0 0 30px rgba(255, 51, 102, 0.12),
+    0 0 60px rgba(0, 255, 136, 0.08),
+    0 0 90px rgba(0, 170, 255, 0.06);
 }
 
 /* Noise texture overlay */
@@ -152,19 +229,20 @@
   background-size: 80px 80px;
 }
 
-/* Radial gradient hero bg */
+/* Radial gradient hero bg - RGB neon */
 .hero-glow {
   background:
-    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 229, 160, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 0%, rgba(0, 184, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 20% 0%, rgba(239, 68, 68, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 229, 160, 0.20) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(0, 170, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(255, 51, 102, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 60% 20%, rgba(179, 136, 255, 0.06) 0%, transparent 60%),
     radial-gradient(ellipse 50% 40% at 50% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
 }
 
-/* Section gradient divider */
+/* Section gradient divider - RGB */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.08), rgba(0, 229, 160, 0.12), rgba(0, 170, 255, 0.08), transparent);
 }
 
 /* Section accent glows */
@@ -173,5 +251,60 @@
 }
 
 .section-glow-blue {
-  background: radial-gradient(600px circle at 50% 0%, rgba(0, 184, 255, 0.06), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(0, 170, 255, 0.06), transparent 70%);
+}
+
+.section-glow-red {
+  background: radial-gradient(600px circle at 50% 0%, rgba(255, 51, 102, 0.05), transparent 70%);
+}
+
+.section-glow-purple {
+  background: radial-gradient(600px circle at 50% 0%, rgba(179, 136, 255, 0.05), transparent 70%);
+}
+
+/* RGB ambient glow - floating background element */
+.rgb-glow {
+  background:
+    radial-gradient(300px circle at 20% 50%, rgba(255, 51, 102, 0.06), transparent 70%),
+    radial-gradient(300px circle at 80% 50%, rgba(0, 170, 255, 0.06), transparent 70%),
+    radial-gradient(300px circle at 50% 30%, rgba(0, 255, 136, 0.04), transparent 70%);
+}
+
+/* Animated RGB line */
+@keyframes rgb-line {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.rgb-line {
+  height: 2px;
+  background: linear-gradient(90deg, #ff3366, #00ff88, #00aaff, #b388ff, #ff3366);
+  background-size: 200% 100%;
+  animation: rgb-line 3s linear infinite;
+}
+
+/* Animated RGB border glow for special elements */
+@keyframes rgb-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(255, 51, 102, 0.15),
+      0 0 40px rgba(0, 255, 136, 0.08),
+      0 0 60px rgba(0, 170, 255, 0.05);
+  }
+  33% {
+    box-shadow:
+      0 0 20px rgba(0, 255, 136, 0.15),
+      0 0 40px rgba(0, 170, 255, 0.08),
+      0 0 60px rgba(255, 51, 102, 0.05);
+  }
+  66% {
+    box-shadow:
+      0 0 20px rgba(0, 170, 255, 0.15),
+      0 0 40px rgba(255, 51, 102, 0.08),
+      0 0 60px rgba(0, 255, 136, 0.05);
+  }
+}
+
+.rgb-pulse {
+  animation: rgb-pulse 4s ease-in-out infinite;
 }

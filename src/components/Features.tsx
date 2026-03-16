@@ -82,8 +82,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Features() {
   return (
     <section id="features" className="relative py-28 sm:py-36 overflow-hidden">
-      {/* Section glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] section-glow-green pointer-events-none" />
+      {/* RGB section glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(0,255,136,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[15%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(255,51,102,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section header */}

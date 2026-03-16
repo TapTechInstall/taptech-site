@@ -48,8 +48,10 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-28 sm:py-36">
-      {/* Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-accent/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      {/* RGB glows */}
+      <div className="absolute bottom-0 left-1/3 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(0,229,160,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[20%] right-1/4 w-[400px] h-[300px] bg-[radial-gradient(circle,rgba(255,51,102,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-1/3 w-[400px] h-[300px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6">
         <motion.div

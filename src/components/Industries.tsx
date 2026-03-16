@@ -87,8 +87,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Industries() {
   return (
     <section id="industries" className="relative py-28 sm:py-36 overflow-hidden">
-      {/* Section glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] section-glow-blue pointer-events-none" />
+      {/* RGB section glows */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(179,136,255,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[30%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div

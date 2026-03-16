@@ -29,8 +29,11 @@ export default function Hero() {
       {/* Grid background */}
       <div className="absolute inset-0 grid-bg opacity-40" />
 
-      {/* Extra depth glow near card area */}
-      <div className="absolute top-1/4 right-0 w-[800px] h-[600px] bg-[radial-gradient(circle_at_70%_40%,rgba(0,229,160,0.06),transparent_60%)] pointer-events-none" />
+      {/* RGB glow orbs */}
+      <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(255,51,102,0.08),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[20%] right-[5%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,170,255,0.08),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[30%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,255,136,0.05),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[40%] right-[30%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(179,136,255,0.05),transparent_60%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-20 w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -56,7 +59,7 @@ export default function Hero() {
             >
               <span className="text-txt/90">One tap.</span>
               <br />
-              <span className="gradient-text">Infinite reach.</span>
+              <span className="gradient-text-rgb">Infinite reach.</span>
             </motion.h1>
 
             <motion.p
@@ -115,7 +118,7 @@ export default function Hero() {
               </div>
               <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl gradient-text">48hr</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl gradient-text-rgb">48hr</p>
                 <p className="text-dim text-xs mt-0.5">Setup time</p>
               </div>
             </motion.div>
@@ -132,8 +135,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom gradient divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+      {/* Bottom RGB divider line */}
+      <div className="absolute bottom-0 left-0 right-0 rgb-line" />
 
       {/* Scroll indicator */}
       <motion.div
