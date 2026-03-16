@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "taptech-site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/davidn/taptech-site"],
+      "port": 3003,
+      "autoPort": true
+    }
+  ]
+}
