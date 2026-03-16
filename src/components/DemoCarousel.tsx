@@ -332,14 +332,12 @@ export default function DemoCarousel() {
           className="text-center mt-12"
         >
           <a
-            href="https://pages.taptechconnect.com/jordan-cuts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-accent/20 bg-accent/[0.04] text-accent font-semibold text-sm hover:bg-accent/[0.08] hover:border-accent/30 transition-all duration-300"
+            href="#contact"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full gradient-btn text-bg font-semibold text-sm"
           >
-            Try the Live Demo
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            Get Your Free Mockup
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>
         </motion.div>
