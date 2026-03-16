@@ -141,17 +141,29 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           <meshBasicMaterial color="#00aaff" transparent opacity={0.04} />
         </mesh>
 
-        {/* Main card body */}
-        <RoundedBox args={[3.4, 2.1, 0.06]} radius={0.12} smoothness={4}>
+        {/* Main card body -- thin card proportions */}
+        <RoundedBox args={[3.37, 2.125, 0.03]} radius={0.08} smoothness={4}>
           <meshPhysicalMaterial
-            color="#0a0a14"
-            metalness={0.9}
-            roughness={0.1}
-            clearcoat={1}
-            clearcoatRoughness={0.05}
-            envMapIntensity={1.5}
+            color="#0d0d18"
+            metalness={0.35}
+            roughness={0.5}
+            clearcoat={0.08}
+            clearcoatRoughness={0.9}
+            envMapIntensity={0.8}
           />
         </RoundedBox>
+
+        {/* Subtle matte front face overlay */}
+        <mesh position={[0, 0, 0.016]}>
+          <planeGeometry args={[3.3, 2.06]} />
+          <meshPhysicalMaterial
+            color="#0f0f1a"
+            metalness={0.2}
+            roughness={0.7}
+            transparent
+            opacity={0.6}
+          />
+        </mesh>
 
         {/* Invisible larger hit area for easier dragging */}
         <mesh visible={false}>
@@ -160,47 +172,100 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         </mesh>
 
         {/* Top RGB accent line */}
-        <RGBLine position={[0, 0.72, 0.04]} width={2.8} />
+        <RGBLine position={[0, 0.74, 0.017]} width={2.8} />
 
-        {/* NFC icon rings with color variation */}
-        <mesh position={[1.2, -0.5, 0.04]}>
-          <ringGeometry args={[0.18, 0.22, 32]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.7} />
+        {/* Edge highlight strips -- makes it read as card */}
+        <mesh position={[0, 0.74, 0.005]}>
+          <planeGeometry args={[3.3, 0.008]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
-        <mesh position={[1.2, -0.5, 0.04]}>
-          <ringGeometry args={[0.1, 0.13, 32]} />
-          <meshBasicMaterial color="#00aaff" transparent opacity={0.5} />
-        </mesh>
-        <mesh position={[1.2, -0.5, 0.04]}>
-          <circleGeometry args={[0.05, 32]} />
-          <meshBasicMaterial color="#ff3366" transparent opacity={0.8} />
+        <mesh position={[0, -0.74, 0.005]}>
+          <planeGeometry args={[3.3, 0.008]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
         </mesh>
 
-        {/* TapTech label */}
-        <mesh position={[-0.5, 0.35, 0.04]}>
-          <planeGeometry args={[1.2, 0.18]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
+        {/* Chip rectangle -- EMV contact pad */}
+        <mesh position={[-1.05, -0.15, 0.017]}>
+          <planeGeometry args={[0.35, 0.28]} />
+          <meshPhysicalMaterial
+            color="#b8a040"
+            metalness={0.7}
+            roughness={0.3}
+            transparent
+            opacity={0.4}
+          />
+        </mesh>
+        {/* Chip inner lines */}
+        <mesh position={[-1.05, -0.15, 0.018]}>
+          <planeGeometry args={[0.25, 0.005]} />
+          <meshBasicMaterial color="#d4be5a" transparent opacity={0.3} />
+        </mesh>
+        <mesh position={[-1.05, -0.1, 0.018]}>
+          <planeGeometry args={[0.25, 0.005]} />
+          <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
+        </mesh>
+        <mesh position={[-1.05, -0.2, 0.018]}>
+          <planeGeometry args={[0.25, 0.005]} />
+          <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
         </mesh>
 
-        {/* Connect label */}
-        <mesh position={[-0.7, 0.08, 0.04]}>
-          <planeGeometry args={[0.8, 0.1]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.15} />
+        {/* NFC tap icon -- smaller, bottom right */}
+        <mesh position={[1.2, -0.55, 0.017]}>
+          <ringGeometry args={[0.14, 0.17, 32]} />
+          <meshBasicMaterial color="#00ff88" transparent opacity={0.5} />
+        </mesh>
+        <mesh position={[1.2, -0.55, 0.017]}>
+          <ringGeometry args={[0.08, 0.1, 32]} />
+          <meshBasicMaterial color="#00aaff" transparent opacity={0.35} />
+        </mesh>
+        <mesh position={[1.2, -0.55, 0.017]}>
+          <circleGeometry args={[0.035, 32]} />
+          <meshBasicMaterial color="#ff3366" transparent opacity={0.6} />
+        </mesh>
+
+        {/* TapTech label area */}
+        <mesh position={[-0.45, 0.45, 0.017]}>
+          <planeGeometry args={[1.1, 0.16]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
+        </mesh>
+
+        {/* Connect sub-label */}
+        <mesh position={[-0.65, 0.2, 0.017]}>
+          <planeGeometry args={[0.7, 0.08]} />
+          <meshBasicMaterial color="#00ff88" transparent opacity={0.12} />
         </mesh>
 
         {/* Bottom info line */}
-        <mesh position={[-0.3, -0.6, 0.04]}>
-          <planeGeometry args={[1.5, 0.06]} />
-          <meshBasicMaterial color="#7c7c99" transparent opacity={0.08} />
+        <mesh position={[-0.2, -0.65, 0.017]}>
+          <planeGeometry args={[1.4, 0.05]} />
+          <meshBasicMaterial color="#7c7c99" transparent opacity={0.06} />
+        </mesh>
+
+        {/* URL text line */}
+        <mesh position={[0.8, -0.65, 0.017]}>
+          <planeGeometry args={[0.9, 0.04]} />
+          <meshBasicMaterial color="#00e5a0" transparent opacity={0.08} />
         </mesh>
 
         {/* Bottom RGB accent line */}
-        <RGBLine position={[0, -0.72, 0.04]} width={2.8} />
+        <RGBLine position={[0, -0.74, 0.017]} width={2.8} />
 
-        {/* Edge reflection */}
-        <mesh position={[0, 0, 0.035]}>
-          <planeGeometry args={[3.35, 2.05]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.015} />
+        {/* Back face -- slight contrast */}
+        <mesh position={[0, 0, -0.016]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[3.3, 2.06]} />
+          <meshPhysicalMaterial
+            color="#08080f"
+            metalness={0.3}
+            roughness={0.6}
+            transparent
+            opacity={0.8}
+          />
+        </mesh>
+
+        {/* Back magnetic stripe */}
+        <mesh position={[0, 0.35, -0.017]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[3.2, 0.25]} />
+          <meshBasicMaterial color="#1a1a2a" transparent opacity={0.5} />
         </mesh>
       </group>
     </Float>
