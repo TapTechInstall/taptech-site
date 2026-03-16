@@ -82,7 +82,7 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="https://taptech-pages.vercel.app/jordan-cuts"
+                href="https://pages.taptechconnect.com/jordan-cuts"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/10 text-txt font-semibold text-sm hover:bg-white/[0.04] transition-all duration-200"
