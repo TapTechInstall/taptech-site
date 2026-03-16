@@ -12,7 +12,7 @@ const dragConfig = {
   friction: 0.96,
   maxTiltX: 0.45,
   minVelocityCutoff: 0.0001,
-  autoRotateSpeed: 0.003,
+  autoRotateSpeed: 0.0025,
 };
 
 function NFCCard({ scrollProgress }: { scrollProgress: number }) {
@@ -87,9 +87,13 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
       if (Math.abs(state.velocityX) < dragConfig.minVelocityCutoff) state.velocityX = 0;
       if (Math.abs(state.velocityY) < dragConfig.minVelocityCutoff) state.velocityY = 0;
 
-      // Resume auto-rotate when momentum settles
+      // Resume auto-rotate when momentum settles, slowing near front/back face
+      // so the card pauses naturally where it reads best
       if (state.velocityX === 0 && state.velocityY === 0) {
-        targetRotation.current.y += dragConfig.autoRotateSpeed;
+        const cosAngle = Math.cos(targetRotation.current.y);
+        // Slow to 25% near front-face (cos≈1) and back-face (cos≈-1), full speed at edge-on (cos≈0)
+        const readabilityFactor = 0.25 + 0.75 * (1 - cosAngle * cosAngle);
+        targetRotation.current.y += dragConfig.autoRotateSpeed * readabilityFactor;
       }
     }
 
@@ -141,20 +145,20 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           <meshBasicMaterial color="#00aaff" transparent opacity={0.04} />
         </mesh>
 
-        {/* Main card body -- thin card proportions */}
-        <RoundedBox args={[3.37, 2.125, 0.03]} radius={0.08} smoothness={4}>
+        {/* Main card body -- standard card proportions with visible edge thickness */}
+        <RoundedBox args={[3.37, 2.125, 0.08]} radius={0.08} smoothness={6}>
           <meshPhysicalMaterial
             color="#0d0d18"
-            metalness={0.35}
-            roughness={0.5}
-            clearcoat={0.08}
-            clearcoatRoughness={0.9}
-            envMapIntensity={0.8}
+            metalness={0.6}
+            roughness={0.3}
+            clearcoat={0.4}
+            clearcoatRoughness={0.5}
+            envMapIntensity={1.2}
           />
         </RoundedBox>
 
         {/* Subtle matte front face overlay */}
-        <mesh position={[0, 0, 0.016]}>
+        <mesh position={[0, 0, 0.042]}>
           <planeGeometry args={[3.3, 2.06]} />
           <meshPhysicalMaterial
             color="#0f0f1a"
@@ -172,20 +176,20 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         </mesh>
 
         {/* Top RGB accent line */}
-        <RGBLine position={[0, 0.74, 0.017]} width={2.8} />
+        <RGBLine position={[0, 0.74, 0.043]} width={2.8} />
 
-        {/* Edge highlight strips -- makes it read as card */}
-        <mesh position={[0, 0.74, 0.005]}>
+        {/* Edge highlight strips -- visible on front face */}
+        <mesh position={[0, 0.74, 0.043]}>
+          <planeGeometry args={[3.3, 0.008]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.12} />
+        </mesh>
+        <mesh position={[0, -0.74, 0.043]}>
           <planeGeometry args={[3.3, 0.008]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
-        <mesh position={[0, -0.74, 0.005]}>
-          <planeGeometry args={[3.3, 0.008]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
-        </mesh>
 
         {/* Chip rectangle -- EMV contact pad */}
-        <mesh position={[-1.05, -0.15, 0.017]}>
+        <mesh position={[-1.05, -0.15, 0.043]}>
           <planeGeometry args={[0.35, 0.28]} />
           <meshPhysicalMaterial
             color="#b8a040"
@@ -196,62 +200,62 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           />
         </mesh>
         {/* Chip inner lines */}
-        <mesh position={[-1.05, -0.15, 0.018]}>
+        <mesh position={[-1.05, -0.15, 0.044]}>
           <planeGeometry args={[0.25, 0.005]} />
           <meshBasicMaterial color="#d4be5a" transparent opacity={0.3} />
         </mesh>
-        <mesh position={[-1.05, -0.1, 0.018]}>
+        <mesh position={[-1.05, -0.1, 0.044]}>
           <planeGeometry args={[0.25, 0.005]} />
           <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
         </mesh>
-        <mesh position={[-1.05, -0.2, 0.018]}>
+        <mesh position={[-1.05, -0.2, 0.044]}>
           <planeGeometry args={[0.25, 0.005]} />
           <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
         </mesh>
 
-        {/* NFC tap icon -- smaller, bottom right */}
-        <mesh position={[1.2, -0.55, 0.017]}>
+        {/* NFC tap icon -- bottom right */}
+        <mesh position={[1.2, -0.55, 0.043]}>
           <ringGeometry args={[0.14, 0.17, 32]} />
           <meshBasicMaterial color="#00ff88" transparent opacity={0.5} />
         </mesh>
-        <mesh position={[1.2, -0.55, 0.017]}>
+        <mesh position={[1.2, -0.55, 0.043]}>
           <ringGeometry args={[0.08, 0.1, 32]} />
           <meshBasicMaterial color="#00aaff" transparent opacity={0.35} />
         </mesh>
-        <mesh position={[1.2, -0.55, 0.017]}>
+        <mesh position={[1.2, -0.55, 0.043]}>
           <circleGeometry args={[0.035, 32]} />
           <meshBasicMaterial color="#ff3366" transparent opacity={0.6} />
         </mesh>
 
         {/* TapTech label area */}
-        <mesh position={[-0.45, 0.45, 0.017]}>
+        <mesh position={[-0.45, 0.45, 0.043]}>
           <planeGeometry args={[1.1, 0.16]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
 
         {/* Connect sub-label */}
-        <mesh position={[-0.65, 0.2, 0.017]}>
+        <mesh position={[-0.65, 0.2, 0.043]}>
           <planeGeometry args={[0.7, 0.08]} />
           <meshBasicMaterial color="#00ff88" transparent opacity={0.12} />
         </mesh>
 
         {/* Bottom info line */}
-        <mesh position={[-0.2, -0.65, 0.017]}>
+        <mesh position={[-0.2, -0.65, 0.043]}>
           <planeGeometry args={[1.4, 0.05]} />
           <meshBasicMaterial color="#7c7c99" transparent opacity={0.06} />
         </mesh>
 
         {/* URL text line */}
-        <mesh position={[0.8, -0.65, 0.017]}>
+        <mesh position={[0.8, -0.65, 0.043]}>
           <planeGeometry args={[0.9, 0.04]} />
           <meshBasicMaterial color="#00e5a0" transparent opacity={0.08} />
         </mesh>
 
         {/* Bottom RGB accent line */}
-        <RGBLine position={[0, -0.74, 0.017]} width={2.8} />
+        <RGBLine position={[0, -0.74, 0.043]} width={2.8} />
 
         {/* Back face -- slight contrast */}
-        <mesh position={[0, 0, -0.016]} rotation={[0, Math.PI, 0]}>
+        <mesh position={[0, 0, -0.042]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[3.3, 2.06]} />
           <meshPhysicalMaterial
             color="#08080f"
@@ -263,7 +267,7 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         </mesh>
 
         {/* Back magnetic stripe */}
-        <mesh position={[0, 0.35, -0.017]} rotation={[0, Math.PI, 0]}>
+        <mesh position={[0, 0.35, -0.043]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[3.2, 0.25]} />
           <meshBasicMaterial color="#1a1a2a" transparent opacity={0.5} />
         </mesh>

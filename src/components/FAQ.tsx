@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     q: 'What does the monthly fee cover?',
-    a: 'Ongoing management: updating your tap page whenever you need, monitoring and responding to Google reviews, maintaining your booking system, and sending you a monthly report with your review growth and ranking changes.',
+    a: 'The monthly fee keeps everything running and improving. It covers: updates to your tap page whenever your info changes, support for your tech setup, and a monthly report showing your review count growth and local ranking movement -- so you always know your system is working.',
   },
   {
     q: 'Can I change my links later?',
