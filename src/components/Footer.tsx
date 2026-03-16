@@ -12,7 +12,7 @@ export default function Footer() {
             Contact
           </a>
           <a
-            href="https://instagram.com/taptechinstall"
+            href="https://instagram.com/taptech.ai"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-txt transition-colors"
