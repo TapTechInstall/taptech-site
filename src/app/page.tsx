@@ -12,10 +12,15 @@ export default function Home() {
     <main className="bg-bg min-h-screen overflow-x-hidden">
       <Nav />
       <Hero />
+      <div className="section-divider" />
       <Features />
+      <div className="section-divider" />
       <Pricing />
+      <div className="section-divider" />
       <Industries />
+      <div className="section-divider" />
       <FAQ />
+      <div className="section-divider" />
       <Contact />
       <Footer />
     </main>

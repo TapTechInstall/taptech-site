@@ -59,61 +59,64 @@ const addons = [
   { name: 'QR code package', price: '$35' },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative py-28 overflow-hidden">
-      {/* Subtle glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
+    <section id="pricing" className="relative py-28 sm:py-36 overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-accent-2/[0.04] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease }}
           className="text-center mb-16"
         >
-          <span className="text-accent text-xs font-semibold tracking-[3px] uppercase block mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-2/[0.08] border border-accent-2/20 text-accent-2 text-xs font-semibold tracking-[0.15em] uppercase mb-6">
             Pricing
           </span>
-          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl md:text-4xl tracking-tight mb-4">
+          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1] mb-5">
             Setup fee + monthly retainer
           </h2>
-          <p className="text-dim text-lg max-w-xl mx-auto">
-            One new customer from Google covers the monthly fee. The system pays for itself.
+          <p className="text-dim text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
+            One new customer from Google covers the monthly fee.
+            <span className="text-accent font-semibold"> The system pays for itself.</span>
           </p>
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid md:grid-cols-3 gap-5 mb-16">
+        <div className="grid md:grid-cols-3 gap-5 lg:gap-6 mb-16">
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className={`relative rounded-2xl border p-7 flex flex-col ${
+              transition={{ duration: 0.5, delay: i * 0.12, ease }}
+              className={`relative card-premium rounded-2xl p-7 lg:p-8 flex flex-col ${
                 tier.popular
-                  ? 'bg-bg-card border-accent-2/30 md:scale-[1.03]'
-                  : 'bg-bg-card border-white/[0.06]'
+                  ? 'md:scale-[1.04] border-accent-2/25 shadow-[0_0_60px_rgba(0,184,255,0.08)]'
+                  : ''
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-accent-2 text-bg text-xs font-bold tracking-wider uppercase">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full bg-accent-2 text-bg text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(0,184,255,0.3)]">
                   Most Popular
                 </div>
               )}
 
-              <div className="mb-6">
+              <div className="mb-7">
                 <h3
-                  className="font-[family-name:var(--font-syne)] font-bold text-sm tracking-wider uppercase mb-3"
+                  className="font-[family-name:var(--font-syne)] font-bold text-xs tracking-[0.2em] uppercase mb-4"
                   style={{ color: tier.color }}
                 >
                   {tier.name}
                 </h3>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="font-[family-name:var(--font-syne)] font-extrabold text-4xl tracking-tight">
+                <div className="flex items-baseline gap-1.5 mb-1">
+                  <span className="font-[family-name:var(--font-syne)] font-extrabold text-4xl sm:text-5xl tracking-tight text-txt">
                     {tier.setup}
                   </span>
                   <span className="text-dim text-sm">setup</span>
@@ -121,10 +124,10 @@ export default function Pricing() {
                 <p className="font-semibold text-lg" style={{ color: tier.color }}>
                   + {tier.monthly}
                 </p>
-                <p className="text-dim text-sm mt-2">{tier.description}</p>
+                <p className="text-dim text-sm mt-3 leading-relaxed">{tier.description}</p>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-3.5 mb-8 flex-1">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm">
                     <svg
@@ -136,17 +139,17 @@ export default function Pricing() {
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className="text-dim">{feature}</span>
+                    <span className="text-dim leading-snug">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <a
                 href="#contact"
-                className={`block text-center py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-[1.02] ${
+                className={`block text-center py-3.5 rounded-full font-semibold text-sm transition-all duration-300 ${
                   tier.popular
-                    ? 'bg-accent-2 text-bg hover:bg-accent-2/90'
-                    : 'border border-white/10 text-txt hover:bg-white/[0.04]'
+                    ? 'gradient-btn text-bg'
+                    : 'border border-white/[0.08] text-txt hover:border-accent/20 hover:bg-accent/[0.04]'
                 }`}
               >
                 Get Started
@@ -160,26 +163,26 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease }}
           className="max-w-2xl mx-auto"
         >
-          <h3 className="font-[family-name:var(--font-syne)] font-bold text-sm text-center text-dim tracking-wider uppercase mb-4">
+          <h3 className="font-[family-name:var(--font-syne)] font-bold text-xs text-center text-dim tracking-[0.2em] uppercase mb-5">
             Add-ons
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {addons.map((addon) => (
               <div
                 key={addon.name}
-                className="bg-bg-card border border-white/[0.04] rounded-xl p-3 text-center"
+                className="card-premium rounded-xl p-4 text-center"
               >
-                <p className="text-xs text-dim mb-1">{addon.name}</p>
+                <p className="text-xs text-dim mb-1.5">{addon.name}</p>
                 <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-accent">
                   {addon.price}
                 </p>
               </div>
             ))}
           </div>
-          <p className="text-center text-dim text-xs mt-6">
+          <p className="text-center text-dim text-xs mt-8">
             No contracts. Cancel anytime. Monthly retainer covers ongoing management.
           </p>
         </motion.div>

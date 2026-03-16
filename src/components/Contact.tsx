@@ -3,6 +3,8 @@
 import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
@@ -13,7 +15,6 @@ export default function Contact() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // Honeypot check
     if (data.get('_hp')) {
       setStatus('sent');
       return;
@@ -42,28 +43,31 @@ export default function Contact() {
     }
   };
 
+  const inputClasses =
+    'w-full bg-bg border border-white/[0.06] rounded-xl px-4 py-3.5 text-sm text-txt placeholder:text-dim/40 focus:outline-none focus:border-accent/30 focus:ring-1 focus:ring-accent/10 transition-all duration-300';
+
   return (
-    <section id="contact" className="relative py-28">
+    <section id="contact" className="relative py-28 sm:py-36">
       {/* Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/[0.04] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-accent/[0.04] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease }}
           className="text-center mb-12"
         >
-          <span className="text-accent text-xs font-semibold tracking-[3px] uppercase block mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/20 text-accent text-xs font-semibold tracking-[0.15em] uppercase mb-6">
             Ready?
           </span>
-          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl md:text-4xl tracking-tight mb-4">
+          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1] mb-5">
             Stop handing out
             <br />
             <span className="gradient-text">forgettable cards</span>
           </h2>
-          <p className="text-dim text-lg">
+          <p className="text-dim text-lg md:text-xl leading-relaxed">
             Get set up in 48 hours. Show up first on Google. Turn every handshake into a customer.
           </p>
         </motion.div>
@@ -72,9 +76,9 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease }}
           onSubmit={handleSubmit}
-          className="bg-bg-card border border-white/[0.06] rounded-2xl p-6 md:p-8 space-y-5"
+          className="card-premium rounded-2xl p-6 sm:p-8 md:p-10 space-y-5"
         >
           {/* Honeypot */}
           <div className="hidden" aria-hidden="true">
@@ -83,7 +87,7 @@ export default function Contact() {
 
           <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <label htmlFor="name" className="block text-xs font-medium text-dim mb-2">
+              <label htmlFor="name" className="block text-xs font-medium text-dim mb-2.5 tracking-wide">
                 Your Name *
               </label>
               <input
@@ -93,11 +97,11 @@ export default function Contact() {
                 required
                 maxLength={120}
                 placeholder="Jordan Rivera"
-                className="w-full bg-bg-alt border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-txt placeholder:text-dim/50 focus:outline-none focus:border-accent/40 transition-colors"
+                className={inputClasses}
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-xs font-medium text-dim mb-2">
+              <label htmlFor="email" className="block text-xs font-medium text-dim mb-2.5 tracking-wide">
                 Email *
               </label>
               <input
@@ -107,14 +111,14 @@ export default function Contact() {
                 required
                 maxLength={254}
                 placeholder="you@example.com"
-                className="w-full bg-bg-alt border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-txt placeholder:text-dim/50 focus:outline-none focus:border-accent/40 transition-colors"
+                className={inputClasses}
               />
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <label htmlFor="phone" className="block text-xs font-medium text-dim mb-2">
+              <label htmlFor="phone" className="block text-xs font-medium text-dim mb-2.5 tracking-wide">
                 Phone (optional)
               </label>
               <input
@@ -123,17 +127,17 @@ export default function Contact() {
                 name="phone"
                 maxLength={30}
                 placeholder="(951) 555-0100"
-                className="w-full bg-bg-alt border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-txt placeholder:text-dim/50 focus:outline-none focus:border-accent/40 transition-colors"
+                className={inputClasses}
               />
             </div>
             <div>
-              <label htmlFor="service" className="block text-xs font-medium text-dim mb-2">
+              <label htmlFor="service" className="block text-xs font-medium text-dim mb-2.5 tracking-wide">
                 Package Interest
               </label>
               <select
                 id="service"
                 name="service"
-                className="w-full bg-bg-alt border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-txt focus:outline-none focus:border-accent/40 transition-colors"
+                className={inputClasses}
               >
                 <option value="">Choose a plan...</option>
                 <option value="Starter - $149 + $29/mo">Starter - $149 + $29/mo</option>
@@ -145,7 +149,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-xs font-medium text-dim mb-2">
+            <label htmlFor="message" className="block text-xs font-medium text-dim mb-2.5 tracking-wide">
               Message *
             </label>
             <textarea
@@ -155,14 +159,14 @@ export default function Contact() {
               maxLength={3000}
               rows={4}
               placeholder="Tell us about your business and what you need..."
-              className="w-full bg-bg-alt border border-white/[0.06] rounded-xl px-4 py-3 text-sm text-txt placeholder:text-dim/50 focus:outline-none focus:border-accent/40 transition-colors resize-none"
+              className={`${inputClasses} resize-none`}
             />
           </div>
 
           <button
             type="submit"
             disabled={status === 'sending'}
-            className="w-full py-3.5 rounded-xl bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-4 rounded-full gradient-btn text-bg font-semibold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === 'sending' ? 'Sending...' : status === 'sent' ? 'Message Sent!' : 'Send Message'}
           </button>
@@ -171,7 +175,7 @@ export default function Contact() {
             <p className="text-red text-xs text-center">Something went wrong. Try emailing us directly.</p>
           )}
 
-          <p className="text-center text-dim text-xs">
+          <p className="text-center text-dim text-xs pt-1">
             Or email directly:{' '}
             <a href="mailto:taptechinstall@gmail.com" className="text-accent hover:underline">
               taptechinstall@gmail.com
@@ -179,7 +183,7 @@ export default function Contact() {
           </p>
         </motion.form>
 
-        <p className="text-center text-dim text-xs mt-6">
+        <p className="text-center text-dim text-xs mt-8">
           Riverside, CA -- serving all of the Inland Empire
         </p>
       </div>

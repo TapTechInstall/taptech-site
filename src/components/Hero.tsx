@@ -12,12 +12,14 @@ const Card3D = dynamic(() => import('./Card3D'), {
   ),
 });
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.7, ease: 'easeOut' as const },
+    transition: { delay: i * 0.12, duration: 0.7, ease },
   }),
 };
 
@@ -25,18 +27,21 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center hero-glow overflow-hidden">
       {/* Grid background */}
-      <div className="absolute inset-0 grid-bg opacity-50" />
+      <div className="absolute inset-0 grid-bg opacity-40" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-12 sm:pb-16 w-full">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+      {/* Extra depth glow near card area */}
+      <div className="absolute top-1/4 right-0 w-[800px] h-[600px] bg-[radial-gradient(circle_at_70%_40%,rgba(0,229,160,0.06),transparent_60%)] pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-12 sm:pb-20 w-full">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Copy */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <motion.div
               custom={0}
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/20 text-accent text-xs font-semibold tracking-wider uppercase"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/25 text-accent text-xs font-semibold tracking-[0.15em] uppercase backdrop-blur-sm"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               Now serving Riverside &amp; the IE
@@ -47,9 +52,9 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="font-[family-name:var(--font-syne)] font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]"
+              className="font-[family-name:var(--font-syne)] font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[-0.03em] leading-[0.95]"
             >
-              One tap.
+              <span className="text-txt/90">One tap.</span>
               <br />
               <span className="gradient-text">Infinite reach.</span>
             </motion.h1>
@@ -59,10 +64,10 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="text-dim text-lg md:text-xl max-w-lg leading-relaxed"
+              className="text-dim text-lg md:text-xl max-w-xl leading-[1.7]"
             >
               Smart NFC cards that instantly share your contact, boost your Google reviews, and turn every handshake into a client.
-              <span className="text-txt font-medium"> No app needed.</span>
+              <span className="text-accent font-semibold"> No app needed.</span>
             </motion.p>
 
             <motion.div
@@ -74,7 +79,7 @@ export default function Hero() {
             >
               <a
                 href="#contact"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 hover:scale-105 glow-accent"
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full gradient-btn text-bg font-semibold text-base"
               >
                 Get Started
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -85,7 +90,7 @@ export default function Hero() {
                 href="https://pages.taptechconnect.com/jordan-cuts"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/10 text-txt font-semibold text-sm hover:bg-white/[0.04] transition-all duration-200"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/[0.08] bg-white/[0.02] text-txt font-semibold text-base hover:border-accent/20 hover:bg-accent/[0.04] transition-all duration-300"
               >
                 See a Demo
               </a>
@@ -97,35 +102,38 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-white/5"
+              className="flex flex-wrap items-center gap-5 sm:gap-8 pt-10 border-t border-white/5"
             >
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-txt">275+</p>
-                <p className="text-dim text-xs">Leads identified</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">275+</p>
+                <p className="text-dim text-xs mt-0.5">Leads identified</p>
               </div>
-              <div className="w-px h-8 bg-white/10" />
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-txt">4</p>
-                <p className="text-dim text-xs">Cities covered</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">4</p>
+                <p className="text-dim text-xs mt-0.5">Cities covered</p>
               </div>
-              <div className="w-px h-8 bg-white/10" />
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-xl sm:text-2xl text-accent">48hr</p>
-                <p className="text-dim text-xs">Setup time</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl gradient-text">48hr</p>
+                <p className="text-dim text-xs mt-0.5">Setup time</p>
               </div>
             </motion.div>
           </div>
 
           {/* Right: 3D Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease }}
           >
             <Card3D />
           </motion.div>
         </div>
       </div>
+
+      {/* Bottom gradient divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
 
       {/* Scroll indicator */}
       <motion.div
@@ -134,7 +142,7 @@ export default function Hero() {
         transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-dim text-xs tracking-wider uppercase">Scroll</span>
+        <span className="text-dim text-xs tracking-[0.15em] uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}

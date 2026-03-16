@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const features = [
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="5" y="2" width="14" height="20" rx="2" />
         <path d="M12 18h.01" />
       </svg>
@@ -16,7 +16,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="3" y="4" width="18" height="18" rx="2" />
         <path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
       </svg>
@@ -27,7 +27,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
@@ -37,7 +37,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M18 20V10M12 20V4M6 20v-6" />
       </svg>
     ),
@@ -47,7 +47,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2L2 7l10 5 10-5-10-5z" />
         <path d="M2 17l10 5 10-5" />
         <path d="M2 12l10 5 10-5" />
@@ -59,7 +59,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
       </svg>
     ),
@@ -77,26 +77,32 @@ const flowSteps = [
   { label: 'Ranking', sub: 'Get found on Google', color: '#b388ff' },
 ];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function Features() {
   return (
-    <section id="features" className="relative py-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="features" className="relative py-28 sm:py-36 overflow-hidden">
+      {/* Section glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] section-glow-green pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease }}
           className="text-center mb-20"
         >
-          <span className="text-accent text-xs font-semibold tracking-[3px] uppercase block mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/[0.08] border border-accent/20 text-accent text-xs font-semibold tracking-[0.15em] uppercase mb-6">
             How It Works
           </span>
-          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl md:text-4xl tracking-tight mb-4">
+          <h2 className="font-[family-name:var(--font-syne)] font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1] mb-5">
             The complete <span className="gradient-text">client connection</span> system
           </h2>
-          <p className="text-dim text-lg max-w-2xl mx-auto">
-            Every piece feeds the next. The card drives people to the tap page. The tap page drives bookings and reviews. The reviews drive Google ranking. It&apos;s a flywheel.
+          <p className="text-dim text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Every piece feeds the next. The card drives people to the tap page. The tap page drives bookings and reviews. The reviews drive Google ranking.
+            <span className="text-accent font-semibold"> It&apos;s a flywheel.</span>
           </p>
         </motion.div>
 
@@ -105,23 +111,25 @@ export default function Features() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease }}
           className="flex flex-wrap justify-center items-center gap-3 mb-20"
         >
           {flowSteps.map((step, i) => (
             <div key={step.label} className="flex items-center gap-3">
               <div
-                className="px-5 py-3 rounded-xl border text-center min-w-[120px]"
+                className="card-premium px-5 py-3 rounded-xl text-center min-w-[120px]"
                 style={{
-                  borderColor: `${step.color}30`,
-                  background: `${step.color}08`,
+                  borderColor: `${step.color}20`,
+                  background: `linear-gradient(180deg, ${step.color}0a, ${step.color}04)`,
                 }}
               >
                 <p className="text-sm font-semibold text-txt">{step.label}</p>
-                <p className="text-[10px] text-dim">{step.sub}</p>
+                <p className="text-[10px] text-dim mt-0.5">{step.sub}</p>
               </div>
               {i < flowSteps.length - 1 && (
-                <span className="text-accent font-bold text-lg hidden sm:block">&#8594;</span>
+                <svg className="w-4 h-4 text-accent/40 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               )}
             </div>
           ))}
@@ -135,27 +143,23 @@ export default function Features() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative bg-bg-card rounded-2xl border border-white/[0.04] p-6 hover:border-white/[0.08] transition-all duration-300 hover:bg-bg-card-hover"
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
+              className="group card-premium rounded-2xl p-7 hover:translate-y-[-2px]"
             >
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: `${feature.color}12`, color: feature.color }}
+                className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+                style={{
+                  background: `linear-gradient(135deg, ${feature.color}15, ${feature.color}08)`,
+                  color: feature.color,
+                  boxShadow: `0 0 0 1px ${feature.color}20`,
+                }}
               >
                 {feature.icon}
               </div>
-              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base mb-2">
+              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base mb-2 text-txt">
                 {feature.title}
               </h3>
-              <p className="text-dim text-sm leading-relaxed">{feature.description}</p>
-
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                style={{
-                  background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${feature.color}06, transparent 60%)`,
-                }}
-              />
+              <p className="text-dim text-sm leading-[1.7]">{feature.description}</p>
             </motion.div>
           ))}
         </div>
