@@ -15,6 +15,102 @@ const dragConfig = {
   autoRotateSpeed: 0.0025,
 };
 
+// Animated NFC waves that pulse outward from the tap icon
+function NFCWaves({ position }: { position: [number, number, number] }) {
+  const wave1Ref = useRef<THREE.Mesh>(null);
+  const wave2Ref = useRef<THREE.Mesh>(null);
+  const wave3Ref = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    const refs = [wave1Ref, wave2Ref, wave3Ref];
+    refs.forEach((ref, i) => {
+      if (!ref.current) return;
+      // Stagger each wave ring
+      const phase = (t * 1.2 + i * 0.8) % 3;
+      const scale = 1 + phase * 0.6;
+      const opacity = Math.max(0, 0.3 - phase * 0.1);
+      ref.current.scale.setScalar(scale);
+      (ref.current.material as THREE.MeshBasicMaterial).opacity = opacity;
+    });
+  });
+
+  return (
+    <group position={position}>
+      <mesh ref={wave1Ref}>
+        <ringGeometry args={[0.2, 0.22, 32]} />
+        <meshBasicMaterial color="#00ff88" transparent opacity={0.3} />
+      </mesh>
+      <mesh ref={wave2Ref}>
+        <ringGeometry args={[0.2, 0.22, 32]} />
+        <meshBasicMaterial color="#00aaff" transparent opacity={0.2} />
+      </mesh>
+      <mesh ref={wave3Ref}>
+        <ringGeometry args={[0.2, 0.22, 32]} />
+        <meshBasicMaterial color="#b388ff" transparent opacity={0.15} />
+      </mesh>
+    </group>
+  );
+}
+
+// Holographic shimmer overlay that shifts color with viewing angle
+function HolographicShimmer({ position }: { position: [number, number, number] }) {
+  const matRef = useRef<THREE.ShaderMaterial>(null);
+
+  const shader = useMemo(() => ({
+    uniforms: {
+      uTime: { value: 0 },
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      varying vec3 vViewDir;
+      void main() {
+        vUv = uv;
+        vNormal = normalize(normalMatrix * normal);
+        vec4 worldPos = modelMatrix * vec4(position, 1.0);
+        vViewDir = normalize(cameraPosition - worldPos.xyz);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      varying vec3 vViewDir;
+      void main() {
+        // Fresnel-based iridescence -- shifts color based on viewing angle
+        float fresnel = 1.0 - abs(dot(vNormal, vViewDir));
+        fresnel = pow(fresnel, 3.0);
+
+        float t = uTime * 0.3 + vUv.x * 4.0 + vUv.y * 2.0;
+        vec3 col = vec3(
+          0.5 + 0.5 * sin(t + fresnel * 6.0),
+          0.5 + 0.5 * sin(t + 2.094 + fresnel * 6.0),
+          0.5 + 0.5 * sin(t + 4.189 + fresnel * 6.0)
+        );
+
+        // Only visible at glancing angles
+        float alpha = fresnel * 0.12;
+        gl_FragColor = vec4(col, alpha);
+      }
+    `,
+  }), []);
+
+  useFrame((state) => {
+    if (matRef.current) {
+      matRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+    }
+  });
+
+  return (
+    <mesh position={position}>
+      <planeGeometry args={[3.3, 2.06]} />
+      <shaderMaterial ref={matRef} {...shader} transparent />
+    </mesh>
+  );
+}
+
 function NFCCard({ scrollProgress }: { scrollProgress: number }) {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -88,10 +184,8 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
       if (Math.abs(state.velocityY) < dragConfig.minVelocityCutoff) state.velocityY = 0;
 
       // Resume auto-rotate when momentum settles, slowing near front/back face
-      // so the card pauses naturally where it reads best
       if (state.velocityX === 0 && state.velocityY === 0) {
         const cosAngle = Math.cos(targetRotation.current.y);
-        // Slow to 25% near front-face (cos≈1) and back-face (cos≈-1), full speed at edge-on (cos≈0)
         const readabilityFactor = 0.25 + 0.75 * (1 - cosAngle * cosAngle);
         targetRotation.current.y += dragConfig.autoRotateSpeed * readabilityFactor;
       }
@@ -169,6 +263,9 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           />
         </mesh>
 
+        {/* Holographic shimmer -- shifts color with viewing angle */}
+        <HolographicShimmer position={[0, 0, 0.0425]} />
+
         {/* Invisible larger hit area for easier dragging */}
         <mesh visible={false}>
           <planeGeometry args={[4, 2.8]} />
@@ -178,7 +275,7 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         {/* Top RGB accent line */}
         <RGBLine position={[0, 0.74, 0.043]} width={2.8} />
 
-        {/* Edge highlight strips -- visible on front face */}
+        {/* Edge highlight strips */}
         <mesh position={[0, 0.74, 0.043]}>
           <planeGeometry args={[3.3, 0.008]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.12} />
@@ -186,31 +283,6 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         <mesh position={[0, -0.74, 0.043]}>
           <planeGeometry args={[3.3, 0.008]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
-        </mesh>
-
-        {/* Chip rectangle -- EMV contact pad */}
-        <mesh position={[-1.05, -0.15, 0.043]}>
-          <planeGeometry args={[0.35, 0.28]} />
-          <meshPhysicalMaterial
-            color="#b8a040"
-            metalness={0.7}
-            roughness={0.3}
-            transparent
-            opacity={0.4}
-          />
-        </mesh>
-        {/* Chip inner lines */}
-        <mesh position={[-1.05, -0.15, 0.044]}>
-          <planeGeometry args={[0.25, 0.005]} />
-          <meshBasicMaterial color="#d4be5a" transparent opacity={0.3} />
-        </mesh>
-        <mesh position={[-1.05, -0.1, 0.044]}>
-          <planeGeometry args={[0.25, 0.005]} />
-          <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
-        </mesh>
-        <mesh position={[-1.05, -0.2, 0.044]}>
-          <planeGeometry args={[0.25, 0.005]} />
-          <meshBasicMaterial color="#d4be5a" transparent opacity={0.2} />
         </mesh>
 
         {/* NFC tap icon -- bottom right */}
@@ -227,6 +299,9 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           <meshBasicMaterial color="#ff3366" transparent opacity={0.6} />
         </mesh>
 
+        {/* NFC pulse waves radiating from tap icon */}
+        <NFCWaves position={[1.2, -0.55, 0.044]} />
+
         {/* TapTech label area */}
         <mesh position={[-0.45, 0.45, 0.043]}>
           <planeGeometry args={[1.1, 0.16]} />
@@ -237,6 +312,17 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         <mesh position={[-0.65, 0.2, 0.043]}>
           <planeGeometry args={[0.7, 0.08]} />
           <meshBasicMaterial color="#00ff88" transparent opacity={0.12} />
+        </mesh>
+
+        {/* Cardholder name placeholder -- where the chip used to be */}
+        <mesh position={[-0.85, -0.2, 0.043]}>
+          <planeGeometry args={[1.2, 0.06]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+        </mesh>
+        {/* Second line -- title/business */}
+        <mesh position={[-0.95, -0.35, 0.043]}>
+          <planeGeometry args={[0.9, 0.04]} />
+          <meshBasicMaterial color="#7c7c99" transparent opacity={0.05} />
         </mesh>
 
         {/* Bottom info line */}
@@ -254,7 +340,7 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         {/* Bottom RGB accent line */}
         <RGBLine position={[0, -0.74, 0.043]} width={2.8} />
 
-        {/* Back face -- slight contrast */}
+        {/* Back face -- clean, no magnetic stripe */}
         <mesh position={[0, 0, -0.042]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[3.3, 2.06]} />
           <meshPhysicalMaterial
@@ -266,10 +352,26 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
           />
         </mesh>
 
-        {/* Back magnetic stripe */}
-        <mesh position={[0, 0.35, -0.043]} rotation={[0, Math.PI, 0]}>
-          <planeGeometry args={[3.2, 0.25]} />
-          <meshBasicMaterial color="#1a1a2a" transparent opacity={0.5} />
+        {/* Back: TapTech branding centered */}
+        <mesh position={[0, 0.1, -0.043]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[1.0, 0.14]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+        </mesh>
+
+        {/* Back: URL line */}
+        <mesh position={[0, -0.15, -0.043]} rotation={[0, Math.PI, 0]}>
+          <planeGeometry args={[1.3, 0.04]} />
+          <meshBasicMaterial color="#00e5a0" transparent opacity={0.06} />
+        </mesh>
+
+        {/* Back: NFC icon mirror */}
+        <mesh position={[0, -0.55, -0.043]} rotation={[0, Math.PI, 0]}>
+          <ringGeometry args={[0.1, 0.12, 32]} />
+          <meshBasicMaterial color="#00ff88" transparent opacity={0.15} />
+        </mesh>
+        <mesh position={[0, -0.55, -0.043]} rotation={[0, Math.PI, 0]}>
+          <circleGeometry args={[0.03, 32]} />
+          <meshBasicMaterial color="#00aaff" transparent opacity={0.2} />
         </mesh>
       </group>
     </Float>
