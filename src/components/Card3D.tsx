@@ -64,11 +64,11 @@ function ContactlessSignal({ position }: { position: [number, number, number] })
   ];
 
   return (
-    <group position={position} rotation={[0, 0, -Math.PI / 2]}>
+    <group position={position}>
       {arcs.map((arc, i) => (
         <mesh key={i} ref={refs[i]}>
           <ringGeometry args={[arc.inner, arc.outer, 48, 1, arcCenter, arcSpan]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.5} side={THREE.DoubleSide} />
         </mesh>
       ))}
     </group>
