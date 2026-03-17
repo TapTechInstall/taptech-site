@@ -22,39 +22,48 @@ const dragConfig = {
   autoRotateSpeed: 0.0025,
 };
 
-// Animated NFC waves that pulse outward from the tap icon
-function NFCWaves({ position }: { position: [number, number, number] }) {
-  const wave1Ref = useRef<THREE.Mesh>(null);
-  const wave2Ref = useRef<THREE.Mesh>(null);
-  const wave3Ref = useRef<THREE.Mesh>(null);
+// Contactless signal arcs -- white Wi-Fi style waves that flow outward
+// Resembles the universal NFC/contactless payment symbol
+function SignalWaves({ position }: { position: [number, number, number] }) {
+  const arc1Ref = useRef<THREE.Mesh>(null);
+  const arc2Ref = useRef<THREE.Mesh>(null);
+  const arc3Ref = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    const refs = [wave1Ref, wave2Ref, wave3Ref];
+    const refs = [arc1Ref, arc2Ref, arc3Ref];
     refs.forEach((ref, i) => {
       if (!ref.current) return;
-      // Stagger each wave ring
-      const phase = (t * 1.2 + i * 0.8) % 3;
-      const scale = 1 + phase * 0.6;
-      const opacity = Math.max(0, 0.3 - phase * 0.1);
-      ref.current.scale.setScalar(scale);
+      // Staggered pulse: each arc fades in then out in sequence
+      const cycle = (t * 0.8 + i * 0.5) % 3;
+      const fadeIn = Math.min(cycle / 0.6, 1);
+      const fadeOut = Math.max(0, 1 - (cycle - 0.6) / 1.5);
+      const opacity = fadeIn * fadeOut * (0.55 - i * 0.12);
       (ref.current.material as THREE.MeshBasicMaterial).opacity = opacity;
     });
   });
 
+  // Arc geometry: partial ring (quarter-circle arcs) tilted 45deg like contactless symbol
+  // thetaStart = -PI/4, thetaLength = PI/2 gives a quarter arc
+  const arcStart = -Math.PI / 4;
+  const arcLength = Math.PI / 2;
+
   return (
-    <group position={position}>
-      <mesh ref={wave1Ref}>
-        <ringGeometry args={[0.2, 0.22, 32]} />
-        <meshBasicMaterial color="#00ff88" transparent opacity={0.3} />
+    <group position={position} rotation={[0, 0, Math.PI / 4]}>
+      {/* Inner arc */}
+      <mesh ref={arc1Ref}>
+        <ringGeometry args={[0.08, 0.095, 24, 1, arcStart, arcLength]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
       </mesh>
-      <mesh ref={wave2Ref}>
-        <ringGeometry args={[0.2, 0.22, 32]} />
-        <meshBasicMaterial color="#00aaff" transparent opacity={0.2} />
+      {/* Middle arc */}
+      <mesh ref={arc2Ref}>
+        <ringGeometry args={[0.14, 0.155, 24, 1, arcStart, arcLength]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
       </mesh>
-      <mesh ref={wave3Ref}>
-        <ringGeometry args={[0.2, 0.22, 32]} />
-        <meshBasicMaterial color="#b388ff" transparent opacity={0.15} />
+      {/* Outer arc */}
+      <mesh ref={arc3Ref}>
+        <ringGeometry args={[0.20, 0.215, 24, 1, arcStart, arcLength]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
       </mesh>
     </group>
   );
@@ -292,22 +301,15 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
 
-        {/* NFC tap icon -- bottom right */}
-        <mesh position={[1.2, -0.55, 0.043]}>
-          <ringGeometry args={[0.14, 0.17, 32]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.5} />
-        </mesh>
-        <mesh position={[1.2, -0.55, 0.043]}>
-          <ringGeometry args={[0.08, 0.1, 32]} />
-          <meshBasicMaterial color="#00aaff" transparent opacity={0.35} />
-        </mesh>
-        <mesh position={[1.2, -0.55, 0.043]}>
-          <circleGeometry args={[0.035, 32]} />
-          <meshBasicMaterial color="#ff3366" transparent opacity={0.6} />
+        {/* Contactless symbol -- bottom right */}
+        {/* Small white dot as the signal origin */}
+        <mesh position={[1.15, -0.58, 0.043]}>
+          <circleGeometry args={[0.03, 24]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.7} />
         </mesh>
 
-        {/* NFC pulse waves radiating from tap icon */}
-        <NFCWaves position={[1.2, -0.55, 0.044]} />
+        {/* Signal arcs flowing from the dot */}
+        <SignalWaves position={[1.15, -0.58, 0.044]} />
 
         {/* === FRONT FACE TYPOGRAPHY LAYOUT === */}
         {/* Safe margin: 0.2 from edges. Card is 3.37 x 2.125 */}
