@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { RoundedBox, Float, MeshDistortMaterial, Environment, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -22,49 +22,52 @@ const dragConfig = {
   autoRotateSpeed: 0.0025,
 };
 
-// Contactless signal arcs -- white Wi-Fi style waves that flow outward
-// Resembles the universal NFC/contactless payment symbol
-function SignalWaves({ position }: { position: [number, number, number] }) {
-  const arc1Ref = useRef<THREE.Mesh>(null);
-  const arc2Ref = useRef<THREE.Mesh>(null);
-  const arc3Ref = useRef<THREE.Mesh>(null);
+// Contactless payment symbol -- matches the ))) icon on debit/credit cards
+// 4 nested arcs radiating outward, oriented like the EMVCo contactless indicator
+function ContactlessSymbol({ position }: { position: [number, number, number] }) {
+  const refs = [
+    useRef<THREE.Mesh>(null),
+    useRef<THREE.Mesh>(null),
+    useRef<THREE.Mesh>(null),
+    useRef<THREE.Mesh>(null),
+  ];
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    const refs = [arc1Ref, arc2Ref, arc3Ref];
     refs.forEach((ref, i) => {
       if (!ref.current) return;
-      // Staggered pulse: each arc fades in then out in sequence
-      const cycle = (t * 0.8 + i * 0.5) % 3;
-      const fadeIn = Math.min(cycle / 0.6, 1);
-      const fadeOut = Math.max(0, 1 - (cycle - 0.6) / 1.5);
-      const opacity = fadeIn * fadeOut * (0.55 - i * 0.12);
-      (ref.current.material as THREE.MeshBasicMaterial).opacity = opacity;
+      // Sequential cascade: inner arc lights first, ripples outward
+      const cycle = (t * 0.7 + i * 0.4) % 3.5;
+      const fadeIn = Math.min(cycle / 0.4, 1);
+      const fadeOut = Math.max(0, 1 - (cycle - 0.8) / 2.0);
+      const baseOpacity = 0.65 - i * 0.1;
+      (ref.current.material as THREE.MeshBasicMaterial).opacity =
+        fadeIn * fadeOut * baseOpacity;
     });
   });
 
-  // Arc geometry: partial ring (quarter-circle arcs) tilted 45deg like contactless symbol
-  // thetaStart = -PI/4, thetaLength = PI/2 gives a quarter arc
-  const arcStart = -Math.PI / 4;
-  const arcLength = Math.PI / 2;
+  // EMVCo contactless indicator: arcs span ~100deg, oriented sideways
+  // The real symbol has arcs opening to the RIGHT like )))
+  // thetaStart centers the arc, thetaLength ~100deg (1.75 rad)
+  const arcSpan = 1.75;
+  const arcCenter = -arcSpan / 2;
+
+  // Radii for 4 nested arcs with consistent gap
+  const arcs = [
+    { inner: 0.045, outer: 0.055 },
+    { inner: 0.085, outer: 0.095 },
+    { inner: 0.125, outer: 0.135 },
+    { inner: 0.165, outer: 0.175 },
+  ];
 
   return (
-    <group position={position} rotation={[0, 0, Math.PI / 4]}>
-      {/* Inner arc */}
-      <mesh ref={arc1Ref}>
-        <ringGeometry args={[0.08, 0.095, 24, 1, arcStart, arcLength]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
-      </mesh>
-      {/* Middle arc */}
-      <mesh ref={arc2Ref}>
-        <ringGeometry args={[0.14, 0.155, 24, 1, arcStart, arcLength]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
-      </mesh>
-      {/* Outer arc */}
-      <mesh ref={arc3Ref}>
-        <ringGeometry args={[0.20, 0.215, 24, 1, arcStart, arcLength]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
-      </mesh>
+    <group position={position} rotation={[0, 0, -Math.PI / 2]}>
+      {arcs.map((arc, i) => (
+        <mesh key={i} ref={refs[i]}>
+          <ringGeometry args={[arc.inner, arc.outer, 32, 1, arcCenter, arcSpan]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -301,15 +304,8 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
 
-        {/* Contactless symbol -- bottom right */}
-        {/* Small white dot as the signal origin */}
-        <mesh position={[1.15, -0.58, 0.043]}>
-          <circleGeometry args={[0.03, 24]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.7} />
-        </mesh>
-
-        {/* Signal arcs flowing from the dot */}
-        <SignalWaves position={[1.15, -0.58, 0.044]} />
+        {/* Contactless tap symbol -- bottom right, matches debit card ))) icon */}
+        <ContactlessSymbol position={[1.15, -0.58, 0.044]} />
 
         {/* === FRONT FACE TYPOGRAPHY LAYOUT === */}
         {/* Safe margin: 0.2 from edges. Card is 3.37 x 2.125 */}
@@ -617,6 +613,28 @@ function Scene({ scrollProgress, fields }: { scrollProgress: number; fields: Car
   );
 }
 
+// Responsive camera -- pulls back on narrow viewports so card never clips
+function ResponsiveCamera() {
+  const { camera, size } = useThree();
+
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    // Below ~500px width, widen FOV to prevent clipping
+    if (size.width < 400) {
+      cam.fov = 62;
+    } else if (size.width < 500) {
+      cam.fov = 55;
+    } else if (size.width < 640) {
+      cam.fov = 50;
+    } else {
+      cam.fov = 45;
+    }
+    cam.updateProjectionMatrix();
+  }, [camera, size.width]);
+
+  return null;
+}
+
 export default function Card3D() {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -692,6 +710,7 @@ export default function Card3D() {
           style={{ background: 'transparent', touchAction: 'none' }}
           onCreated={() => setLoaded(true)}
         >
+          <ResponsiveCamera />
           <ScrollHandler onScroll={handleScroll} />
           <Scene scrollProgress={scrollProgress} fields={fields} />
         </Canvas>
