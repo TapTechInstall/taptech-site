@@ -616,20 +616,28 @@ function Scene({ scrollProgress, fields }: { scrollProgress: number; fields: Car
   );
 }
 
-// Responsive camera -- pulls back on narrow viewports so card never clips
+// Responsive camera -- adjusts Z distance and FOV so card+signal never clips
 function ResponsiveCamera() {
   const { camera, size } = useThree();
 
   useEffect(() => {
     const cam = camera as THREE.PerspectiveCamera;
-    // Below ~500px width, widen FOV to prevent clipping
-    if (size.width < 400) {
-      cam.fov = 62;
-    } else if (size.width < 500) {
+    // Card + signal arcs span ~5.5 units wide. Need generous margins.
+    // Pull camera back further on narrow screens.
+    if (size.width < 360) {
+      cam.position.z = 8;
+      cam.fov = 60;
+    } else if (size.width < 480) {
+      cam.position.z = 7.5;
       cam.fov = 55;
     } else if (size.width < 640) {
+      cam.position.z = 7;
       cam.fov = 50;
+    } else if (size.width < 900) {
+      cam.position.z = 6.5;
+      cam.fov = 48;
     } else {
+      cam.position.z = 6;
       cam.fov = 45;
     }
     cam.updateProjectionMatrix();
@@ -670,7 +678,7 @@ export default function Card3D() {
 
   if (error) {
     return (
-      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center relative">
+      <div className="w-full h-[340px] sm:h-[420px] md:h-[520px] flex items-center justify-center relative">
         <div className="w-[280px] sm:w-[340px] h-[175px] sm:h-[210px] rounded-2xl bg-bg-card border border-accent/20 relative overflow-hidden rgb-pulse">
           <div className="absolute top-0 left-0 right-0 rgb-line" />
           <div className="p-6 flex flex-col justify-between h-full">
@@ -698,7 +706,7 @@ export default function Card3D() {
   return (
     <div className="w-full flex flex-col items-center gap-4">
       <div
-        className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative"
+        className="w-full h-[340px] sm:h-[420px] md:h-[520px] relative overflow-visible"
         style={{ touchAction: 'none' }}
       >
         {!loaded && (
@@ -707,7 +715,7 @@ export default function Card3D() {
           </div>
         )}
         <Canvas
-          camera={{ position: [0, 0, 5], fov: 45 }}
+          camera={{ position: [0, 0, 6], fov: 45 }}
           dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: true, powerPreference: 'default' }}
           style={{ background: 'transparent', touchAction: 'none' }}
