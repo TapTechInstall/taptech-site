@@ -22,49 +22,52 @@ const dragConfig = {
   autoRotateSpeed: 0.0025,
 };
 
-// Contactless payment symbol -- matches the ))) icon on debit/credit cards
-// 4 nested arcs radiating outward, oriented like the EMVCo contactless indicator
-function ContactlessSymbol({ position }: { position: [number, number, number] }) {
-  const refs = [
-    useRef<THREE.Mesh>(null),
-    useRef<THREE.Mesh>(null),
-    useRef<THREE.Mesh>(null),
-    useRef<THREE.Mesh>(null),
-  ];
+// Large contactless signal arcs -- positioned beside the card, flowing outward
+// Thick white ))) arcs that continuously ripple away from the card edge
+function ContactlessSignal({ position }: { position: [number, number, number] }) {
+  const arcCount = 5;
+  const refs = Array.from({ length: arcCount }, () => useRef<THREE.Mesh>(null));
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     refs.forEach((ref, i) => {
       if (!ref.current) return;
-      // Sequential cascade: inner arc lights first, ripples outward
-      const cycle = (t * 0.7 + i * 0.4) % 3.5;
-      const fadeIn = Math.min(cycle / 0.4, 1);
-      const fadeOut = Math.max(0, 1 - (cycle - 0.8) / 2.0);
-      const baseOpacity = 0.65 - i * 0.1;
+      // Continuous ripple: arcs scale outward and fade as they travel
+      const speed = 0.9;
+      const cycle = (t * speed + i * 0.55) % (arcCount * 0.55);
+      const life = cycle / (arcCount * 0.55);
+
+      // Scale grows as arc travels outward
+      const scale = 1 + life * 0.6;
+      ref.current.scale.setScalar(scale);
+
+      // Fade in fast, hold, fade out at edges
+      const fadeIn = Math.min(life / 0.15, 1);
+      const fadeOut = Math.max(0, 1 - (life - 0.5) / 0.5);
+      const peak = 0.6 - i * 0.06;
       (ref.current.material as THREE.MeshBasicMaterial).opacity =
-        fadeIn * fadeOut * baseOpacity;
+        fadeIn * fadeOut * peak;
     });
   });
 
-  // EMVCo contactless indicator: arcs span ~100deg, oriented sideways
-  // The real symbol has arcs opening to the RIGHT like )))
-  // thetaStart centers the arc, thetaLength ~100deg (1.75 rad)
-  const arcSpan = 1.75;
+  // Wide arcs opening to the right -- ~120deg span for clear ))) shape
+  const arcSpan = 2.1;
   const arcCenter = -arcSpan / 2;
 
-  // Radii for 4 nested arcs with consistent gap
+  // Large, thick arcs with generous spacing
   const arcs = [
-    { inner: 0.045, outer: 0.055 },
-    { inner: 0.085, outer: 0.095 },
-    { inner: 0.125, outer: 0.135 },
-    { inner: 0.165, outer: 0.175 },
+    { inner: 0.22, outer: 0.26 },
+    { inner: 0.38, outer: 0.42 },
+    { inner: 0.54, outer: 0.58 },
+    { inner: 0.70, outer: 0.74 },
+    { inner: 0.86, outer: 0.90 },
   ];
 
   return (
     <group position={position} rotation={[0, 0, -Math.PI / 2]}>
       {arcs.map((arc, i) => (
         <mesh key={i} ref={refs[i]}>
-          <ringGeometry args={[arc.inner, arc.outer, 32, 1, arcCenter, arcSpan]} />
+          <ringGeometry args={[arc.inner, arc.outer, 48, 1, arcCenter, arcSpan]} />
           <meshBasicMaterial color="#ffffff" transparent opacity={0.5} />
         </mesh>
       ))}
@@ -304,8 +307,8 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
         </mesh>
 
-        {/* Contactless tap symbol -- bottom right, matches debit card ))) icon */}
-        <ContactlessSymbol position={[1.15, -0.58, 0.044]} />
+        {/* Contactless signal -- large arcs flowing outward from card right edge */}
+        <ContactlessSignal position={[2.0, 0, 0.02]} />
 
         {/* === FRONT FACE TYPOGRAPHY LAYOUT === */}
         {/* Safe margin: 0.2 from edges. Card is 3.37 x 2.125 */}
