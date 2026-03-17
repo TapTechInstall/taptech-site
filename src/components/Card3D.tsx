@@ -309,107 +309,131 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
         {/* NFC pulse waves radiating from tap icon */}
         <NFCWaves position={[1.2, -0.55, 0.044]} />
 
-        {/* TapTech label */}
+        {/* === FRONT FACE TYPOGRAPHY LAYOUT === */}
+        {/* Safe margin: 0.2 from edges. Card is 3.37 x 2.125 */}
+        {/* Left edge: -1.485, Right edge: 1.485, usable x: -1.28 to 1.28 */}
+        {/* Top edge: 0.8625, Bottom edge: -0.8625, usable y: -0.66 to 0.66 */}
+
+        {/* Brand: TapTech -- top left, understated */}
         <Text
-          position={[-0.45, 0.48, 0.044]}
-          fontSize={0.18}
+          position={[-1.28, 0.62, 0.044]}
+          fontSize={0.14}
           color="#ffffff"
-          anchorX="center"
+          anchorX="left"
           anchorY="middle"
-          fillOpacity={0.9}
+          fillOpacity={0.85}
+          letterSpacing={0.02}
         >
           TapTech
         </Text>
 
-        {/* Connect sub-label */}
+        {/* Brand: CONNECT -- right of TapTech, accent */}
         <Text
-          position={[-0.62, 0.26, 0.044]}
-          fontSize={0.08}
+          position={[-1.28, 0.46, 0.044]}
+          fontSize={0.065}
           color="#00ff88"
-          anchorX="center"
+          anchorX="left"
           anchorY="middle"
-          letterSpacing={0.2}
-          fillOpacity={0.8}
+          letterSpacing={0.25}
+          fillOpacity={0.7}
         >
           CONNECT
         </Text>
 
-        {/* Cardholder name -- live from input */}
+        {/* Cardholder name -- primary focal point, left-aligned, larger */}
         {fields.name ? (
           <Text
-            position={[-0.85, -0.15, 0.044]}
-            fontSize={0.13}
+            position={[-1.28, -0.05, 0.044]}
+            fontSize={0.17}
             color="#ffffff"
             anchorX="left"
             anchorY="middle"
-            maxWidth={2.4}
-            fillOpacity={0.85}
+            maxWidth={2.2}
+            fillOpacity={0.95}
+            letterSpacing={0.01}
           >
             {fields.name}
           </Text>
         ) : (
-          <mesh position={[-0.85, -0.2, 0.043]}>
-            <planeGeometry args={[1.2, 0.06]} />
-            <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
-          </mesh>
+          <group position={[-1.28, -0.05, 0.043]}>
+            <mesh position={[0.55, 0, 0]}>
+              <planeGeometry args={[1.1, 0.045]} />
+              <meshBasicMaterial color="#ffffff" transparent opacity={0.04} />
+            </mesh>
+          </group>
         )}
 
-        {/* Title/business -- live from input */}
+        {/* Title/business -- secondary, smaller, muted */}
         {fields.title ? (
           <Text
-            position={[-0.85, -0.33, 0.044]}
-            fontSize={0.09}
-            color="#7c7c99"
+            position={[-1.28, -0.26, 0.044]}
+            fontSize={0.085}
+            color="#8888aa"
             anchorX="left"
             anchorY="middle"
-            maxWidth={2.4}
-            fillOpacity={0.7}
+            maxWidth={2.2}
+            fillOpacity={0.65}
+            letterSpacing={0.03}
           >
             {fields.title}
           </Text>
         ) : (
-          <mesh position={[-0.95, -0.35, 0.043]}>
-            <planeGeometry args={[0.9, 0.04]} />
-            <meshBasicMaterial color="#7c7c99" transparent opacity={0.05} />
-          </mesh>
+          <group position={[-1.28, -0.26, 0.043]}>
+            <mesh position={[0.4, 0, 0]}>
+              <planeGeometry args={[0.8, 0.03]} />
+              <meshBasicMaterial color="#8888aa" transparent opacity={0.04} />
+            </mesh>
+          </group>
         )}
 
-        {/* Phone -- live from input */}
+        {/* Thin separator line above contact info */}
+        <mesh position={[-0.45, -0.46, 0.043]}>
+          <planeGeometry args={[1.66, 0.003]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+        </mesh>
+
+        {/* Phone -- bottom left, small, utility text */}
         {fields.phone ? (
           <Text
-            position={[-0.2, -0.65, 0.044]}
-            fontSize={0.08}
-            color="#7c7c99"
-            anchorX="center"
+            position={[-1.28, -0.58, 0.044]}
+            fontSize={0.065}
+            color="#8888aa"
+            anchorX="left"
             anchorY="middle"
-            fillOpacity={0.6}
+            fillOpacity={0.55}
+            letterSpacing={0.04}
           >
             {fields.phone}
           </Text>
         ) : (
-          <mesh position={[-0.2, -0.65, 0.043]}>
-            <planeGeometry args={[1.4, 0.05]} />
-            <meshBasicMaterial color="#7c7c99" transparent opacity={0.06} />
-          </mesh>
+          <group position={[-1.28, -0.58, 0.043]}>
+            <mesh position={[0.4, 0, 0]}>
+              <planeGeometry args={[0.8, 0.025]} />
+              <meshBasicMaterial color="#8888aa" transparent opacity={0.03} />
+            </mesh>
+          </group>
         )}
 
-        {/* Website -- live from input */}
+        {/* Website -- bottom left below phone, accent color, small */}
         {fields.website ? (
           <Text
-            position={[0.8, -0.65, 0.044]}
-            fontSize={0.08}
+            position={[-1.28, -0.70, 0.044]}
+            fontSize={0.06}
             color="#00e5a0"
-            anchorX="center"
+            anchorX="left"
             anchorY="middle"
-            fillOpacity={0.7}
+            fillOpacity={0.6}
+            letterSpacing={0.03}
           >
             {fields.website}
           </Text>
         ) : (
-          <mesh position={[0.8, -0.65, 0.043]}>
-            <planeGeometry args={[0.9, 0.04]} />
-            <meshBasicMaterial color="#00e5a0" transparent opacity={0.08} />
-          </mesh>
+          <group position={[-1.28, -0.70, 0.043]}>
+            <mesh position={[0.35, 0, 0]}>
+              <planeGeometry args={[0.7, 0.02]} />
+              <meshBasicMaterial color="#00e5a0" transparent opacity={0.04} />
+            </mesh>
+          </group>
         )}
 
         {/* Bottom RGB accent line */}

@@ -16,6 +16,8 @@ export default function Home() {
       <Nav />
       <Hero />
       <div className="section-divider" />
+      <Industries />
+      <div className="section-divider" />
       <DemoCarousel />
       <div className="section-divider" />
       <Features />
@@ -25,8 +27,6 @@ export default function Home() {
       <Pricing />
       <div className="section-divider" />
       <MockupCTA />
-      <div className="section-divider" />
-      <Industries />
       <div className="section-divider" />
       <FAQ />
       <div className="section-divider" />
