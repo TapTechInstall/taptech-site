@@ -2,8 +2,15 @@
 
 import { useRef, useMemo, useState, useEffect, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { RoundedBox, Float, MeshDistortMaterial, Environment } from '@react-three/drei';
+import { RoundedBox, Float, MeshDistortMaterial, Environment, Text } from '@react-three/drei';
 import * as THREE from 'three';
+
+interface CardFields {
+  name: string;
+  title: string;
+  phone: string;
+  website: string;
+}
 
 const dragConfig = {
   dragSensitivityX: 0.01,
@@ -111,7 +118,7 @@ function HolographicShimmer({ position }: { position: [number, number, number] }
   );
 }
 
-function NFCCard({ scrollProgress }: { scrollProgress: number }) {
+function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: CardFields }) {
   const groupRef = useRef<THREE.Group>(null);
 
   const dragState = useRef({
@@ -302,40 +309,108 @@ function NFCCard({ scrollProgress }: { scrollProgress: number }) {
         {/* NFC pulse waves radiating from tap icon */}
         <NFCWaves position={[1.2, -0.55, 0.044]} />
 
-        {/* TapTech label area */}
-        <mesh position={[-0.45, 0.45, 0.043]}>
-          <planeGeometry args={[1.1, 0.16]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
-        </mesh>
+        {/* TapTech label */}
+        <Text
+          position={[-0.45, 0.48, 0.044]}
+          fontSize={0.18}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          fillOpacity={0.9}
+        >
+          TapTech
+        </Text>
 
         {/* Connect sub-label */}
-        <mesh position={[-0.65, 0.2, 0.043]}>
-          <planeGeometry args={[0.7, 0.08]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.12} />
-        </mesh>
+        <Text
+          position={[-0.62, 0.26, 0.044]}
+          fontSize={0.08}
+          color="#00ff88"
+          anchorX="center"
+          anchorY="middle"
+          letterSpacing={0.2}
+          fillOpacity={0.8}
+        >
+          CONNECT
+        </Text>
 
-        {/* Cardholder name placeholder -- where the chip used to be */}
-        <mesh position={[-0.85, -0.2, 0.043]}>
-          <planeGeometry args={[1.2, 0.06]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
-        </mesh>
-        {/* Second line -- title/business */}
-        <mesh position={[-0.95, -0.35, 0.043]}>
-          <planeGeometry args={[0.9, 0.04]} />
-          <meshBasicMaterial color="#7c7c99" transparent opacity={0.05} />
-        </mesh>
+        {/* Cardholder name -- live from input */}
+        {fields.name ? (
+          <Text
+            position={[-0.85, -0.15, 0.044]}
+            fontSize={0.13}
+            color="#ffffff"
+            anchorX="left"
+            anchorY="middle"
+            maxWidth={2.4}
+            fillOpacity={0.85}
+          >
+            {fields.name}
+          </Text>
+        ) : (
+          <mesh position={[-0.85, -0.2, 0.043]}>
+            <planeGeometry args={[1.2, 0.06]} />
+            <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+          </mesh>
+        )}
 
-        {/* Bottom info line */}
-        <mesh position={[-0.2, -0.65, 0.043]}>
-          <planeGeometry args={[1.4, 0.05]} />
-          <meshBasicMaterial color="#7c7c99" transparent opacity={0.06} />
-        </mesh>
+        {/* Title/business -- live from input */}
+        {fields.title ? (
+          <Text
+            position={[-0.85, -0.33, 0.044]}
+            fontSize={0.09}
+            color="#7c7c99"
+            anchorX="left"
+            anchorY="middle"
+            maxWidth={2.4}
+            fillOpacity={0.7}
+          >
+            {fields.title}
+          </Text>
+        ) : (
+          <mesh position={[-0.95, -0.35, 0.043]}>
+            <planeGeometry args={[0.9, 0.04]} />
+            <meshBasicMaterial color="#7c7c99" transparent opacity={0.05} />
+          </mesh>
+        )}
 
-        {/* URL text line */}
-        <mesh position={[0.8, -0.65, 0.043]}>
-          <planeGeometry args={[0.9, 0.04]} />
-          <meshBasicMaterial color="#00e5a0" transparent opacity={0.08} />
-        </mesh>
+        {/* Phone -- live from input */}
+        {fields.phone ? (
+          <Text
+            position={[-0.2, -0.65, 0.044]}
+            fontSize={0.08}
+            color="#7c7c99"
+            anchorX="center"
+            anchorY="middle"
+            fillOpacity={0.6}
+          >
+            {fields.phone}
+          </Text>
+        ) : (
+          <mesh position={[-0.2, -0.65, 0.043]}>
+            <planeGeometry args={[1.4, 0.05]} />
+            <meshBasicMaterial color="#7c7c99" transparent opacity={0.06} />
+          </mesh>
+        )}
+
+        {/* Website -- live from input */}
+        {fields.website ? (
+          <Text
+            position={[0.8, -0.65, 0.044]}
+            fontSize={0.08}
+            color="#00e5a0"
+            anchorX="center"
+            anchorY="middle"
+            fillOpacity={0.7}
+          >
+            {fields.website}
+          </Text>
+        ) : (
+          <mesh position={[0.8, -0.65, 0.043]}>
+            <planeGeometry args={[0.9, 0.04]} />
+            <meshBasicMaterial color="#00e5a0" transparent opacity={0.08} />
+          </mesh>
+        )}
 
         {/* Bottom RGB accent line */}
         <RGBLine position={[0, -0.74, 0.043]} width={2.8} />
@@ -491,7 +566,7 @@ function ScrollHandler({ onScroll }: { onScroll: (progress: number) => void }) {
   return null;
 }
 
-function Scene({ scrollProgress }: { scrollProgress: number }) {
+function Scene({ scrollProgress, fields }: { scrollProgress: number; fields: CardFields }) {
   return (
     <>
       <ambientLight intensity={0.4} />
@@ -504,7 +579,7 @@ function Scene({ scrollProgress }: { scrollProgress: number }) {
       <pointLight position={[-2, -2, 3]} intensity={0.3} color="#b388ff" />
 
       <Environment preset="city" />
-      <NFCCard scrollProgress={scrollProgress} />
+      <NFCCard scrollProgress={scrollProgress} fields={fields} />
       <ParticleField scrollProgress={scrollProgress} />
 
       {/* RGB glow orbs */}
@@ -520,9 +595,20 @@ export default function Card3D() {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [fields, setFields] = useState<CardFields>({
+    name: '',
+    title: '',
+    phone: '',
+    website: '',
+  });
+  const [showForm, setShowForm] = useState(false);
 
   const handleScroll = useCallback((progress: number) => {
     setScrollProgress(progress);
+  }, []);
+
+  const updateField = useCallback((key: keyof CardFields, value: string) => {
+    setFields(prev => ({ ...prev, [key]: value }));
   }, []);
 
   useEffect(() => {
@@ -560,26 +646,96 @@ export default function Card3D() {
     );
   }
 
+  const hasAnyField = fields.name || fields.title || fields.phone || fields.website;
+
   return (
-    <div
-      className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative"
-      style={{ touchAction: 'none' }}
-    >
-      {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <div className="w-12 h-12 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
+    <div className="w-full flex flex-col items-center gap-4">
+      <div
+        className="w-full h-[300px] sm:h-[400px] md:h-[500px] relative"
+        style={{ touchAction: 'none' }}
+      >
+        {!loaded && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="w-12 h-12 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
+          </div>
+        )}
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'default' }}
+          style={{ background: 'transparent', touchAction: 'none' }}
+          onCreated={() => setLoaded(true)}
+        >
+          <ScrollHandler onScroll={handleScroll} />
+          <Scene scrollProgress={scrollProgress} fields={fields} />
+        </Canvas>
+      </div>
+
+      {/* Customize toggle */}
+      <button
+        onClick={() => setShowForm(prev => !prev)}
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-accent/20 bg-accent/[0.06] text-accent text-sm font-semibold tracking-wide hover:bg-accent/[0.12] transition-all duration-300"
+      >
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        </svg>
+        {showForm ? 'Hide Editor' : 'Customize Your Card'}
+      </button>
+
+      {/* Input form */}
+      {showForm && (
+        <div className="w-full max-w-sm space-y-3 px-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div>
+            <label className="block text-dim text-xs mb-1 tracking-wide uppercase">Your Name</label>
+            <input
+              type="text"
+              value={fields.name}
+              onChange={e => updateField('name', e.target.value)}
+              placeholder="John Smith"
+              maxLength={30}
+              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+            />
+          </div>
+          <div>
+            <label className="block text-dim text-xs mb-1 tracking-wide uppercase">Title / Business</label>
+            <input
+              type="text"
+              value={fields.title}
+              onChange={e => updateField('title', e.target.value)}
+              placeholder="Owner, Riverside Barbershop"
+              maxLength={40}
+              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+            />
+          </div>
+          <div>
+            <label className="block text-dim text-xs mb-1 tracking-wide uppercase">Phone</label>
+            <input
+              type="tel"
+              value={fields.phone}
+              onChange={e => updateField('phone', e.target.value)}
+              placeholder="(951) 555-0123"
+              maxLength={20}
+              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+            />
+          </div>
+          <div>
+            <label className="block text-dim text-xs mb-1 tracking-wide uppercase">Website</label>
+            <input
+              type="text"
+              value={fields.website}
+              onChange={e => updateField('website', e.target.value)}
+              placeholder="yourbusiness.com"
+              maxLength={30}
+              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+            />
+          </div>
+          {hasAnyField && (
+            <p className="text-center text-dim text-xs pt-1">
+              See your info appear on the card in real time
+            </p>
+          )}
         </div>
       )}
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: 'default' }}
-        style={{ background: 'transparent', touchAction: 'none' }}
-        onCreated={() => setLoaded(true)}
-      >
-        <ScrollHandler onScroll={handleScroll} />
-        <Scene scrollProgress={scrollProgress} />
-      </Canvas>
     </div>
   );
 }
