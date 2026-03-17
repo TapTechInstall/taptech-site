@@ -111,13 +111,18 @@ export default function Hero() {
               </div>
               <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
               <div>
-                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">No apps</p>
-                <p className="text-dim text-xs mt-0.5">needed</p>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">2 sec</p>
+                <p className="text-dim text-xs mt-0.5">To share your contact</p>
               </div>
               <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
               <div>
                 <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">10 sec</p>
                 <p className="text-dim text-xs mt-0.5">To leave a review</p>
+              </div>
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+              <div>
+                <p className="font-[family-name:var(--font-syne)] font-extrabold text-2xl sm:text-3xl text-txt">No apps</p>
+                <p className="text-dim text-xs mt-0.5">needed</p>
               </div>
             </motion.div>
           </div>
