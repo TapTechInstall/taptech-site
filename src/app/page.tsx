@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="bg-bg min-h-screen overflow-x-hidden">
+    <main id="top" className="bg-bg min-h-screen overflow-x-hidden">
       <Nav />
       <Hero />
       <div className="section-divider" />
