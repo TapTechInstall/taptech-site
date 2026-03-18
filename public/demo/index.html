@@ -29,7 +29,7 @@
   --radius-btn: 14px;
 }
 
-/* ── Reset ── */
+/* -- Reset -- */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 
@@ -45,7 +45,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Card Container ── */
+/* -- Card Container -- */
 .card-wrap {
   width: 100%;
   max-width: 420px;
@@ -54,7 +54,7 @@ body {
   padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px);
 }
 
-/* ── Ambient glow ── */
+/* -- Ambient glow -- */
 .glow-orb {
   position: fixed;
   border-radius: 50%;
@@ -72,7 +72,7 @@ body {
   100% { transform: translate(20px, 15px) scale(1.1); }
 }
 
-/* ── Profile Section ── */
+/* -- Profile Section -- */
 .profile {
   position: relative;
   z-index: 1;
@@ -104,9 +104,32 @@ body {
   justify-content: center;
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: 36px;
-  color: var(--accent);
+  font-size: 28px;
   letter-spacing: -1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar .tt-logo {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.avatar .tt-tap {
+  color: var(--accent);
+}
+
+.avatar .tt-tech {
+  color: var(--text);
+}
+
+.avatar .tt-icon {
+  position: absolute;
+  bottom: 14px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.3;
 }
 
 .profile-name {
@@ -133,7 +156,7 @@ body {
   margin: 0 auto;
 }
 
-/* ── Quick Actions (Call / Text / Email) ── */
+/* -- Quick Actions (Call / Text / Email) -- */
 .quick-actions {
   display: flex;
   gap: 10px;
@@ -178,7 +201,7 @@ body {
 .quick-btn.text-btn svg { color: #00B8FF; }
 .quick-btn.email-btn svg { color: #a78bfa; }
 
-/* ── Link Buttons ── */
+/* -- Link Buttons -- */
 .links {
   display: flex;
   flex-direction: column;
@@ -203,14 +226,13 @@ body {
   transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   animation: fadeUp 0.5s ease-out both;
+  cursor: pointer;
 }
 
 .link-btn:nth-child(1) { animation-delay: 0.15s; }
 .link-btn:nth-child(2) { animation-delay: 0.20s; }
 .link-btn:nth-child(3) { animation-delay: 0.25s; }
 .link-btn:nth-child(4) { animation-delay: 0.30s; }
-.link-btn:nth-child(5) { animation-delay: 0.35s; }
-.link-btn:nth-child(6) { animation-delay: 0.40s; }
 
 .link-btn:active {
   transform: scale(0.98);
@@ -237,16 +259,119 @@ body {
 .link-btn .arrow {
   color: var(--text-dim);
   font-size: 16px;
-  transition: transform 0.2s;
+  transition: transform 0.3s;
 }
+
 .link-btn:active .arrow { transform: translateX(3px); }
 
 .icon-ig    { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
 .icon-web   { background: rgba(0, 184, 255, 0.15); color: #00B8FF; }
-.icon-book  { background: rgba(0, 229, 160, 0.15); color: #00E5A0; }
 .icon-services { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
 
-/* ── Save Contact ── */
+/* -- Services Expandable -- */
+.services-wrapper {
+  animation: fadeUp 0.5s ease-out 0.30s both;
+}
+
+.services-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.services-toggle:active {
+  transform: scale(0.98);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+.services-toggle .icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.services-toggle .icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.services-toggle .label { flex: 1; text-align: left; }
+.services-toggle .arrow {
+  color: var(--text-dim);
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+.services-toggle.open .arrow {
+  transform: rotate(90deg);
+}
+
+.services-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  background: var(--bg-card);
+  border-radius: 0 0 var(--radius-btn) var(--radius-btn);
+  margin-top: -4px;
+  border: 1px solid transparent;
+  border-top: none;
+}
+
+.services-panel.open {
+  max-height: 600px;
+  border-color: var(--border);
+  padding: 16px 18px 18px;
+}
+
+.service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.service-item:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.service-item .s-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.service-item .s-text h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+
+.service-item .s-text p {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* -- Save Contact -- */
 .save-contact {
   position: relative;
   z-index: 1;
@@ -284,7 +409,7 @@ body {
   height: 18px;
 }
 
-/* ── Footer / Badge ── */
+/* -- Footer / Badge -- */
 .demo-badge {
   text-align: center;
   padding: 20px 0 8px;
@@ -320,7 +445,7 @@ body {
   font-weight: 600;
 }
 
-/* ── Animations ── */
+/* -- Animations -- */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -331,7 +456,7 @@ body {
   50%      { opacity: 0.4; }
 }
 
-/* ── Confirmation Toast ── */
+/* -- Confirmation Toast -- */
 .toast {
   position: fixed;
   bottom: 40px;
@@ -367,7 +492,9 @@ body {
   <!-- Profile -->
   <div class="profile">
     <div class="avatar-ring">
-      <div class="avatar">DN</div>
+      <div class="avatar">
+        <span class="tt-logo"><span class="tt-tap">Tap</span><span class="tt-tech">Tech</span></span>
+      </div>
     </div>
     <h1 class="profile-name">David N.</h1>
     <p class="profile-title">Founder, TapTech Connect</p>
@@ -408,26 +535,58 @@ body {
       <span class="arrow">&rsaquo;</span>
     </a>
 
-    <a href="https://calendly.com/taptechconnect" target="_blank" rel="noopener" class="link-btn">
-      <div class="icon icon-book">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+    <!-- Our Services - expandable -->
+    <div class="services-wrapper">
+      <button class="services-toggle" id="servicesToggle">
+        <div class="icon icon-services">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
+        </div>
+        <span class="label">Our Services</span>
+        <span class="arrow">&rsaquo;</span>
+      </button>
+      <div class="services-panel" id="servicesPanel">
+        <div class="service-item">
+          <span class="s-icon">&#9889;</span>
+          <div class="s-text">
+            <h4>Smart NFC Business Cards</h4>
+            <p>Custom-branded, laser-engraved PVC cards with NFC. One tap shares your contact, socials, and booking link.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="s-icon">&#9733;</span>
+          <div class="s-text">
+            <h4>Google Review Growth</h4>
+            <p>Automated review collection that boosts your Google ranking and brings in more customers.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="s-icon">&#128197;</span>
+          <div class="s-text">
+            <h4>Booking System Setup</h4>
+            <p>Online scheduling so clients can book 24/7. Integrated directly into your tap page.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="s-icon">&#128270;</span>
+          <div class="s-text">
+            <h4>Google Business Optimization</h4>
+            <p>We optimize your Google Business Profile so you rank higher and get found first in local search.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="s-icon">&#128241;</span>
+          <div class="s-text">
+            <h4>Digital Tap Page</h4>
+            <p>A custom mobile landing page for your business — contact info, services, reviews, and booking in one link.</p>
+          </div>
+        </div>
       </div>
-      <span class="label">Book a Free Demo Call</span>
-      <span class="arrow">&rsaquo;</span>
-    </a>
-
-    <a href="https://taptechconnect.com" target="_blank" rel="noopener" class="link-btn" onclick="event.preventDefault(); window.open('https://taptechconnect.com#top', '_blank');">
-      <div class="icon icon-services">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>
-      </div>
-      <span class="label">Our Services</span>
-      <span class="arrow">&rsaquo;</span>
-    </a>
+    </div>
   </div>
 
   <!-- Save Contact -->
   <div class="save-contact">
-    <button class="save-btn" onclick="saveContact()">
+    <button class="save-btn" id="saveBtn">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
       Save Contact
     </button>
@@ -450,58 +609,65 @@ body {
 // ================================================================
 // CONTACT CONFIG — edit this block to change all contact data
 // ================================================================
-const CONTACT = {
+var CONTACT = {
   firstName:  'David',
   lastName:   'N.',
   fullName:   'David N.',
   title:      'Founder',
   org:        'TapTech Connect',
-  phone:      '+15105700690',    // E.164 format
+  phone:      '+15105700690',
   email:      'taptechinstall@gmail.com',
   website:    'https://taptechconnect.com',
   instagram:  'https://instagram.com/davidnav.m',
-  calendly:   'https://calendly.com/taptechconnect',  // UPDATE with your real Calendly link
   address:    'Riverside, CA',
   note:       'TapTech Connect - Smart digital business cards for local businesses',
 };
 
 // ================================================================
-// vCard generator — creates downloadable .vcf contact file
+// Services toggle
 // ================================================================
-function saveContact() {
-  const vcard = [
+document.getElementById('servicesToggle').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('servicesPanel').classList.toggle('open');
+});
+
+// ================================================================
+// vCard generator
+// ================================================================
+document.getElementById('saveBtn').addEventListener('click', function() {
+  var vcard = [
     'BEGIN:VCARD',
     'VERSION:3.0',
-    `FN:${CONTACT.fullName}`,
-    `N:${CONTACT.lastName};${CONTACT.firstName};;;`,
-    `ORG:${CONTACT.org}`,
-    `TITLE:${CONTACT.title}`,
-    `TEL;TYPE=CELL:${CONTACT.phone}`,
-    `EMAIL:${CONTACT.email}`,
-    `URL:${CONTACT.website}`,
-    `ADR;TYPE=WORK:;;${CONTACT.address};;;;`,
-    `NOTE:${CONTACT.note}`,
+    'FN:' + CONTACT.fullName,
+    'N:' + CONTACT.lastName + ';' + CONTACT.firstName + ';;;',
+    'ORG:' + CONTACT.org,
+    'TITLE:' + CONTACT.title,
+    'TEL;TYPE=CELL:' + CONTACT.phone,
+    'EMAIL:' + CONTACT.email,
+    'URL:' + CONTACT.website,
+    'ADR;TYPE=WORK:;;' + CONTACT.address + ';;;;',
+    'NOTE:' + CONTACT.note,
     'END:VCARD',
   ].join('\n');
 
-  const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  var blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
-  a.download = `${CONTACT.firstName}_${CONTACT.org.replace(/\s+/g, '_')}.vcf`;
+  a.download = CONTACT.firstName + '_' + CONTACT.org.replace(/\s+/g, '_') + '.vcf';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
   showToast('Contact saved!');
-}
+});
 
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 </script>
 
