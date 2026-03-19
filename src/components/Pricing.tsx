@@ -53,7 +53,7 @@ const tiers = [
 ];
 
 const addons = [
-  { name: 'Extra tap cards', price: '$25 each' },
+  { name: 'Extra tap cards', price: '$20 each' },
   { name: 'Review stand', price: '$40' },
   { name: 'Custom domain', price: '$15/yr' },
   { name: 'QR code package', price: '$35' },
