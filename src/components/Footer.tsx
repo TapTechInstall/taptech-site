@@ -65,6 +65,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-dim text-xs">&copy; 2026 TapTech Connect. All rights reserved.</p>
+          <div className="flex items-center gap-4 text-dim text-xs">
+            <a href="/privacy.html" className="hover:text-txt transition-colors duration-200">Privacy Policy</a>
+            <a href="/terms.html" className="hover:text-txt transition-colors duration-200">Terms of Service</a>
+          </div>
           <p className="text-dim/50 text-xs">Riverside, CA</p>
         </div>
       </div>
