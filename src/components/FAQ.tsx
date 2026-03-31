@@ -9,24 +9,16 @@ const faqs = [
     a: 'Your client holds their phone near the card -- no app needed. It instantly opens a custom page with your contact info, booking link, Google reviews, and social media. Works with all modern iPhones and Androids.',
   },
   {
-    q: 'Do my clients need to download anything?',
-    a: 'Nope. Zero downloads, zero apps. They just tap and everything pops up instantly in their browser. One tap to save your contact directly to their phone.',
-  },
-  {
     q: 'What does the monthly fee cover?',
-    a: 'The monthly fee keeps everything running and improving. It covers: updates to your tap page whenever your info changes, support for your tech setup, and a monthly report showing your review count growth and local ranking movement -- so you always know your system is working.',
-  },
-  {
-    q: 'Can I change my links later?',
-    a: 'Absolutely. Your tap page is fully editable. New Instagram? Different booking link? Updated phone number? We update it for you anytime -- included in your monthly retainer.',
+    a: 'Your website hosting and edits, updates to your tap card profile whenever your info changes, support for your tech setup, and a monthly report showing your review count growth and local ranking movement.',
   },
   {
     q: 'How fast is setup?',
-    a: 'Most clients are fully set up within 48 hours. We build your tap page, program your cards, set up booking, and optimize your Google listing. You can be live by end of week.',
+    a: 'Most clients are fully set up within 48 hours. We build your website, program your cards, set up booking, and optimize your Google listing. You can be live by end of week.',
   },
   {
     q: 'What if I cancel?',
-    a: 'No contracts. Cancel anytime. Your cards still work, but the tap page goes offline. Most clients stay because the reviews and bookings more than cover the monthly fee.',
+    a: 'No contracts. Cancel anytime. Your cards still work, but your website and tap page go offline. Most clients stay because the reviews and bookings more than cover the monthly fee.',
   },
   {
     q: 'How do the Google reviews work?',
@@ -45,7 +37,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.05, ease }}
-      className={`border-b border-white/[0.04] transition-colors duration-300 ${open ? 'border-accent/10' : ''}`}
+      className={`border-b border-border transition-colors duration-300 ${open ? 'border-accent/20' : ''}`}
     >
       <button
         onClick={() => setOpen(!open)}
