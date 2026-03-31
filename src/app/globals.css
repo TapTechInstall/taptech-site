@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme inline {
   --color-bg: #FAFAFA;
   --color-bg-alt: #F5F5F0;
@@ -27,7 +29,7 @@
 
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html { scroll-behavior: smooth; overflow-x: hidden; color-scheme: light; }
   body {
     background: var(--color-bg);
     color: var(--color-txt);
