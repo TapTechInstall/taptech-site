@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Apex Auto Performance</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #18181b;
+    color: #e4e4e7;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .top-bar {
+    background: #dc2626;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .top-bar a { color: #fff; text-decoration: none; }
+  .nav {
+    background: #0f0f12;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav .logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .nav .logo span { color: #dc2626; }
+  .menu-icon { display: flex; flex-direction: column; gap: 4px; }
+  .menu-icon span { width: 24px; height: 2px; background: #dc2626; }
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15,15,18,0.92) 0%, rgba(15,15,18,0.4) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px 20px;
+  }
+  .hero-tag {
+    font-size: 11px;
+    color: #dc2626;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-top: 8px;
+  }
+  .hero p { font-size: 13px; color: #a1a1aa; margin-top: 10px; line-height: 1.5; }
+  .hero-btns { display: flex; gap: 10px; margin-top: 20px; }
+  .btn-primary {
+    padding: 12px 24px;
+    background: #dc2626;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+  }
+  .btn-outline {
+    padding: 12px 24px;
+    border: 1px solid #52525b;
+    color: #e4e4e7;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .accent-line {
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 40%, transparent 40%);
+  }
+  .section { padding: 28px 20px; }
+  .section-label {
+    font-size: 11px;
+    color: #dc2626;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: #1f1f23;
+    margin-bottom: 6px;
+    border-left: 3px solid #dc2626;
+  }
+  .service-item .name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .service-item .desc { font-size: 11px; color: #71717a; margin-top: 2px; }
+  .service-item .price {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #dc2626;
+    white-space: nowrap;
+  }
+  .service-item .from { font-size: 10px; color: #71717a; text-transform: uppercase; }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .feature-block {
+    background: #1f1f23;
+    padding: 18px 14px;
+    border-top: 2px solid #dc2626;
+  }
+  .feature-block h4 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .feature-block p { font-size: 11px; color: #71717a; line-height: 1.5; }
+  .cta-section {
+    background: #dc2626;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .cta-section h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .cta-section p { font-size: 13px; color: rgba(255,255,255,0.8); margin: 8px 0 16px; }
+  .cta-section a {
+    display: inline-block;
+    background: #0f0f12;
+    color: #fff;
+    padding: 14px 36px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #27272a;
+    font-size: 14px;
+  }
+  .hours-row .day { color: #71717a; }
+  .hours-row .time { color: #e4e4e7; font-weight: 600; }
+  .footer {
+    background: #0f0f12;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .footer .logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .footer .logo span { color: #dc2626; }
+  .footer p { font-size: 12px; color: #52525b; margin-top: 8px; line-height: 1.8; }
+  .footer a { color: #dc2626; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>Now Open Saturdays</span>
+  <a href="tel:9515557890">(951) 555-7890</a>
+</div>
+
+<div class="nav">
+  <div class="logo">Apex <span>Auto</span></div>
+  <div class="menu-icon"><span></span><span></span><span></span></div>
+</div>
+
+<div class="hero">
+  <img src="photos/auto-hero.jpg" alt="Auto shop">
+  <div class="hero-overlay">
+    <div class="hero-tag">Performance & Repair</div>
+    <h1>Your Car<br>Deserves<br>The Best</h1>
+    <p>Expert auto repair and performance upgrades in Riverside.</p>
+    <div class="hero-btns">
+      <a href="tel:9515557890" class="btn-primary">Book Now</a>
+      <a href="#services" class="btn-outline">Services</a>
+    </div>
+  </div>
+</div>
+
+<div class="accent-line"></div>
+
+<div class="section" id="services">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Services & Pricing</div>
+  <div class="service-item">
+    <div><div class="name">Oil Change</div><div class="desc">Synthetic blend or full synthetic</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$49</div></div>
+  </div>
+  <div class="service-item">
+    <div><div class="name">Brake Service</div><div class="desc">Pads, rotors, fluid flush</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$189</div></div>
+  </div>
+  <div class="service-item">
+    <div><div class="name">Tire Package</div><div class="desc">Mount, balance, alignment</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$399</div></div>
+  </div>
+  <div class="service-item">
+    <div><div class="name">Engine Diagnostics</div><div class="desc">Full scan and report</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$89</div></div>
+  </div>
+  <div class="service-item">
+    <div><div class="name">Performance Tune</div><div class="desc">ECU tuning, intake, exhaust</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$299</div></div>
+  </div>
+  <div class="service-item">
+    <div><div class="name">A/C Service</div><div class="desc">Recharge, leak test, repair</div></div>
+    <div style="text-align:right;"><div class="from">From</div><div class="price">$129</div></div>
+  </div>
+</div>
+
+<div class="section" style="padding-top: 0;">
+  <div class="section-label">Why Us</div>
+  <div class="section-title">The Apex Difference</div>
+  <div class="features">
+    <div class="feature-block"><h4>ASE Certified</h4><p>All technicians are ASE certified master mechanics.</p></div>
+    <div class="feature-block"><h4>Warranty</h4><p>24-month / 24,000 mile warranty on all repairs.</p></div>
+    <div class="feature-block"><h4>Same Day</h4><p>Most services completed same day. Loaner cars available.</p></div>
+    <div class="feature-block"><h4>All Makes</h4><p>Domestic, import, diesel. We work on everything.</p></div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h3>Ready to Book?</h3>
+  <p>Schedule your appointment online or call us today.</p>
+  <a href="tel:9515557890">Call (951) 555-7890</a>
+</div>
+
+<div class="section">
+  <div class="section-label">Visit Us</div>
+  <div class="section-title">Hours</div>
+  <div class="hours-row"><span class="day">Mon - Fri</span><span class="time">7:30 AM - 6 PM</span></div>
+  <div class="hours-row"><span class="day">Saturday</span><span class="time">8 AM - 3 PM</span></div>
+  <div class="hours-row"><span class="day">Sunday</span><span class="time">Closed</span></div>
+</div>
+
+<div class="footer">
+  <div class="logo">Apex <span>Auto</span></div>
+  <p>5280 Van Buren Blvd, Riverside, CA 92503<br><a href="tel:9515557890">(951) 555-7890</a></p>
+</div>
+
+</body>
+</html>

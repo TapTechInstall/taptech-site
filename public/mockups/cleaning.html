@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>SparkClean Home Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #fff;
+    color: #1e293b;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .nav {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav .logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1e293b;
+  }
+  .nav .logo span { color: #0ea5e9; }
+  .nav-cta {
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  /* Hero - SaaS style */
+  .hero {
+    padding: 40px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+  }
+  .hero-pill {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0f172a;
+  }
+  .hero h1 span { color: #0ea5e9; }
+  .hero p {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 12px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 32px;
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(14,165,233,0.3);
+  }
+  .hero-sub {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 10px;
+  }
+  /* Social proof */
+  .social-proof {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+    background: #f8fafc;
+  }
+  .avatars {
+    display: flex;
+  }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #bae6fd;
+    border: 2px solid #fff;
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #0284c7;
+    font-weight: 700;
+  }
+  .avatar:first-child { margin-left: 0; }
+  .social-proof .text {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .social-proof .text strong { color: #0f172a; }
+  /* Checklist services */
+  .section { padding: 28px 20px; }
+  .section-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0284c7;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 18px;
+  }
+  .checklist {
+    list-style: none;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .check-icon {
+    width: 22px;
+    height: 22px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: #16a34a;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .checklist li .text { font-size: 14px; font-weight: 500; }
+  .checklist li .sub { font-size: 12px; color: #94a3b8; font-weight: 400; }
+  /* Before/After */
+  .ba-container {
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .ba-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .ba-side {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .ba-side.before { background: #e2e8f0; }
+  .ba-side.after { background: #bae6fd; }
+  .ba-side .label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    padding: 4px 12px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+  }
+  .ba-side .icon {
+    font-size: 40px;
+    color: rgba(0,0,0,0.15);
+  }
+  /* Pricing packages */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .price-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+    border: 2px solid transparent;
+  }
+  .price-card.featured {
+    border-color: #0ea5e9;
+    background: #f0f9ff;
+  }
+  .price-card .name {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    margin-bottom: 8px;
+  }
+  .price-card .price {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .price-card .price span { font-size: 12px; color: #94a3b8; font-weight: 400; }
+  .price-card .desc {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .price-card.featured .name { color: #0ea5e9; }
+  /* How it works */
+  .step-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .step-num {
+    width: 32px;
+    height: 32px;
+    background: #0ea5e9;
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-row h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .step-row p { font-size: 12px; color: #94a3b8; }
+  /* CTA */
+  .cta-section {
+    background: #0ea5e9;
+    padding: 28px 20px;
+    text-align: center;
+    margin: 0 20px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .cta-section h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .cta-section p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    margin: 8px 0 16px;
+  }
+  .cta-section a {
+    display: inline-block;
+    background: #fff;
+    color: #0ea5e9;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .footer {
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+  }
+  .footer .logo { font-size: 18px; font-weight: 800; }
+  .footer .logo span { color: #0ea5e9; }
+  .footer p { font-size: 12px; color: #94a3b8; margin-top: 6px; line-height: 1.8; }
+  .footer a { color: #0ea5e9; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">Spark<span>Clean</span></div>
+  <a href="tel:9515556543" class="nav-cta">Get Quote</a>
+</div>
+
+<div class="hero">
+  <div class="hero-pill">Serving the Inland Empire</div>
+  <h1>A Cleaner Home<br>in <span>One Tap</span></h1>
+  <p>Professional house cleaning you can book in minutes. Trusted by 500+ Riverside families.</p>
+  <a href="tel:9515556543" class="hero-cta">Book Your Clean</a>
+  <div class="hero-sub">No contracts. Cancel anytime.</div>
+</div>
+
+<div class="social-proof">
+  <div class="avatars">
+    <div class="avatar">J</div>
+    <div class="avatar">K</div>
+    <div class="avatar">M</div>
+    <div class="avatar">+</div>
+  </div>
+  <div class="text"><strong>4.9 stars</strong> from 500+ happy homes</div>
+</div>
+
+<div class="section">
+  <div class="section-badge">Services</div>
+  <div class="section-title">What's Included</div>
+  <div class="section-desc">Every clean covers the essentials and more</div>
+  <ul class="checklist">
+    <li><div class="check-icon">+</div><div><div class="text">Kitchen deep clean</div><div class="sub">Counters, sink, appliances, stovetop</div></div></li>
+    <li><div class="check-icon">+</div><div><div class="text">Bathroom sanitization</div><div class="sub">Toilet, shower, mirrors, floors</div></div></li>
+    <li><div class="check-icon">+</div><div><div class="text">All floors vacuumed & mopped</div><div class="sub">Hardwood, tile, carpet -- all types</div></div></li>
+    <li><div class="check-icon">+</div><div><div class="text">Dusting & surface wipe-down</div><div class="sub">Shelves, baseboards, light fixtures</div></div></li>
+    <li><div class="check-icon">+</div><div><div class="text">Trash removal & bed making</div><div class="sub">Finishing touches in every room</div></div></li>
+    <li><div class="check-icon">+</div><div><div class="text">Eco-friendly products</div><div class="sub">Non-toxic, pet & kid safe</div></div></li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-badge">Results</div>
+  <div class="section-title">Before & After</div>
+  <div class="ba-container">
+    <div class="ba-header">
+      <div class="ba-side before"><div class="icon">B</div><div class="label">Before</div></div>
+      <div class="ba-side after"><div class="icon">A</div><div class="label">After</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-badge">Pricing</div>
+  <div class="section-title">Simple, Flat Pricing</div>
+  <div class="section-desc">No hidden fees. Supplies included.</div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="name">Studio</div>
+      <div class="price">$89<span>/clean</span></div>
+      <div class="desc">Studio or 1-bed apartment</div>
+    </div>
+    <div class="price-card featured">
+      <div class="name">Home</div>
+      <div class="price">$149<span>/clean</span></div>
+      <div class="desc">2-3 bed home, most popular</div>
+    </div>
+    <div class="price-card">
+      <div class="name">Large</div>
+      <div class="price">$219<span>/clean</span></div>
+      <div class="desc">4+ bed home or deep clean</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-badge">How It Works</div>
+  <div class="section-title">3 Simple Steps</div>
+  <div class="step-row"><div class="step-num">1</div><div><h4>Book Online</h4><p>Pick your date, time, and home size. Takes 60 seconds.</p></div></div>
+  <div class="step-row"><div class="step-num">2</div><div><h4>We Clean</h4><p>Our vetted, insured team arrives on time with all supplies.</p></div></div>
+  <div class="step-row"><div class="step-num">3</div><div><h4>Enjoy</h4><p>Come home to a spotless space. Guaranteed satisfaction.</p></div></div>
+</div>
+
+<div class="cta-section">
+  <h3>Get Your First Clean</h3>
+  <p>20% off for new customers. Book in under a minute.</p>
+  <a href="tel:9515556543">Book Now</a>
+</div>
+
+<div class="footer">
+  <div class="logo">Spark<span>Clean</span></div>
+  <p>Serving Riverside, Corona & Moreno Valley<br><a href="tel:9515556543">(951) 555-6543</a><br>Licensed & Insured</p>
+</div>
+
+</body>
+</html>

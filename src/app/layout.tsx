@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const playfair = Playfair_Display({
   variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   variable: "--font-dm",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -23,10 +23,10 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "TapTech Connect | Smart Business Cards & Google Ranking",
   description:
-    "NFC smart cards that instantly share your contact, boost Google reviews, and turn every handshake into a client. Setup + monthly management for local businesses.",
+    "Smart tap cards that instantly share your contact, boost Google reviews, and turn every handshake into a client. Setup + monthly management for local businesses.",
   openGraph: {
     title: "TapTech Connect",
-    description: "Tap into more customers. NFC cards + Google ranking for local businesses.",
+    description: "Tap into more customers. Smart tap cards + Google ranking for local businesses.",
     type: "website",
   },
 };
@@ -37,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${syne.variable} ${dmSans.variable} ${jetbrains.variable} antialiased`}>
+    <html lang="en">
+      <body className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} antialiased`}>
         {children}
       </body>
     </html>

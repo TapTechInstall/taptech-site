@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed | TapTech Connect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --text: #1a1a1a;
+    --text-dim: #6b6b6b;
+    --gold: #D4AF37;
+    --gold-dark: #B8960C;
+    --border: rgba(0,0,0,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .check {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    animation: scaleIn 0.5s ease;
+  }
+  .check svg { width: 36px; height: 36px; stroke: #fff; stroke-width: 3; fill: none; }
+  @keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+  .next-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 48px;
+    text-align: left;
+    max-width: 400px;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(212,175,55,0.1);
+    color: var(--gold-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .upsell {
+    padding: 32px;
+    background: rgba(212,175,55,0.04);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 16px;
+    max-width: 500px;
+    margin-bottom: 32px;
+  }
+  .upsell h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .upsell p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .upsell a {
+    display: inline-block;
+    padding: 10px 28px;
+    background: var(--text);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .back-link {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+  <div class="check">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+
+  <h1>Order confirmed</h1>
+  <p class="sub">We'll engrave your card(s) and ship within 3-5 business days. Check your email for a receipt.</p>
+
+  <div class="next-steps">
+    <div class="step"><div class="step-num">1</div><span>We'll text you to confirm card details and design</span></div>
+    <div class="step"><div class="step-num">2</div><span>Your card is laser-engraved and quality checked</span></div>
+    <div class="step"><div class="step-num">3</div><span>Ships with tracking in 3-5 business days</span></div>
+  </div>
+
+  <div class="upsell">
+    <h3>While you wait -- level up</h3>
+    <p>Get a professional website and Google ranking to go with your new card. Your card will link directly to your site, driving more traffic and reviews.</p>
+    <a href="/#pricing">See full service plans &rarr;</a>
+  </div>
+
+  <a href="/" class="back-link">&larr; Back to TapTech Connect</a>
+</body>
+</html>

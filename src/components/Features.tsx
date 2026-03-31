@@ -12,7 +12,7 @@ const features = [
     ),
     title: 'Tap & Connect',
     description: 'Customer holds their phone near your card. No app, no download, no friction. Your contact saves instantly.',
-    color: '#00e5a0',
+    color: '#D4AF37',
   },
   {
     icon: (
@@ -23,7 +23,7 @@ const features = [
     ),
     title: 'Book Instantly',
     description: 'One tap to schedule. We build your booking page and link it right to your card. No third-party apps.',
-    color: '#00b8ff',
+    color: '#B8960C',
   },
   {
     icon: (
@@ -33,7 +33,7 @@ const features = [
     ),
     title: '5-Star Reviews',
     description: 'Review stand at checkout drives Google reviews on autopilot. More reviews = higher ranking = more customers.',
-    color: '#ffd600',
+    color: '#D4AF37',
   },
   {
     icon: (
@@ -43,7 +43,7 @@ const features = [
     ),
     title: 'Google Ranking',
     description: 'Full Google Business Profile optimization. We handle photos, categories, citations, and review responses.',
-    color: '#b388ff',
+    color: '#8B7355',
   },
   {
     icon: (
@@ -53,9 +53,9 @@ const features = [
         <path d="M2 12l10 5 10-5" />
       </svg>
     ),
-    title: 'Custom Tap Page',
-    description: 'Mobile-optimized landing page with your brand, photos, services, booking link, and review button. Updates anytime.',
-    color: '#ff6ec7',
+    title: 'Your Own Website',
+    description: 'We build you a professional website with your brand, photos, services, booking, and reviews. We handle updates and edits for you.',
+    color: '#C4922A',
   },
   {
     icon: (
@@ -65,16 +65,16 @@ const features = [
     ),
     title: 'Monthly Reports',
     description: 'See your review growth, ranking changes, and booking stats. One report, every month. Proof the system works.',
-    color: '#ff8c42',
+    color: '#B8960C',
   },
 ];
 
 const flowSteps = [
-  { label: 'Tap Card', sub: 'Physical trigger', color: '#00e5a0' },
-  { label: 'Tap Page', sub: 'Digital identity', color: '#00b8ff' },
-  { label: 'Booking', sub: 'Convert to appointment', color: '#ff8c42' },
-  { label: 'Review', sub: 'Build social proof', color: '#ffd600' },
-  { label: 'Ranking', sub: 'Get found on Google', color: '#b388ff' },
+  { label: 'Tap Card', sub: 'Hand it out', color: '#D4AF37' },
+  { label: 'Website', sub: 'We build it for you', color: '#B8960C' },
+  { label: 'Booking', sub: 'Clients book online', color: '#C4922A' },
+  { label: 'Review', sub: 'Build social proof', color: '#D4AF37' },
+  { label: 'Ranking', sub: 'Get found on Google', color: '#8B7355' },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -82,10 +82,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Features() {
   return (
     <section id="features" className="relative py-28 sm:py-36 overflow-hidden">
-      {/* RGB section glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(0,255,136,0.05),transparent_60%)] pointer-events-none" />
-      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[15%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(255,51,102,0.03),transparent_60%)] pointer-events-none" />
+      {/* Section glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(212,175,55,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(184,150,12,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section header */}
@@ -103,7 +102,7 @@ export default function Features() {
             The complete <span className="gradient-text">client connection</span> system
           </h2>
           <p className="text-dim text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Every piece feeds the next. The card drives people to your page. The page drives bookings and reviews. The reviews drive Google ranking.
+            Every piece feeds the next. The card drives people to your website. The website drives bookings and reviews. The reviews drive Google ranking.
             <span className="text-accent font-semibold"> It&apos;s a flywheel.</span>
           </p>
         </motion.div>
@@ -121,8 +120,8 @@ export default function Features() {
               <div
                 className="card-premium px-5 py-3 rounded-xl text-center min-w-[120px]"
                 style={{
-                  borderColor: `${step.color}20`,
-                  background: `linear-gradient(180deg, ${step.color}0a, ${step.color}04)`,
+                  borderColor: `${step.color}25`,
+                  background: `linear-gradient(180deg, ${step.color}08, ${step.color}03)`,
                 }}
               >
                 <p className="text-sm font-semibold text-txt">{step.label}</p>

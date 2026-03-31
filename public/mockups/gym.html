@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>FORGE Fitness</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #111111;
+    color: #e5e5e5;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .nav {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111111;
+  }
+  .nav .logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+  }
+  .nav .logo span { color: #c4f418; }
+  .nav-join {
+    background: #c4f418;
+    color: #111;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 380px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #111 50%, #0a0a0a 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 24px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(196,244,24,0.06) 0%, transparent 50%);
+  }
+  .hero-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #c4f418;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .hero h1 span {
+    display: block;
+    color: #c4f418;
+    font-size: 52px;
+  }
+  .hero p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 14px;
+    font-weight: 300;
+    position: relative;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 40px;
+    background: #c4f418;
+    color: #111;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-decoration: none;
+    position: relative;
+  }
+  /* Neon accent line */
+  .neon-line {
+    height: 3px;
+    background: linear-gradient(90deg, #c4f418, transparent);
+  }
+  .section { padding: 28px 20px; }
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c4f418;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+  }
+  /* Membership tiers */
+  .tier-card {
+    background: #1a1a1a;
+    padding: 24px 20px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-card.featured {
+    border: 2px solid #c4f418;
+  }
+  .tier-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #c4f418;
+    color: #111;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .tier-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .tier-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #c4f418;
+    margin: 8px 0;
+  }
+  .tier-price span { font-size: 14px; color: #666; font-weight: 400; }
+  .tier-features {
+    list-style: none;
+    font-size: 13px;
+    color: #999;
+  }
+  .tier-features li {
+    padding: 6px 0;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tier-features li::before {
+    content: '+';
+    color: #c4f418;
+    font-weight: 700;
+  }
+  .tier-btn {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
+  .tier-card.featured .tier-btn {
+    background: #c4f418;
+    color: #111;
+    border-color: #c4f418;
+  }
+  /* Class schedule */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .schedule-item {
+    background: #1a1a1a;
+    padding: 14px;
+  }
+  .schedule-item .time {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    color: #c4f418;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .schedule-item .class-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 4px;
+  }
+  .schedule-item .trainer {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+  }
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .stat-box {
+    background: #1a1a1a;
+    padding: 18px 10px;
+    text-align: center;
+  }
+  .stat-box .num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #c4f418;
+  }
+  .stat-box .label {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  /* CTA */
+  .cta-bar {
+    background: #c4f418;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .cta-bar h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .cta-bar p {
+    font-size: 13px;
+    color: #333;
+    margin: 8px 0 16px;
+  }
+  .cta-bar a {
+    display: inline-block;
+    background: #111;
+    color: #c4f418;
+    padding: 12px 36px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+  .footer {
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer .logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+  }
+  .footer .logo span { color: #c4f418; }
+  .footer p { font-size: 11px; color: #555; margin-top: 6px; line-height: 1.8; }
+  .footer a { color: #c4f418; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">FOR<span>GE</span></div>
+  <a href="#join" class="nav-join">Join</a>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">Riverside's Elite Gym</div>
+  <h1>PUSH YOUR<br><span>LIMITS</span></h1>
+  <p>High-intensity training. Expert coaches. Real results.</p>
+  <a href="#join" class="hero-cta">Start Free Trial</a>
+</div>
+
+<div class="neon-line"></div>
+
+<div class="section">
+  <div class="stats-row">
+    <div class="stat-box"><div class="num">15K</div><div class="label">Sq Ft</div></div>
+    <div class="stat-box"><div class="num">50+</div><div class="label">Classes/Wk</div></div>
+    <div class="stat-box"><div class="num">8</div><div class="label">Coaches</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Classes</div>
+  <div class="section-title">Today's Schedule</div>
+  <div class="schedule-grid">
+    <div class="schedule-item">
+      <div class="time">6:00 AM</div>
+      <div class="class-name">HIIT Burn</div>
+      <div class="trainer">Coach Mike</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">7:30 AM</div>
+      <div class="class-name">Strength</div>
+      <div class="trainer">Coach Dani</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">9:00 AM</div>
+      <div class="class-name">CrossFit</div>
+      <div class="trainer">Coach Jay</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">12:00 PM</div>
+      <div class="class-name">Boxing</div>
+      <div class="trainer">Coach Rico</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">4:30 PM</div>
+      <div class="class-name">Olympic Lift</div>
+      <div class="trainer">Coach Dani</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">6:00 PM</div>
+      <div class="class-name">HIIT Burn</div>
+      <div class="trainer">Coach Mike</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">7:00 PM</div>
+      <div class="class-name">Yoga Flow</div>
+      <div class="trainer">Coach Ava</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">8:00 PM</div>
+      <div class="class-name">Open Gym</div>
+      <div class="trainer">Self-guided</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="join">
+  <div class="section-label">Membership</div>
+  <div class="section-title">Choose Your Plan</div>
+
+  <div class="tier-card">
+    <div class="tier-name">Basic</div>
+    <div class="tier-price">$49<span>/mo</span></div>
+    <ul class="tier-features">
+      <li>Open gym access</li>
+      <li>Locker room & showers</li>
+      <li>1 free class/week</li>
+    </ul>
+    <a href="tel:9515554321" class="tier-btn">Get Started</a>
+  </div>
+
+  <div class="tier-card featured">
+    <div class="tier-badge">Most Popular</div>
+    <div class="tier-name">Unlimited</div>
+    <div class="tier-price">$99<span>/mo</span></div>
+    <ul class="tier-features">
+      <li>Everything in Basic</li>
+      <li>Unlimited classes</li>
+      <li>InBody scan monthly</li>
+      <li>Nutrition coaching</li>
+    </ul>
+    <a href="tel:9515554321" class="tier-btn">Get Started</a>
+  </div>
+
+  <div class="tier-card">
+    <div class="tier-name">Elite</div>
+    <div class="tier-price">$179<span>/mo</span></div>
+    <ul class="tier-features">
+      <li>Everything in Unlimited</li>
+      <li>2 personal training sessions/mo</li>
+      <li>Recovery room access</li>
+      <li>Guest passes (2/mo)</li>
+    </ul>
+    <a href="tel:9515554321" class="tier-btn">Get Started</a>
+  </div>
+</div>
+
+<div class="cta-bar">
+  <h3>First Week Free</h3>
+  <p>No commitment. No credit card. Just show up.</p>
+  <a href="tel:9515554321">Call (951) 555-4321</a>
+</div>
+
+<div class="footer">
+  <div class="logo">FOR<span>GE</span></div>
+  <p>7100 Indiana Ave, Riverside, CA 92504<br><a href="tel:9515554321">(951) 555-4321</a><br>Open Daily 5 AM - 10 PM</p>
+</div>
+
+</body>
+</html>

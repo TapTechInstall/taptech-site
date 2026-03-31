@@ -1,28 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #07070c;
-  --color-bg-alt: #0f0f18;
-  --color-bg-card: #0d0d16;
-  --color-bg-card-hover: #13131f;
-  --color-txt: #eaeaf2;
-  --color-dim: #7c7c99;
-  --color-accent: #00e5a0;
-  --color-accent-2: #00b8ff;
-  --color-neon-red: #ff3366;
-  --color-neon-green: #00ff88;
-  --color-neon-blue: #00aaff;
-  --color-neon-purple: #b388ff;
+  --color-bg: #FAFAFA;
+  --color-bg-alt: #F5F5F0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F9F9F5;
+  --color-txt: #1a1a1a;
+  --color-dim: #6b6b6b;
+  --color-accent: #D4AF37;
+  --color-accent-2: #B8960C;
+  --color-gold: #D4AF37;
+  --color-gold-dark: #B8960C;
+  --color-gold-light: #E8D48B;
   --color-red: #ef4444;
   --color-green: #22c55e;
-  --color-purple: #b388ff;
-  --color-orange: #ff8c42;
-  --color-yellow: #ffd600;
-  --color-pink: #ff6ec7;
-  --color-border: rgba(255, 255, 255, 0.04);
-  --color-glow: rgba(0, 229, 160, 0.12);
-  --font-syne: "Syne", sans-serif;
-  --font-dm: "DM Sans", sans-serif;
+  --color-purple: #8B7355;
+  --color-orange: #C4922A;
+  --color-yellow: #D4AF37;
+  --color-pink: #C4922A;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-glow: rgba(212, 175, 55, 0.12);
+  --font-syne: "Playfair Display", serif;
+  --font-dm: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
@@ -41,35 +40,35 @@
 }
 
 ::selection {
-  background: rgba(0, 229, 160, 0.3);
-  color: #fff;
+  background: rgba(212, 175, 55, 0.3);
+  color: #1a1a1a;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.25); }
 
-/* Gradient text - green to blue */
+/* Gradient text - gold */
 .gradient-text {
-  background: linear-gradient(135deg, #00e5a0 0%, #00b8ff 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #B8960C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* RGB gradient text - full spectrum neon */
+/* RGB gradient text - gold shimmer */
 .gradient-text-rgb {
-  background: linear-gradient(135deg, #ff3366 0%, #00ff88 40%, #00aaff 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #E8D48B 40%, #B8960C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Neon gradient text - warm to cool */
+/* Neon gradient text - gold warm */
 .gradient-text-neon {
-  background: linear-gradient(135deg, #ff3366 0%, #ff6ec7 25%, #b388ff 50%, #00b8ff 75%, #00e5a0 100%);
+  background: linear-gradient(135deg, #B8960C 0%, #D4AF37 50%, #E8D48B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -77,31 +76,31 @@
 
 /* Glass card */
 .glass {
-  background: rgba(20, 20, 32, 0.6);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Premium card surface */
 .card-premium {
-  background: linear-gradient(180deg, rgba(20, 20, 32, 0.8), rgba(13, 13, 22, 0.6));
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 .card-premium:hover {
-  border-color: rgba(0, 229, 160, 0.12);
+  border-color: rgba(212, 175, 55, 0.25);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 0 40px rgba(0, 229, 160, 0.05);
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(212, 175, 55, 0.08);
 }
 
-/* RGB border card - animated gradient border on hover */
+/* RGB border card */
 .card-rgb {
-  background: linear-gradient(180deg, rgba(20, 20, 32, 0.8), rgba(13, 13, 22, 0.6));
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
   position: relative;
 }
@@ -119,38 +118,34 @@
   transition: opacity 0.4s;
 }
 .card-rgb:hover::before {
-  background: linear-gradient(135deg, #ff336640, #00ff8840, #00aaff40);
+  background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(184,150,12,0.2));
   opacity: 1;
 }
 .card-rgb:hover {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 0 30px rgba(255, 51, 102, 0.04),
-    0 0 30px rgba(0, 255, 136, 0.04),
-    0 0 30px rgba(0, 170, 255, 0.04);
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 20px rgba(212, 175, 55, 0.06);
 }
 
-/* Gradient CTA button */
+/* Gradient CTA button - dark */
 .gradient-btn {
-  background: linear-gradient(135deg, #00e5a0, #00c98b);
-  box-shadow:
-    0 0 30px rgba(0, 229, 160, 0.25),
-    0 0 60px rgba(0, 229, 160, 0.1);
+  background: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  color: #FFFFFF;
 }
 .gradient-btn:hover {
   transform: scale(1.03);
-  box-shadow:
-    0 0 40px rgba(0, 229, 160, 0.35),
-    0 0 80px rgba(0, 229, 160, 0.15);
+  background: #333;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 .gradient-btn::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
   transform: translateX(-100%);
   transition: transform 0.6s ease;
 }
@@ -158,50 +153,31 @@
   transform: translateX(100%);
 }
 
-/* RGB gradient button */
-.gradient-btn-rgb {
-  background: linear-gradient(135deg, #ff3366, #b388ff, #00b8ff);
-  background-size: 200% 200%;
-  animation: gradient-shift 4s ease infinite;
-  box-shadow:
-    0 0 20px rgba(255, 51, 102, 0.15),
-    0 0 40px rgba(0, 184, 255, 0.1);
+/* Gold gradient button */
+.gradient-btn-gold {
+  background: linear-gradient(135deg, #D4AF37, #B8960C);
+  box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
+  color: #FFFFFF;
 }
-.gradient-btn-rgb:hover {
+.gradient-btn-gold:hover {
   transform: scale(1.03);
-  box-shadow:
-    0 0 30px rgba(255, 51, 102, 0.25),
-    0 0 60px rgba(0, 184, 255, 0.15);
-}
-
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
 }
 
 /* Glow effects */
 .glow-accent {
-  box-shadow:
-    0 0 30px rgba(0, 229, 160, 0.2),
-    0 0 80px rgba(0, 229, 160, 0.08),
-    0 0 120px rgba(0, 229, 160, 0.04);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.12);
 }
 
 .glow-blue {
-  box-shadow:
-    0 0 30px rgba(0, 184, 255, 0.2),
-    0 0 80px rgba(0, 184, 255, 0.08),
-    0 0 120px rgba(0, 184, 255, 0.04);
+  box-shadow: 0 4px 20px rgba(184, 150, 12, 0.12);
 }
 
 .glow-rgb {
-  box-shadow:
-    0 0 30px rgba(255, 51, 102, 0.12),
-    0 0 60px rgba(0, 255, 136, 0.08),
-    0 0 90px rgba(0, 170, 255, 0.06);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.08);
 }
 
 /* Noise texture overlay */
@@ -210,67 +186,58 @@
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  opacity: 0.015;
   pointer-events: none;
   z-index: 1;
-}
-
-/* Animated gradient border */
-@keyframes border-rotate {
-  0% { --angle: 0deg; }
-  100% { --angle: 360deg; }
 }
 
 /* Grid background pattern */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
   background-size: 80px 80px;
 }
 
-/* Radial gradient hero bg - RGB neon */
+/* Hero glow - warm gold tones */
 .hero-glow {
   background:
-    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 229, 160, 0.20) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(0, 170, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(255, 51, 102, 0.10) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 60% 20%, rgba(179, 136, 255, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(184, 150, 12, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(232, 212, 139, 0.05) 0%, transparent 50%);
 }
 
-/* Section gradient divider - RGB */
+/* Section gradient divider */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 51, 102, 0.08), rgba(0, 229, 160, 0.12), rgba(0, 170, 255, 0.08), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0.06), transparent);
 }
 
 /* Section accent glows */
 .section-glow-green {
-  background: radial-gradient(600px circle at 50% 0%, rgba(0, 229, 160, 0.06), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(212, 175, 55, 0.04), transparent 70%);
 }
 
 .section-glow-blue {
-  background: radial-gradient(600px circle at 50% 0%, rgba(0, 170, 255, 0.06), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(184, 150, 12, 0.04), transparent 70%);
 }
 
 .section-glow-red {
-  background: radial-gradient(600px circle at 50% 0%, rgba(255, 51, 102, 0.05), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(212, 175, 55, 0.03), transparent 70%);
 }
 
 .section-glow-purple {
-  background: radial-gradient(600px circle at 50% 0%, rgba(179, 136, 255, 0.05), transparent 70%);
+  background: radial-gradient(600px circle at 50% 0%, rgba(184, 150, 12, 0.03), transparent 70%);
 }
 
-/* RGB ambient glow - floating background element */
+/* RGB ambient glow */
 .rgb-glow {
   background:
-    radial-gradient(300px circle at 20% 50%, rgba(255, 51, 102, 0.06), transparent 70%),
-    radial-gradient(300px circle at 80% 50%, rgba(0, 170, 255, 0.06), transparent 70%),
-    radial-gradient(300px circle at 50% 30%, rgba(0, 255, 136, 0.04), transparent 70%);
+    radial-gradient(300px circle at 20% 50%, rgba(212, 175, 55, 0.04), transparent 70%),
+    radial-gradient(300px circle at 80% 50%, rgba(184, 150, 12, 0.04), transparent 70%);
 }
 
-/* Animated RGB line */
+/* Gold line */
 @keyframes rgb-line {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
@@ -278,33 +245,32 @@
 
 .rgb-line {
   height: 2px;
-  background: linear-gradient(90deg, #ff3366, #00ff88, #00aaff, #b388ff, #ff3366);
+  background: linear-gradient(90deg, transparent, #D4AF37, #E8D48B, #B8960C, transparent);
   background-size: 200% 100%;
   animation: rgb-line 3s linear infinite;
 }
 
-/* Animated RGB border glow for special elements */
+/* Gold pulse */
 @keyframes rgb-pulse {
   0%, 100% {
-    box-shadow:
-      0 0 20px rgba(255, 51, 102, 0.15),
-      0 0 40px rgba(0, 255, 136, 0.08),
-      0 0 60px rgba(0, 170, 255, 0.05);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
   }
-  33% {
-    box-shadow:
-      0 0 20px rgba(0, 255, 136, 0.15),
-      0 0 40px rgba(0, 170, 255, 0.08),
-      0 0 60px rgba(255, 51, 102, 0.05);
-  }
-  66% {
-    box-shadow:
-      0 0 20px rgba(0, 170, 255, 0.15),
-      0 0 40px rgba(255, 51, 102, 0.08),
-      0 0 60px rgba(0, 255, 136, 0.05);
+  50% {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.18);
   }
 }
 
 .rgb-pulse {
   animation: rgb-pulse 4s ease-in-out infinite;
+}
+
+@keyframes heroPulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
 }

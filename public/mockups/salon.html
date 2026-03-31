@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Blush & Co. Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: #fdf8f5;
+    color: #3a2f2f;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .nav {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav .logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #3a2f2f;
+  }
+  .nav .logo em { color: #c2838a; font-style: italic; }
+  .nav-book {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c2838a;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #c2838a;
+    padding-bottom: 2px;
+  }
+  /* Editorial hero */
+  .hero {
+    position: relative;
+    height: 440px;
+    background: linear-gradient(135deg, #f5e6e0, #e8d4cc, #f0ddd5);
+    overflow: hidden;
+  }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 30px;
+  }
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c2838a;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #3a2f2f;
+  }
+  .hero h1 em {
+    color: #c2838a;
+    font-style: italic;
+  }
+  .hero-line {
+    width: 40px;
+    height: 1px;
+    background: #c2838a;
+    margin: 20px auto;
+  }
+  .hero p {
+    font-size: 13px;
+    color: #8a7070;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    margin-top: 24px;
+    padding: 12px 36px;
+    background: #c2838a;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  /* Section */
+  .section {
+    padding: 32px 24px;
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c2838a;
+    margin-bottom: 6px;
+  }
+  .section-heading {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #3a2f2f;
+    margin-bottom: 20px;
+  }
+  /* Services -- editorial list */
+  .service-editorial {
+    border-bottom: 1px solid #e8ddd5;
+    padding: 18px 0;
+  }
+  .service-editorial:first-of-type { border-top: 1px solid #e8ddd5; }
+  .service-editorial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .service-editorial-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .service-editorial-price {
+    font-size: 14px;
+    color: #c2838a;
+    font-weight: 500;
+  }
+  .service-editorial-desc {
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  /* Stylist profiles */
+  .stylists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stylist-card {
+    text-align: center;
+  }
+  .stylist-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, #e8d4cc, #d4b8ae);
+    border-radius: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    color: #c2838a;
+    font-style: italic;
+  }
+  .stylist-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .stylist-card p {
+    font-size: 11px;
+    color: #999;
+    font-weight: 300;
+  }
+  /* Instagram grid */
+  .insta-section {
+    padding: 24px 24px 0;
+  }
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .insta-tile {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f0ddd5, #e2ccc2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #c2838a;
+    letter-spacing: 1px;
+  }
+  .insta-handle {
+    text-align: center;
+    padding: 14px;
+    font-size: 13px;
+    color: #c2838a;
+    font-weight: 500;
+  }
+  /* CTA */
+  .cta-section {
+    background: #3a2f2f;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .cta-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: #f5e6e0;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .cta-section p {
+    font-size: 13px;
+    color: #a08080;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 12px 36px;
+    border: 1px solid #c2838a;
+    color: #c2838a;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .cta-phone {
+    display: block;
+    margin-top: 12px;
+    color: #a08080;
+    font-size: 13px;
+    text-decoration: none;
+  }
+  /* Footer */
+  .footer {
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid #e8ddd5;
+  }
+  .footer .logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    color: #3a2f2f;
+  }
+  .footer p {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 6px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">Blush <em>& Co.</em></div>
+  <a href="#book" class="nav-book">Book Now</a>
+</div>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Hair -- Nails -- Beauty</div>
+    <h1>Where<br><em>Beauty</em><br>Meets Art</h1>
+    <div class="hero-line"></div>
+    <p>A full-service salon experience in the heart of Riverside.</p>
+    <a href="#book" class="hero-cta">Book a Session</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-eyebrow">Services</div>
+  <div class="section-heading">What We Offer</div>
+
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Women's Cut & Style</div>
+      <div class="service-editorial-price">from $65</div>
+    </div>
+    <div class="service-editorial-desc">Consultation, shampoo, precision cut, and blowout</div>
+  </div>
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Balayage</div>
+      <div class="service-editorial-price">from $180</div>
+    </div>
+    <div class="service-editorial-desc">Hand-painted highlights for a natural, sun-kissed look</div>
+  </div>
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Full Color</div>
+      <div class="service-editorial-price">from $120</div>
+    </div>
+    <div class="service-editorial-desc">Single process color with premium ammonia-free products</div>
+  </div>
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Gel Manicure</div>
+      <div class="service-editorial-price">$45</div>
+    </div>
+    <div class="service-editorial-desc">Long-lasting gel polish with cuticle care</div>
+  </div>
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Lash Extensions</div>
+      <div class="service-editorial-price">from $150</div>
+    </div>
+    <div class="service-editorial-desc">Classic, hybrid, or volume sets</div>
+  </div>
+  <div class="service-editorial">
+    <div class="service-editorial-header">
+      <div class="service-editorial-name">Facial Treatment</div>
+      <div class="service-editorial-price">from $85</div>
+    </div>
+    <div class="service-editorial-desc">Customized facial with organic skincare products</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-eyebrow">Our Team</div>
+  <div class="section-heading">Meet the Stylists</div>
+  <div class="stylists">
+    <div class="stylist-card">
+      <div class="stylist-img">A</div>
+      <h4>Alicia Rivera</h4>
+      <p>Lead Stylist -- Color Specialist</p>
+    </div>
+    <div class="stylist-card">
+      <div class="stylist-img">M</div>
+      <h4>Maya Patel</h4>
+      <p>Senior Stylist -- Balayage Expert</p>
+    </div>
+    <div class="stylist-card">
+      <div class="stylist-img">J</div>
+      <h4>Jade Kim</h4>
+      <p>Nail Artist -- Lash Tech</p>
+    </div>
+    <div class="stylist-card">
+      <div class="stylist-img">S</div>
+      <h4>Sofia Torres</h4>
+      <p>Esthetician -- Skincare</p>
+    </div>
+  </div>
+</div>
+
+<div class="insta-section">
+  <div class="section-eyebrow">Follow Us</div>
+  <div class="section-heading">On Instagram</div>
+  <div class="insta-grid">
+    <div class="insta-tile">Look 1</div>
+    <div class="insta-tile">Look 2</div>
+    <div class="insta-tile">Look 3</div>
+    <div class="insta-tile">Look 4</div>
+    <div class="insta-tile">Look 5</div>
+    <div class="insta-tile">Look 6</div>
+  </div>
+  <div class="insta-handle">@blushandco.riverside</div>
+</div>
+
+<div class="cta-section" id="book">
+  <h3>Ready to Glow?</h3>
+  <p>Book your appointment online or give us a call.</p>
+  <a href="tel:9515558765" class="cta-btn">Book Appointment</a>
+  <a href="tel:9515558765" class="cta-phone">(951) 555-8765</a>
+</div>
+
+<div class="footer">
+  <div class="logo">Blush & Co.</div>
+  <p>2250 Market Street, Riverside, CA 92501<br>Tue-Sat 9 AM - 7 PM | Sun 10 AM - 4 PM<br>Closed Monday</p>
+</div>
+
+</body>
+</html>

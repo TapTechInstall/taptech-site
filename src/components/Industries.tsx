@@ -5,42 +5,42 @@ import { motion } from 'framer-motion';
 const categories = [
   {
     group: 'Beauty & Personal Care',
-    color: '#ff6ec7',
+    color: '#D4AF37',
     industries: ['Barbershops', 'Salons', 'Nail Techs', 'Med Spas', 'Tattoo Artists', 'Lash & Brow Studios'],
   },
   {
     group: 'Health & Wellness',
-    color: '#00e5a0',
+    color: '#B8960C',
     industries: ['Dentists', 'Chiropractors', 'Yoga & Pilates Studios', 'Personal Trainers', 'Gyms & Fitness Studios', 'Massage Therapists'],
   },
   {
     group: 'Home Services',
-    color: '#00b8ff',
+    color: '#C4922A',
     industries: ['Contractors', 'Roofers', 'Electricians', 'Plumbers', 'Cleaning Services', 'Landscapers'],
   },
   {
     group: 'Food & Hospitality',
-    color: '#ff8c42',
+    color: '#8B7355',
     industries: ['Restaurants', 'Cafes & Coffee Shops', 'Catering', 'Food Trucks', 'Bakeries', 'Event Venues'],
   },
   {
     group: 'Real Estate & Finance',
-    color: '#ffd600',
+    color: '#D4AF37',
     industries: ['Realtors', 'Loan Officers', 'Insurance Agents', 'Mortgage Brokers', 'Property Managers', 'Financial Advisors'],
   },
   {
     group: 'Automotive',
-    color: '#b388ff',
+    color: '#B8960C',
     industries: ['Auto Detailers', 'Auto Shops', 'Car Sales', 'Tire Shops', 'Body Shops', 'Mobile Mechanics'],
   },
   {
     group: 'Creative & Events',
-    color: '#ff3366',
+    color: '#C4922A',
     industries: ['Photographers', 'DJs', 'Videographers', 'Event Planners', 'Florists', 'Wedding Vendors'],
   },
   {
     group: 'Pets & More',
-    color: '#00e5a0',
+    color: '#8B7355',
     industries: ['Pet Groomers', 'Dog Walkers', 'Tutors & Coaches', 'Music Teachers', 'Dance Studios', 'Martial Arts'],
   },
 ];
@@ -50,10 +50,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Industries() {
   return (
     <section id="industries" className="relative py-28 sm:py-36 overflow-hidden">
-      {/* RGB section glows */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(179,136,255,0.05),transparent_60%)] pointer-events-none" />
-      <div className="absolute top-[30%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,170,255,0.04),transparent_60%)] pointer-events-none" />
-      <div className="absolute bottom-[10%] right-[15%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(255,51,102,0.03),transparent_60%)] pointer-events-none" />
+      {/* Section glows */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(212,175,55,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-[30%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(184,150,12,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div

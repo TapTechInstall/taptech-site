@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Fiora Kitchen & Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: #faf6f0;
+    color: #3d2b1f;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .hero {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(61,43,31,0.1) 0%, rgba(61,43,31,0.75) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px 24px;
+  }
+  .hero-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #e8c87a;
+    letter-spacing: 2px;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .hero-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 10px;
+    font-weight: 300;
+  }
+  .nav-strip {
+    background: #3d2b1f;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-strip::-webkit-scrollbar { display: none; }
+  .nav-strip a {
+    color: #e8c87a;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  .section { padding: 28px 24px; }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .divider-line { flex: 1; height: 1px; background: #d4c4ad; }
+  .divider-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #a68c6d;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #3d2b1f;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .section-subtitle {
+    font-size: 12px;
+    color: #a68c6d;
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .menu-category { margin-bottom: 24px; }
+  .menu-category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #a68c6d;
+    border-bottom: 1px solid #e0d5c5;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .menu-item-desc { font-size: 11px; color: #888; margin-top: 2px; font-weight: 300; }
+  .menu-item-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a68c6d;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  .reserve-section {
+    background: #3d2b1f;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .reserve-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: #e8c87a;
+    margin-bottom: 8px;
+  }
+  .reserve-section p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .reserve-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid #e8c87a;
+    color: #e8c87a;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .reserve-phone {
+    display: block;
+    margin-top: 14px;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .hours-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #f0ebe3;
+  }
+  .hours-row:last-child { border: none; }
+  .hours-row .day { color: #888; }
+  .hours-row .time { font-weight: 600; }
+  .photo-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .photo-strip img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+  .footer {
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .footer .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: #3d2b1f;
+    font-weight: 700;
+  }
+  .footer p {
+    font-size: 12px;
+    color: #a68c6d;
+    margin-top: 6px;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="photos/restaurant-hero.jpg" alt="Restaurant interior">
+  <div class="hero-overlay">
+    <div class="hero-tag">Italian-Inspired Cuisine</div>
+    <div class="hero-name">Fiora</div>
+    <div class="hero-desc">Kitchen & Bar -- Riverside, California</div>
+  </div>
+</div>
+
+<div class="nav-strip">
+  <a href="#menu">Menu</a>
+  <a href="#reserve">Reservations</a>
+  <a href="#hours">Hours</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div class="section" id="about">
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-text">Our Story</div>
+    <div class="divider-line"></div>
+  </div>
+  <p style="font-size:14px; line-height:1.8; color:#666; text-align:center; font-weight:300;">
+    Nestled in the heart of downtown Riverside, Fiora brings the warmth of Italian tradition to Southern California. Fresh pasta made daily, locally sourced ingredients, and wines from the finest vineyards.
+  </p>
+</div>
+
+<div class="photo-strip">
+  <img src="photos/restaurant-hero.jpg" alt="Dish 1" style="object-position: left;">
+  <img src="photos/restaurant-hero.jpg" alt="Dish 2" style="object-position: right;">
+</div>
+
+<div class="section" id="menu">
+  <div class="section-title">The Menu</div>
+  <div class="section-subtitle">Seasonal selections -- ask your server for daily specials</div>
+  <div class="menu-category">
+    <div class="menu-category-title">Antipasti</div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Burrata & Heirloom Tomato</div><div class="menu-item-desc">Basil, aged balsamic, olive oil</div></div>
+      <div class="menu-item-price">$16</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Calamari Fritti</div><div class="menu-item-desc">Lemon aioli, marinara, Calabrian chili</div></div>
+      <div class="menu-item-price">$14</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Charcuterie Board</div><div class="menu-item-desc">Imported meats, cheeses, seasonal fruit</div></div>
+      <div class="menu-item-price">$22</div>
+    </div>
+  </div>
+  <div class="menu-category">
+    <div class="menu-category-title">Pasta</div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Cacio e Pepe</div><div class="menu-item-desc">House-made tonnarelli, pecorino, black pepper</div></div>
+      <div class="menu-item-price">$19</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Pappardelle Bolognese</div><div class="menu-item-desc">Slow-braised beef and pork ragu</div></div>
+      <div class="menu-item-price">$24</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Lobster Ravioli</div><div class="menu-item-desc">Brown butter, sage, toasted pine nuts</div></div>
+      <div class="menu-item-price">$28</div>
+    </div>
+  </div>
+  <div class="menu-category">
+    <div class="menu-category-title">Entrees</div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Branzino</div><div class="menu-item-desc">Grilled, lemon caper sauce, roasted vegetables</div></div>
+      <div class="menu-item-price">$32</div>
+    </div>
+    <div class="menu-item">
+      <div><div class="menu-item-name">Osso Buco</div><div class="menu-item-desc">Braised veal shank, saffron risotto, gremolata</div></div>
+      <div class="menu-item-price">$36</div>
+    </div>
+  </div>
+</div>
+
+<div class="reserve-section" id="reserve">
+  <h3>Reserve a Table</h3>
+  <p>Join us for an unforgettable evening. Reservations recommended for dinner service.</p>
+  <a href="tel:9515554567" class="reserve-btn">Make a Reservation</a>
+  <a href="tel:9515554567" class="reserve-phone">(951) 555-4567</a>
+</div>
+
+<div class="section" id="hours">
+  <div class="section-title">Hours</div>
+  <div class="section-subtitle">Walk-ins welcome, reservations preferred</div>
+  <div class="hours-card">
+    <div class="hours-row"><span class="day">Monday</span><span class="time">Closed</span></div>
+    <div class="hours-row"><span class="day">Tue - Thu</span><span class="time">5 PM - 9:30 PM</span></div>
+    <div class="hours-row"><span class="day">Fri - Sat</span><span class="time">5 PM - 10:30 PM</span></div>
+    <div class="hours-row"><span class="day">Sunday</span><span class="time">4 PM - 9 PM</span></div>
+  </div>
+</div>
+
+<div class="footer" id="contact">
+  <div class="name">Fiora Kitchen & Bar</div>
+  <p>3601 Main Street, Riverside, CA 92501<br>(951) 555-4567<br>info@fiorariverside.com</p>
+</div>
+
+</body>
+</html>

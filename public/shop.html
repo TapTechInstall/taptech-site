@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Custom Tap Business Cards | TapTech Connect</title>
+<meta name="description" content="Custom laser-engraved tap business cards. One tap shares your contact instantly. No app needed. Starting at $12/card. Free shipping on 5+.">
+<meta property="og:title" content="Custom Tap Business Cards | TapTech Connect">
+<meta property="og:description" content="Laser-engraved tap cards. Tap to share your contact. No app needed. Starting at $12/card.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://taptechconnect.com/shop">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --bg-alt: #F5F5F0;
+    --text: #1a1a1a;
+    --text-dim: #6b6b6b;
+    --text-light: #999;
+    --gold: #D4AF37;
+    --gold-dark: #B8960C;
+    --gold-light: #E8D48B;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250,250,250,0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: box-shadow 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    border-bottom-color: rgba(0,0,0,0.06);
+    box-shadow: 0 1px 12px rgba(0,0,0,0.05);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: -0.2px;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); font-weight: 600; }
+
+  .nav-cta {
+    background: var(--text) !important;
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover {
+    background: #333 !important;
+    transform: translateY(-1px);
+    color: #fff !important;
+  }
+
+  /* ── Promo bar ── */
+  .promo-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 101;
+    background: var(--text);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .promo-bar strong { color: var(--gold-light); }
+  nav { top: 38px; }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 180px 24px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .hero-visual { position: relative; }
+  .hero-img-main {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--bg-alt);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .card-display {
+    width: 80%;
+    max-width: 340px;
+    aspect-ratio: 1.586;
+    background: linear-gradient(145deg, #F5F0E0, #EBE4CC);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-3deg);
+    transition: transform 0.4s ease;
+  }
+  .card-display:hover { transform: rotate(0deg) scale(1.02); }
+  .card-display::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  .card-display::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+  .card-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .card-brand-sub {
+    font-size: 0.55rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .card-title {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .card-contact {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .card-contact .gold { color: var(--gold); }
+  .card-nfc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    opacity: 0.4;
+  }
+  .card-nfc-ring {
+    width: 18px; height: 18px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+  }
+  .card-nfc-dot {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .hero-thumbs {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .thumb {
+    width: 80px; height: 80px;
+    border-radius: 12px;
+    background: var(--bg-alt);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 8px;
+    line-height: 1.3;
+  }
+  .thumb:hover, .thumb.active { border-color: var(--gold); }
+
+  /* ── Purchase column ── */
+  .hero-purchase { padding-top: 20px; }
+  .hero-purchase h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .hero-purchase h1 .gold { color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 440px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .stars { display: flex; gap: 2px; }
+  .stars svg { width: 16px; height: 16px; fill: var(--gold); }
+  .rating-text { font-size: 0.85rem; color: var(--text-dim); }
+
+  /* ── Pricing tiles ── */
+  .pricing-tiles, .final-tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .price-tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border: 2px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fff;
+    position: relative;
+  }
+  .price-tile:hover { border-color: rgba(0,0,0,0.12); }
+  .price-tile.selected {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(212,175,55,0.03), rgba(232,212,139,0.02));
+    box-shadow: 0 0 0 1px var(--gold), 0 4px 12px rgba(212,175,55,0.1);
+  }
+  .price-tile-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .price-radio {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.15);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .price-tile.selected .price-radio {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  .price-radio::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .price-tile.selected .price-radio::after { opacity: 1; }
+  .price-tile-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .price-tile-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    background: rgba(212,175,55,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+  }
+  .price-tile-right { text-align: right; }
+  .price-per {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+  .price-per small { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; color: var(--text-dim); }
+  .price-total {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 1px;
+  }
+  .price-save {
+    font-size: 0.72rem;
+    color: var(--gold-dark);
+    font-weight: 600;
+  }
+
+  /* ── CTA ── */
+  .cta-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: -0.2px;
+    margin-bottom: 12px;
+  }
+  .cta-btn:hover { background: #333; transform: translateY(-1px); }
+  .cta-btn:active { transform: translateY(0); }
+
+  .cta-subtext {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cta-subtext span { display: flex; align-items: center; gap: 4px; }
+
+  .no-fee {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(212,175,55,0.06);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-align: center;
+  }
+  .no-fee strong { color: var(--gold-dark); }
+
+  /* ── How it works ── */
+  .how-section { padding: 100px 24px; background: var(--bg-alt); }
+  .how-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .section-label {
+    font-weight: 600; font-size: 0.78rem; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold-dark); margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -1px;
+    line-height: 1.12; margin-bottom: 16px; color: var(--text);
+  }
+  .how-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 48px; margin-top: 60px;
+  }
+  .how-step { text-align: center; }
+  .how-num {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--text); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.1rem; margin: 0 auto 20px;
+  }
+  .how-step h3 {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.15rem; margin-bottom: 10px; color: var(--text); letter-spacing: -0.3px;
+  }
+  .how-step p {
+    font-size: 0.92rem; color: var(--text-dim); line-height: 1.7;
+    max-width: 280px; margin: 0 auto;
+  }
+
+  /* ── Testimonials ── */
+  .testimonials-section { padding: 100px 24px; background: var(--bg); }
+  .testimonials-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .testimonial-card {
+    background: #fff; border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 16px; padding: 28px; text-align: left;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(212,175,55,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .testimonial-stars { display: flex; gap: 2px; margin-bottom: 16px; }
+  .testimonial-stars svg { width: 14px; height: 14px; fill: var(--gold); }
+  .testimonial-quote {
+    font-size: 0.92rem; color: var(--text-dim); line-height: 1.75;
+    margin-bottom: 20px; font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .testimonial-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(184,150,12,0.08));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; color: var(--gold-dark);
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+  .testimonial-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+  .testimonial-role { font-size: 0.75rem; color: var(--text-light); }
+
+  /* ── Features ── */
+  .features-section { padding: 100px 24px; background: var(--bg); }
+  .features-inner { max-width: 1000px; margin: 0 auto; }
+  .feature-block {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center; margin-bottom: 80px;
+  }
+  .feature-block:last-child { margin-bottom: 0; }
+  .feature-block.reverse { direction: rtl; }
+  .feature-block.reverse > * { direction: ltr; }
+  .feature-visual {
+    background: var(--bg-alt); border-radius: 16px; aspect-ratio: 1.2;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(0,0,0,0.04); overflow: hidden; padding: 32px;
+  }
+  .feature-text .section-label { margin-bottom: 12px; }
+  .feature-text h3 {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.6rem; letter-spacing: -0.5px; margin-bottom: 16px;
+    color: var(--text); line-height: 1.2;
+  }
+  .feature-text p {
+    font-size: 0.95rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 20px;
+  }
+  .feature-specs { list-style: none; }
+  .feature-specs li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.88rem; color: var(--text-dim); padding: 6px 0;
+  }
+  .feature-specs li svg {
+    width: 16px; height: 16px; stroke: var(--gold);
+    fill: none; stroke-width: 2.5; flex-shrink: 0;
+  }
+
+  /* ── Phone mock ── */
+  .phone-mock {
+    width: 200px; background: #fff; border-radius: 24px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1); overflow: hidden; margin: 0 auto;
+  }
+  .phone-status {
+    background: #f8f8f8; padding: 6px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.55rem; color: var(--text-dim);
+  }
+  .phone-notch { width: 48px; height: 12px; background: var(--text); border-radius: 8px; }
+  .phone-content { padding: 16px; text-align: center; }
+  .phone-content .pc-avatar {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(184,150,12,0.08));
+    border-radius: 50%; margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; color: var(--gold-dark);
+  }
+  .phone-content h4 { font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .phone-content .pc-role { font-size: 0.6rem; color: var(--text-light); margin-bottom: 12px; }
+  .phone-content .pc-btn {
+    display: block; background: var(--text); color: #fff; border: none;
+    border-radius: 8px; padding: 8px; font-size: 0.65rem; font-weight: 600;
+    margin-bottom: 6px; width: 100%;
+  }
+  .phone-content .pc-btn-outline {
+    display: block; background: none; border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px; padding: 7px; font-size: 0.65rem; font-weight: 500;
+    color: var(--text); margin-bottom: 6px; width: 100%;
+  }
+  .phone-bar { padding: 6px; display: flex; justify-content: center; }
+  .phone-bar-line { width: 60px; height: 3px; background: rgba(0,0,0,0.12); border-radius: 2px; }
+
+  /* ── Comparison ── */
+  .compare-section { padding: 100px 24px; background: var(--bg-alt); }
+  .compare-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .compare-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin-top: 48px; background: #fff; border-radius: 16px;
+    overflow: hidden; border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-sm);
+  }
+  .compare-table th, .compare-table td {
+    padding: 16px 24px; text-align: left; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .compare-table th {
+    background: var(--bg-alt); font-weight: 600; font-size: 0.82rem;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim);
+  }
+  .compare-table th:last-child { color: var(--gold-dark); }
+  .compare-table td:first-child { color: var(--text); font-weight: 500; }
+  .compare-table td:nth-child(2) { color: var(--text-light); }
+  .compare-table td:last-child { color: var(--text); font-weight: 500; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .check { color: var(--gold); font-weight: 700; }
+  .cross { color: #ccc; }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 100px 24px; background: var(--bg); }
+  .faq-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .faq-list { margin-top: 48px; text-align: left; }
+  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .faq-q {
+    width: 100%; background: none; border: none; padding: 20px 0;
+    font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: var(--text); cursor: pointer; display: flex;
+    justify-content: space-between; align-items: center; text-align: left;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--gold-dark); }
+  .faq-icon {
+    font-size: 1.2rem; color: var(--text-light);
+    transition: transform 0.3s, color 0.3s; flex-shrink: 0; margin-left: 16px;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--gold); }
+  .faq-item.open .faq-q { color: var(--gold-dark); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+  .faq-a p {
+    font-size: 0.9rem; color: var(--text-dim); line-height: 1.75;
+    border-left: 2px solid rgba(212,175,55,0.2); padding-left: 16px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta { padding: 100px 24px; background: var(--bg-alt); text-align: center; }
+  .final-cta-inner { max-width: 600px; margin: 0 auto; }
+  .final-cta h2 { margin-bottom: 16px; }
+  .final-cta p {
+    font-size: 1rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 40px;
+  }
+  .final-tiles { text-align: left; }
+
+  /* ── Cross-sell ── */
+  .cross-sell {
+    padding: 60px 24px; background: var(--bg); text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+  .cross-sell p { font-size: 0.95rem; color: var(--text-dim); }
+  .cross-sell a {
+    color: var(--gold-dark); font-weight: 600; text-decoration: none; transition: color 0.2s;
+  }
+  .cross-sell a:hover { color: var(--text); text-decoration: underline; }
+
+  /* ── Footer ── */
+  footer {
+    padding: 60px 24px 40px; background: var(--bg);
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .footer-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.2rem; color: var(--text); margin-bottom: 12px;
+  }
+  .footer-brand span { color: var(--gold); }
+  .footer-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+  .footer-col h4 {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text); margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block; font-size: 0.88rem; color: var(--text-dim);
+    text-decoration: none; margin-bottom: 10px; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--text); }
+  .footer-bottom {
+    max-width: 1000px; margin: 40px auto 0; padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.06); display: flex;
+    justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: var(--text-light);
+  }
+
+  /* ── Sticky mobile CTA ── */
+  .sticky-cta {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 99; background: #fff; border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .sticky-cta-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 500px; margin: 0 auto;
+  }
+  .sticky-price {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.1rem; color: var(--text);
+  }
+  .sticky-price small {
+    font-family: 'Inter', sans-serif; font-size: 0.75rem;
+    color: var(--text-dim); font-weight: 400;
+  }
+  .sticky-btn {
+    background: var(--text); color: #fff; border: none;
+    padding: 12px 28px; border-radius: 10px; font-weight: 700;
+    font-size: 0.9rem; cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+  }
+  .sticky-btn:hover { background: #333; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav { padding: 12px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero {
+      grid-template-columns: 1fr; gap: 40px; padding: 140px 20px 60px;
+    }
+    .hero-visual { order: -1; }
+    .how-grid { grid-template-columns: 1fr; gap: 32px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .feature-block, .feature-block.reverse {
+      grid-template-columns: 1fr; gap: 32px; direction: ltr;
+    }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .sticky-cta { display: block; }
+    body { padding-bottom: 70px; }
+    .compare-table th, .compare-table td { padding: 12px 14px; font-size: 0.82rem; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .hero-thumbs { gap: 8px; }
+    .thumb { width: 64px; height: 64px; font-size: 0.58rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Promo bar -->
+<div class="promo-bar">
+  <strong>Free Shipping</strong> on orders of 5+ cards &nbsp;|&nbsp; Ships in 3-5 business days
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="https://taptechconnect.com" class="logo">TapTech <span>Connect</span></a>
+  <div class="nav-links">
+    <a href="/">Tap Cards</a>
+    <a href="/websites.html">Websites</a>
+    <a href="/shop.html" class="active">Shop</a>
+    <a href="#order" class="nav-cta">Order Now</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero" id="top">
+  <div class="hero-visual fade-up">
+    <div class="hero-img-main">
+      <div class="card-display">
+        <div>
+          <div class="card-brand">TapTech</div>
+          <div class="card-brand-sub">Connect</div>
+        </div>
+        <div>
+          <div class="card-name">Your Name Here</div>
+          <div class="card-title">Your Business</div>
+        </div>
+        <div class="card-bottom">
+          <div class="card-contact">(951) 555-0123<br><span class="gold">yourbusiness.com</span></div>
+          <div class="card-nfc"><div class="card-nfc-ring"></div><div class="card-nfc-dot"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-thumbs">
+      <div class="thumb active">Card Front</div>
+      <div class="thumb">Laser Detail</div>
+      <div class="thumb">Tap Demo</div>
+      <div class="thumb">What They See</div>
+    </div>
+  </div>
+
+  <div class="hero-purchase fade-up" id="order">
+    <h1>The Business Card They <span class="gold">Actually Keep</span></h1>
+    <p class="hero-sub">Custom laser-engraved tap card. Hold it to any phone, your contact info saves instantly. <strong>No app needed.</strong></p>
+
+    <div class="rating-bar">
+      <div class="stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <span class="rating-text">4.9 stars from local business owners</span>
+    </div>
+
+    <div class="pricing-tiles">
+      <div class="price-tile" data-qty="1" onclick="selectTier(this)">
+        <div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">1 Card</span></div>
+        <div class="price-tile-right"><div class="price-per">$29</div></div>
+      </div>
+      <div class="price-tile selected" data-qty="5" onclick="selectTier(this)">
+        <div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">5-Pack</span><span class="price-tile-badge">Popular</span></div>
+        <div class="price-tile-right"><div class="price-per">$20<small>/card</small></div><div class="price-total">$100 total</div><div class="price-save">Save 31%</div></div>
+      </div>
+      <div class="price-tile" data-qty="10" onclick="selectTier(this)">
+        <div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">10-Pack</span><span class="price-tile-badge">Best Value</span></div>
+        <div class="price-tile-right"><div class="price-per">$12<small>/card</small></div><div class="price-total">$120 total</div><div class="price-save">Save 59%</div></div>
+      </div>
+    </div>
+
+    <button class="cta-btn" id="main-cta" onclick="orderCards()">Order My Cards</button>
+    <div class="cta-subtext">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Ships in 3-5 days</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Free shipping on 5+</span>
+    </div>
+
+    <div class="no-fee"><strong>No monthly fee.</strong> One-time purchase. Your digital profile is free to update forever.</div>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-label fade-up">How It Works</div>
+    <h2 class="fade-up">Three steps. Two seconds. One card.</h2>
+    <div class="how-grid">
+      <div class="how-step fade-up">
+        <div class="how-num">1</div>
+        <h3>We Engrave Your Card</h3>
+        <p>Your name, logo, and info precision laser-engraved on a premium card. Not printed. Not stickered.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="how-num">2</div>
+        <h3>You Tap, They Save</h3>
+        <p>Hold your card to any smartphone. Your contact info, booking link, and socials pop up instantly.</p>
+      </div>
+      <div class="how-step fade-up">
+        <div class="how-num">3</div>
+        <h3>They Become a Client</h3>
+        <p>Your info is saved in their phone forever. No app needed. Works on every iPhone and Android.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="section-label fade-up">What Owners Are Saying</div>
+    <h2 class="fade-up">Real results from <span style="color:var(--gold)">real businesses</span></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-quote">"My clients tap my card after their cut and book their next appointment right there. I've gotten more repeat bookings in a month than the last year with paper cards."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">MT</div><div><div class="testimonial-name">Marcus T.</div><div class="testimonial-role">Barber, Riverside CA</div></div></div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-quote">"I hand these out at open houses. People tap, save my info, and I've gotten 3 listings from follow-ups weeks later. Way more professional than a paper card."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">SL</div><div><div class="testimonial-name">Sarah L.</div><div class="testimonial-role">Realtor, Corona CA</div></div></div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-quote">"People at the gym ask about training and I just hand them the card. They see my transformations, pricing, and book a session before they even leave."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar">DK</div><div><div class="testimonial-name">Dre K.</div><div class="testimonial-role">Personal Trainer, Moreno Valley CA</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ecosystem upsell -->
+<section style="padding:60px 20px;max-width:700px;margin:0 auto;text-align:center;" class="fade-up">
+  <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:var(--text);margin-bottom:8px;">Your card works even harder with a custom website</p>
+  <p style="color:var(--text-dim);font-size:0.95rem;line-height:1.7;margin-bottom:20px;">We build and manage professional websites for small businesses. When a customer taps your card, they land on a site with booking, reviews, and your full portfolio. We handle all the updates and edits so you never have to.</p>
+  <a href="/websites.html" style="display:inline-block;padding:12px 32px;background:var(--text);color:#fff;border-radius:50px;font-weight:600;font-size:0.9rem;text-decoration:none;">See website packages &rarr;</a>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+  <div class="features-inner">
+    <div class="feature-block fade-up">
+      <div class="feature-visual">
+        <div class="card-display" style="transform:rotate(2deg)">
+          <div><div class="card-brand">TapTech</div><div class="card-brand-sub">Connect</div></div>
+          <div><div class="card-name">Jordan Rivera</div><div class="card-title">Premium Barber</div></div>
+          <div class="card-bottom"><div class="card-contact">(951) 555-0123<br><span class="gold">jordancuts.com</span></div><div class="card-nfc"><div class="card-nfc-ring"></div><div class="card-nfc-dot"></div></div></div>
+        </div>
+      </div>
+      <div class="feature-text">
+        <div class="section-label">The Card</div>
+        <h3>Built to last years, not weeks</h3>
+        <p>Premium PVC with embedded chip, rated for 100,000+ taps. Waterproof and scratch-resistant. Your info is precision laser-engraved.</p>
+        <ul class="feature-specs">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Standard credit card size (85.6 x 54mm)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Chip rated for 100,000+ taps</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Waterproof and scratch-resistant</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Precision laser engraving</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feature-block reverse fade-up">
+      <div class="feature-visual">
+        <div class="phone-mock">
+          <div class="phone-status"><span>9:41</span><div class="phone-notch"></div><span>5G</span></div>
+          <div class="phone-content">
+            <div class="pc-avatar">JR</div>
+            <h4>Jordan Rivera</h4>
+            <div class="pc-role">Premium Barber -- Riverside, CA</div>
+            <button class="pc-btn">Save Contact</button>
+            <button class="pc-btn-outline">Book Appointment</button>
+            <button class="pc-btn-outline">Leave a Review</button>
+          </div>
+          <div class="phone-bar"><div class="phone-bar-line"></div></div>
+        </div>
+      </div>
+      <div class="feature-text">
+        <div class="section-label">The Profile</div>
+        <h3>Update your info anytime -- the card never goes out of date</h3>
+        <p>When someone taps your card, they see a mobile-optimized page with tap-to-call, tap-to-book, social links, reviews, and a one-tap contact save.</p>
+        <ul class="feature-specs">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Name, phone, email, website</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Booking link and social profiles</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> One-tap contact save</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Edit anytime, free forever</li>
+        </ul>
+      </div>
+    </div>
+    <div class="feature-block fade-up">
+      <div class="feature-visual" style="background: linear-gradient(135deg, #F5F0E0, #EBE4CC);">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:800; color:var(--text); letter-spacing:-1px; margin-bottom:8px;">Laser Engraved</div>
+          <div style="font-size:0.8rem; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase;">Precision Cut Detail</div>
+          <div style="margin-top:24px; display:flex; gap:16px; justify-content:center;">
+            <div style="width:60px; height:60px; border:2px solid var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div style="width:60px; height:60px; border:2px solid var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div style="width:60px; height:60px; border:2px solid var(--gold); border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-weight:700; font-size:0.8rem; color:var(--gold);">LOGO</div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-text">
+        <div class="section-label">The Engraving</div>
+        <h3>Not printed. Not stickered. Permanent.</h3>
+        <p>Every card is individually engraved with your name, title, and logo. A permanent, tactile finish that feels premium in hand and makes an impression before you even tap it.</p>
+        <ul class="feature-specs">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Custom logo engraving</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Name, title, contact details</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> QR code backup option</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Won't fade or peel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <div class="section-label fade-up">Why Switch</div>
+    <h2 class="fade-up">Tap card vs. paper cards</h2>
+    <table class="compare-table fade-up">
+      <thead><tr><th>Feature</th><th>Paper Cards</th><th>TapTech Card</th></tr></thead>
+      <tbody>
+        <tr><td>Cost per contact shared</td><td>~$0.10/card (runs out)</td><td><span class="check">One-time purchase</span></td></tr>
+        <tr><td>Info stays up to date</td><td><span class="cross">Reprint needed</span></td><td><span class="check">Edit anytime, free</span></td></tr>
+        <tr><td>Contact saves to phone</td><td><span class="cross">Manual entry</span></td><td><span class="check">Instant tap-to-save</span></td></tr>
+        <tr><td>Professional impression</td><td>Standard</td><td><span class="check">Premium, memorable</span></td></tr>
+        <tr><td>Environmental impact</td><td><span class="cross">88% thrown away</span></td><td><span class="check">One card, forever</span></td></tr>
+        <tr><td>Booking and reviews</td><td><span class="cross">Not possible</span></td><td><span class="check">Built-in links</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-label fade-up">Questions</div>
+    <h2 class="fade-up">Before you order</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Does it work on all phones? <span class="faq-icon">+</span></button><div class="faq-a"><p>Yes. All iPhones (XS and later) and Android phones with tap capability -- that covers 95%+ of smartphones in use today. Your client doesn't need to download anything.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do my clients need an app? <span class="faq-icon">+</span></button><div class="faq-a"><p>No. Tapping the card opens their browser automatically with your profile page. Nothing to install, nothing to sign up for. It just works.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I change my info after I order? <span class="faq-icon">+</span></button><div class="faq-a"><p>Yes. Your digital profile can be updated anytime for free. New phone number, new website, new socials -- just let us know and we update it. The physical card stays the same.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does the card last? <span class="faq-icon">+</span></button><div class="faq-a"><p>The chip is rated for 100,000+ taps. The card itself is waterproof and scratch-resistant PVC. It will outlast your phone.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">If I order 5, are they all the same? <span class="faq-icon">+</span></button><div class="faq-a"><p>They can be, or you can customize each one for different team members. Just include the details for each card when you order.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does shipping take? <span class="faq-icon">+</span></button><div class="faq-a"><p>3-5 business days. Free shipping on orders of 5 or more cards. We'll send you a tracking number as soon as it ships.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a monthly fee? <span class="faq-icon">+</span></button><div class="faq-a"><p>No. One-time purchase. Your digital profile is free to host and update forever. No subscriptions, no hidden fees.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="buy">
+  <div class="final-cta-inner">
+    <div class="section-label fade-up">Ready?</div>
+    <h2 class="fade-up">Make every introduction <span style="color:var(--gold)">count</span></h2>
+    <p class="fade-up">One card. Unlimited taps. Your info saved in their phone forever.</p>
+    <div class="final-tiles">
+      <div class="price-tile" data-qty="1" onclick="selectTierFinal(this)"><div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">1 Card</span></div><div class="price-tile-right"><div class="price-per">$29</div></div></div>
+      <div class="price-tile selected" data-qty="5" onclick="selectTierFinal(this)"><div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">5-Pack</span><span class="price-tile-badge">Popular</span></div><div class="price-tile-right"><div class="price-per">$20<small>/card</small></div><div class="price-total">$100 total</div><div class="price-save">Save 31%</div></div></div>
+      <div class="price-tile" data-qty="10" onclick="selectTierFinal(this)"><div class="price-tile-left"><div class="price-radio"></div><span class="price-tile-name">10-Pack</span><span class="price-tile-badge">Best Value</span></div><div class="price-tile-right"><div class="price-per">$12<small>/card</small></div><div class="price-total">$120 total</div><div class="price-save">Save 59%</div></div></div>
+    </div>
+    <button class="cta-btn" id="final-cta-btn" onclick="orderCards()">Order My Cards</button>
+    <div class="cta-subtext">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> No monthly fees</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Free updates forever</span>
+    </div>
+  </div>
+</section>
+
+<!-- Cross-sell -->
+<section style="padding:60px 20px;max-width:900px;margin:0 auto;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="fade-up">
+    <div style="padding:32px;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.15);border-radius:16px;text-align:center;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom:12px;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px;">Need a website built?</p>
+      <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.6;margin-bottom:14px;">We design, build, and maintain professional websites for small businesses. Your tap card links right to it. Starting at $499.</p>
+      <a href="/websites.html" style="color:var(--gold);font-weight:600;font-size:0.85rem;text-decoration:underline;">See website packages &rarr;</a>
+    </div>
+    <div style="padding:32px;background:rgba(212,175,55,0.04);border:1px solid rgba(212,175,55,0.15);border-radius:16px;text-align:center;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="margin-bottom:12px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:6px;">Want more Google reviews?</p>
+      <p style="color:var(--text-dim);font-size:0.85rem;line-height:1.6;margin-bottom:14px;">Our full plans include Google ranking and review management. Starting at $29/mo.</p>
+      <a href="/#pricing" style="color:var(--gold);font-weight:600;font-size:0.85rem;text-decoration:underline;">See full plans &rarr;</a>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--text-dim);font-size:0.8rem;margin-top:16px;">No monthly fee for standalone cards. Want ongoing management? <a href="/#pricing" style="color:var(--gold);text-decoration:underline;">See our full service plans</a>.</p>
+</section>
+<style>.fade-up section > div[style*="grid"] { grid-template-columns: 1fr 1fr; } @media (max-width:600px) { section > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; } }</style>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">TapTech <span>Connect</span></div><p class="footer-desc">Custom tap cards, professional websites, and Google ranking for local businesses.</p></div>
+    <div class="footer-col"><h4>Services</h4><a href="/">Tap Cards</a><a href="/websites.html">Websites</a><a href="/shop.html">Shop</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="sms:+15105700690">Text us</a><a href="tel:+15105700690">Call us</a><a href="mailto:taptechinstall@gmail.com">Email</a><a href="https://instagram.com/taptech.ai" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 TapTech Connect. All rights reserved.</span><span>Riverside, CA</span></div>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-price">$20<small>/card</small> <small>5-Pack</small></div>
+    <button class="sticky-btn" onclick="orderCards()">Order Now</button>
+  </div>
+</div>
+
+<script>
+var selectedQty = '5';
+var stickyLabels = { '1': { price: '$29', label: '1 Card' }, '5': { price: '$20', label: '5-Pack' }, '10': { price: '$12', label: '10-Pack' } };
+
+async function orderCards() {
+  // Disable all CTA buttons while processing
+  var btns = document.querySelectorAll('#main-cta, #final-cta-btn, .sticky-btn');
+  btns.forEach(function(b) { b.disabled = true; b.textContent = 'Redirecting...'; });
+
+  try {
+    var res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity: selectedQty }),
+    });
+    var data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Checkout failed');
+    }
+  } catch (err) {
+    // Re-enable buttons on error
+    btns.forEach(function(b) { b.disabled = false; b.textContent = 'Order My Cards'; });
+    document.querySelectorAll('.sticky-btn').forEach(function(b) { b.textContent = 'Order Now'; });
+    alert('Something went wrong. Please try again or text us at (510) 570-0690.');
+  }
+}
+
+function syncAll(qty) {
+  selectedQty = qty;
+  document.querySelectorAll('.pricing-tiles .price-tile, .final-tiles .price-tile').forEach(function(t) {
+    t.classList.remove('selected');
+    if (t.dataset.qty === qty) t.classList.add('selected');
+  });
+  var s = stickyLabels[qty];
+  var sp = document.querySelector('.sticky-price');
+  if (sp) sp.innerHTML = s.price + '<small>/card</small> <small>' + s.label + '</small>';
+}
+
+function selectTier(el) { syncAll(el.dataset.qty); }
+function selectTierFinal(el) { syncAll(el.dataset.qty); }
+
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+  if (!wasOpen) item.classList.add('open');
+}
+
+window.addEventListener('scroll', function() {
+  var nav = document.querySelector('nav');
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  var sticky = document.getElementById('sticky-cta');
+  if (!sticky) return;
+  if (window.innerWidth > 768) { sticky.style.display = 'none'; return; }
+  sticky.style.display = window.scrollY > 600 ? 'block' : 'none';
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>

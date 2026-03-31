@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>GreenEdge Landscaping</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: #1a1a2e;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+  }
+  .nav .logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .nav .logo span { color: #22c55e; }
+  .nav-cta {
+    background: #22c55e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+  }
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 300px;
+  }
+  .hero-text {
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-text .tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #22c55e;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .hero-text h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .hero-text p { font-size: 12px; color: #666; margin-top: 10px; line-height: 1.6; }
+  .hero-img { position: relative; overflow: hidden; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #f0fdf4;
+    padding: 18px 0;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #22c55e;
+  }
+  .stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .section { padding: 28px 20px; }
+  .section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #22c55e;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .service-tile {
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .service-tile-img {
+    height: 100px;
+    overflow: hidden;
+  }
+  .service-tile-img img { width: 100%; height: 100%; object-fit: cover; }
+  .service-tile-body { padding: 12px; }
+  .service-tile-body h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .service-tile-body p { font-size: 11px; color: #888; line-height: 1.4; }
+  .ba-section {
+    background: #1a1a2e;
+    padding: 28px 20px;
+    color: #fff;
+  }
+  .ba-container { border-radius: 12px; overflow: hidden; margin-top: 16px; }
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .ba-side { position: relative; }
+  .ba-side img { width: 100%; height: 180px; object-fit: cover; }
+  .ba-label {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .ba-label.after-label { background: #22c55e; }
+  .process-step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: #f0fdf4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #22c55e;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .step-content p { font-size: 12px; color: #888; line-height: 1.5; }
+  .cta-bar {
+    background: #22c55e;
+    color: #fff;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .cta-bar h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .cta-bar p { font-size: 13px; opacity: 0.9; margin-bottom: 16px; }
+  .cta-btn {
+    display: inline-block;
+    background: #fff;
+    color: #22c55e;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .footer { padding: 24px 20px; text-align: center; }
+  .footer .logo { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; }
+  .footer .logo span { color: #22c55e; }
+  .footer p { font-size: 12px; color: #999; margin-top: 6px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">Green<span>Edge</span></div>
+  <a href="tel:9515553210" class="nav-cta">Free Quote</a>
+</div>
+
+<div class="hero-split">
+  <div class="hero-text">
+    <div class="tag">Landscaping & Design</div>
+    <h1>Transform Your Outdoor Space</h1>
+    <p>Professional landscaping services for Riverside homes and businesses.</p>
+  </div>
+  <div class="hero-img">
+    <img src="photos/landscaper-hero.jpg" alt="Beautiful landscape">
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Projects</div></div>
+  <div class="stat"><div class="stat-num">15</div><div class="stat-label">Years</div></div>
+  <div class="stat"><div class="stat-num">4.9</div><div class="stat-label">Rating</div></div>
+</div>
+
+<div class="section">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Our Services</div>
+  <div class="services-grid">
+    <div class="service-tile">
+      <div class="service-tile-img"><img src="photos/landscaper-hero.jpg" alt="Lawn" style="object-position: center 40%;"></div>
+      <div class="service-tile-body"><h4>Lawn Care</h4><p>Mowing, edging, fertilization & weed control</p></div>
+    </div>
+    <div class="service-tile">
+      <div class="service-tile-img"><img src="photos/landscaper-hero.jpg" alt="Hardscape" style="object-position: center 60%;"></div>
+      <div class="service-tile-body"><h4>Hardscaping</h4><p>Patios, walkways, retaining walls & fire pits</p></div>
+    </div>
+    <div class="service-tile">
+      <div class="service-tile-img"><img src="photos/landscaper-hero.jpg" alt="Irrigation" style="object-position: top;"></div>
+      <div class="service-tile-body"><h4>Irrigation</h4><p>Sprinkler install, drip systems & repairs</p></div>
+    </div>
+    <div class="service-tile">
+      <div class="service-tile-img"><img src="photos/landscaper-hero.jpg" alt="Design" style="object-position: bottom;"></div>
+      <div class="service-tile-body"><h4>Landscape Design</h4><p>Custom designs, 3D renders & drought-tolerant plans</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="ba-section">
+  <div class="section-label" style="color: #22c55e;">Results</div>
+  <div class="section-title" style="color: #fff;">Before & After</div>
+  <div class="ba-container">
+    <div class="ba-grid">
+      <div class="ba-side">
+        <img src="photos/landscaper-hero.jpg" alt="Before" style="filter: grayscale(60%) brightness(0.7);">
+        <div class="ba-label">Before</div>
+      </div>
+      <div class="ba-side">
+        <img src="photos/landscaper-hero.jpg" alt="After">
+        <div class="ba-label after-label">After</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color:#999; text-align:center; margin-top:12px;">Backyard transformation -- Riverside Hills</p>
+</div>
+
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Simple Process</div>
+  <div class="process-step"><div class="step-num">1</div><div class="step-content"><h4>Free Consultation</h4><p>We visit your property and discuss your vision and budget.</p></div></div>
+  <div class="process-step"><div class="step-num">2</div><div class="step-content"><h4>Custom Design</h4><p>Our team creates a detailed plan with 3D renderings.</p></div></div>
+  <div class="process-step"><div class="step-num">3</div><div class="step-content"><h4>Expert Install</h4><p>Professional installation with quality materials and clean work.</p></div></div>
+  <div class="process-step"><div class="step-num">4</div><div class="step-content"><h4>Ongoing Care</h4><p>Optional maintenance plans to keep your yard looking perfect.</p></div></div>
+</div>
+
+<div class="cta-bar">
+  <h3>Ready to Transform Your Yard?</h3>
+  <p>Get a free, no-obligation estimate for your project.</p>
+  <a href="tel:9515553210" class="cta-btn">Get Free Quote</a>
+</div>
+
+<div class="footer">
+  <div class="logo">Green<span>Edge</span></div>
+  <p>Serving the Inland Empire<br>(951) 555-3210 | info@greenedgelandscaping.com</p>
+</div>
+
+</body>
+</html>

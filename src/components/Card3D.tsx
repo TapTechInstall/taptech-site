@@ -22,8 +22,6 @@ const dragConfig = {
   autoRotateSpeed: 0.0025,
 };
 
-// Large contactless signal arcs -- positioned beside the card, flowing outward
-// Thick white ))) arcs that continuously ripple away from the card edge
 function ContactlessSignal({ position }: { position: [number, number, number] }) {
   const arcCount = 5;
   const refs = Array.from({ length: arcCount }, () => useRef<THREE.Mesh>(null));
@@ -32,16 +30,11 @@ function ContactlessSignal({ position }: { position: [number, number, number] })
     const t = state.clock.elapsedTime;
     refs.forEach((ref, i) => {
       if (!ref.current) return;
-      // Continuous ripple: arcs scale outward and fade as they travel
       const speed = 0.9;
       const cycle = (t * speed + i * 0.55) % (arcCount * 0.55);
       const life = cycle / (arcCount * 0.55);
-
-      // Scale grows as arc travels outward
       const scale = 1 + life * 0.6;
       ref.current.scale.setScalar(scale);
-
-      // Fade in fast, hold, fade out at edges
       const fadeIn = Math.min(life / 0.15, 1);
       const fadeOut = Math.max(0, 1 - (life - 0.5) / 0.5);
       const peak = 0.6 - i * 0.06;
@@ -50,11 +43,9 @@ function ContactlessSignal({ position }: { position: [number, number, number] })
     });
   });
 
-  // Wide arcs opening to the right -- ~120deg span for clear ))) shape
   const arcSpan = 2.1;
   const arcCenter = -arcSpan / 2;
 
-  // Large, thick arcs with generous spacing
   const arcs = [
     { inner: 0.22, outer: 0.26 },
     { inner: 0.38, outer: 0.42 },
@@ -68,14 +59,13 @@ function ContactlessSignal({ position }: { position: [number, number, number] })
       {arcs.map((arc, i) => (
         <mesh key={i} ref={refs[i]}>
           <ringGeometry args={[arc.inner, arc.outer, 48, 1, arcCenter, arcSpan]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.5} side={THREE.DoubleSide} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.5} side={THREE.DoubleSide} />
         </mesh>
       ))}
     </group>
   );
 }
 
-// Holographic shimmer overlay that shifts color with viewing angle
 function HolographicShimmer({ position }: { position: [number, number, number] }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
 
@@ -101,19 +91,16 @@ function HolographicShimmer({ position }: { position: [number, number, number] }
       varying vec3 vNormal;
       varying vec3 vViewDir;
       void main() {
-        // Fresnel-based iridescence -- shifts color based on viewing angle
         float fresnel = 1.0 - abs(dot(vNormal, vViewDir));
         fresnel = pow(fresnel, 3.0);
-
         float t = uTime * 0.3 + vUv.x * 4.0 + vUv.y * 2.0;
+        // Gold shimmer tones
         vec3 col = vec3(
-          0.5 + 0.5 * sin(t + fresnel * 6.0),
-          0.5 + 0.5 * sin(t + 2.094 + fresnel * 6.0),
-          0.5 + 0.5 * sin(t + 4.189 + fresnel * 6.0)
+          0.83 + 0.17 * sin(t + fresnel * 4.0),
+          0.69 + 0.15 * sin(t + 1.5 + fresnel * 4.0),
+          0.22 + 0.1 * sin(t + 3.0 + fresnel * 4.0)
         );
-
-        // Only visible at glancing angles
-        float alpha = fresnel * 0.12;
+        float alpha = fresnel * 0.15;
         gl_FragColor = vec4(col, alpha);
       }
     `,
@@ -195,7 +182,6 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
     const state = dragState.current;
 
     if (!state.dragging) {
-      // Apply momentum
       targetRotation.current.y += state.velocityX;
       targetRotation.current.x += state.velocityY;
 
@@ -205,7 +191,6 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
       if (Math.abs(state.velocityX) < dragConfig.minVelocityCutoff) state.velocityX = 0;
       if (Math.abs(state.velocityY) < dragConfig.minVelocityCutoff) state.velocityY = 0;
 
-      // Resume auto-rotate when momentum settles, slowing near front/back face
       if (state.velocityX === 0 && state.velocityY === 0) {
         const cosAngle = Math.cos(targetRotation.current.y);
         const readabilityFactor = 0.25 + 0.75 * (1 - cosAngle * cosAngle);
@@ -213,17 +198,14 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
       }
     }
 
-    // Clamp X
     targetRotation.current.x = Math.max(
       -dragConfig.maxTiltX,
       Math.min(dragConfig.maxTiltX, targetRotation.current.x)
     );
 
-    // Smooth interpolation
     state.rotationX += (targetRotation.current.x - state.rotationX) * dragConfig.damping;
     state.rotationY += (targetRotation.current.y - state.rotationY) * dragConfig.damping;
 
-    // Apply scroll offset on top of drag rotation
     const scrollRotY = scrollProgress * Math.PI * 0.6;
     const scrollRotX = scrollProgress * 0.3;
 
@@ -231,7 +213,6 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
     groupRef.current.rotation.y = state.rotationY + scrollRotY;
     groupRef.current.rotation.z = Math.sin(state.rotationY * 0.3) * 0.03;
 
-    // Scroll-driven scale and position
     const s = 1 + scrollProgress * 0.15;
     groupRef.current.scale.setScalar(s);
     groupRef.current.position.y = scrollProgress * -0.5;
@@ -247,79 +228,74 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
         onPointerLeave={endDrag}
         onPointerCancel={endDrag}
       >
-        {/* RGB glow planes behind card */}
-        <mesh position={[-0.4, 0.2, -0.08]}>
+        {/* Gold glow planes behind card */}
+        <mesh position={[-0.3, 0.15, -0.08]}>
           <planeGeometry args={[3.2, 2.2]} />
-          <meshBasicMaterial color="#ff3366" transparent opacity={0.04} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.04} />
         </mesh>
         <mesh position={[0, 0, -0.06]}>
           <planeGeometry args={[3.6, 2.4]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.05} />
+          <meshBasicMaterial color="#B8960C" transparent opacity={0.03} />
         </mesh>
-        <mesh position={[0.4, -0.2, -0.1]}>
+        <mesh position={[0.3, -0.15, -0.1]}>
           <planeGeometry args={[3.2, 2.2]} />
-          <meshBasicMaterial color="#00aaff" transparent opacity={0.04} />
+          <meshBasicMaterial color="#E8D48B" transparent opacity={0.03} />
         </mesh>
 
-        {/* Main card body -- standard card proportions with visible edge thickness */}
+        {/* Main card body -- cream/white with gold metallic finish */}
         <RoundedBox args={[3.37, 2.125, 0.08]} radius={0.08} smoothness={6}>
           <meshPhysicalMaterial
-            color="#0d0d18"
-            metalness={0.6}
-            roughness={0.3}
-            clearcoat={0.4}
-            clearcoatRoughness={0.5}
-            envMapIntensity={1.2}
+            color="#F5F0E0"
+            metalness={0.3}
+            roughness={0.4}
+            clearcoat={0.5}
+            clearcoatRoughness={0.4}
+            envMapIntensity={1.0}
           />
         </RoundedBox>
 
-        {/* Subtle matte front face overlay */}
+        {/* Front face overlay */}
         <mesh position={[0, 0, 0.042]}>
           <planeGeometry args={[3.3, 2.06]} />
           <meshPhysicalMaterial
-            color="#0f0f1a"
-            metalness={0.2}
+            color="#FAF8F0"
+            metalness={0.1}
             roughness={0.7}
             transparent
             opacity={0.6}
           />
         </mesh>
 
-        {/* Holographic shimmer -- shifts color with viewing angle */}
+        {/* Holographic shimmer */}
         <HolographicShimmer position={[0, 0, 0.0425]} />
 
-        {/* Invisible larger hit area for easier dragging */}
+        {/* Invisible hit area */}
         <mesh visible={false}>
           <planeGeometry args={[4, 2.8]} />
           <meshBasicMaterial transparent opacity={0} />
         </mesh>
 
-        {/* Top RGB accent line */}
-        <RGBLine position={[0, 0.74, 0.043]} width={2.8} />
+        {/* Top gold accent line */}
+        <GoldLine position={[0, 0.74, 0.043]} width={2.8} />
 
-        {/* Edge highlight strips */}
+        {/* Edge highlights */}
         <mesh position={[0, 0.74, 0.043]}>
           <planeGeometry args={[3.3, 0.008]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.12} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.2} />
         </mesh>
         <mesh position={[0, -0.74, 0.043]}>
           <planeGeometry args={[3.3, 0.008]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.08} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.12} />
         </mesh>
 
-        {/* Contactless signal -- large arcs flowing outward from card right edge */}
+        {/* Contactless signal */}
         <ContactlessSignal position={[2.0, 0, 0.02]} />
 
-        {/* === FRONT FACE TYPOGRAPHY LAYOUT === */}
-        {/* Safe margin: 0.2 from edges. Card is 3.37 x 2.125 */}
-        {/* Left edge: -1.485, Right edge: 1.485, usable x: -1.28 to 1.28 */}
-        {/* Top edge: 0.8625, Bottom edge: -0.8625, usable y: -0.66 to 0.66 */}
-
-        {/* Brand: TapTech -- top left, understated */}
+        {/* Brand: TapTech */}
         <Text
           position={[-1.28, 0.62, 0.044]}
           fontSize={0.14}
-          color="#ffffff"
+          color="#1a1a1a"
           anchorX="left"
           anchorY="middle"
           fillOpacity={0.85}
@@ -328,11 +304,11 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           TapTech
         </Text>
 
-        {/* Brand: CONNECT -- right of TapTech, accent */}
+        {/* Brand: CONNECT */}
         <Text
           position={[-1.28, 0.46, 0.044]}
           fontSize={0.065}
-          color="#00ff88"
+          color="#D4AF37"
           anchorX="left"
           anchorY="middle"
           letterSpacing={0.25}
@@ -341,12 +317,12 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           CONNECT
         </Text>
 
-        {/* Cardholder name -- primary focal point, left-aligned, larger */}
+        {/* Cardholder name */}
         {fields.name ? (
           <Text
             position={[-1.28, -0.05, 0.044]}
             fontSize={0.17}
-            color="#ffffff"
+            color="#1a1a1a"
             anchorX="left"
             anchorY="middle"
             maxWidth={2.2}
@@ -359,17 +335,17 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <group position={[-1.28, -0.05, 0.043]}>
             <mesh position={[0.55, 0, 0]}>
               <planeGeometry args={[1.1, 0.045]} />
-              <meshBasicMaterial color="#ffffff" transparent opacity={0.04} />
+              <meshBasicMaterial color="#1a1a1a" transparent opacity={0.06} />
             </mesh>
           </group>
         )}
 
-        {/* Title/business -- secondary, smaller, muted */}
+        {/* Title/business */}
         {fields.title ? (
           <Text
             position={[-1.28, -0.26, 0.044]}
             fontSize={0.085}
-            color="#8888aa"
+            color="#6b6b6b"
             anchorX="left"
             anchorY="middle"
             maxWidth={2.2}
@@ -382,23 +358,23 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <group position={[-1.28, -0.26, 0.043]}>
             <mesh position={[0.4, 0, 0]}>
               <planeGeometry args={[0.8, 0.03]} />
-              <meshBasicMaterial color="#8888aa" transparent opacity={0.04} />
+              <meshBasicMaterial color="#6b6b6b" transparent opacity={0.06} />
             </mesh>
           </group>
         )}
 
-        {/* Thin separator line above contact info */}
+        {/* Separator */}
         <mesh position={[-0.45, -0.46, 0.043]}>
           <planeGeometry args={[1.66, 0.003]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.15} />
         </mesh>
 
-        {/* Phone -- bottom left, small, utility text */}
+        {/* Phone */}
         {fields.phone ? (
           <Text
             position={[-1.28, -0.58, 0.044]}
             fontSize={0.065}
-            color="#8888aa"
+            color="#6b6b6b"
             anchorX="left"
             anchorY="middle"
             fillOpacity={0.55}
@@ -410,17 +386,17 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <group position={[-1.28, -0.58, 0.043]}>
             <mesh position={[0.4, 0, 0]}>
               <planeGeometry args={[0.8, 0.025]} />
-              <meshBasicMaterial color="#8888aa" transparent opacity={0.03} />
+              <meshBasicMaterial color="#6b6b6b" transparent opacity={0.05} />
             </mesh>
           </group>
         )}
 
-        {/* Website -- bottom left below phone, accent color, small */}
+        {/* Website */}
         {fields.website ? (
           <Text
             position={[-1.28, -0.70, 0.044]}
             fontSize={0.06}
-            color="#00e5a0"
+            color="#D4AF37"
             anchorX="left"
             anchorY="middle"
             fillOpacity={0.6}
@@ -432,53 +408,53 @@ function NFCCard({ scrollProgress, fields }: { scrollProgress: number; fields: C
           <group position={[-1.28, -0.70, 0.043]}>
             <mesh position={[0.35, 0, 0]}>
               <planeGeometry args={[0.7, 0.02]} />
-              <meshBasicMaterial color="#00e5a0" transparent opacity={0.04} />
+              <meshBasicMaterial color="#D4AF37" transparent opacity={0.06} />
             </mesh>
           </group>
         )}
 
-        {/* Bottom RGB accent line */}
-        <RGBLine position={[0, -0.74, 0.043]} width={2.8} />
+        {/* Bottom gold accent line */}
+        <GoldLine position={[0, -0.74, 0.043]} width={2.8} />
 
-        {/* Back face -- clean, no magnetic stripe */}
+        {/* Back face */}
         <mesh position={[0, 0, -0.042]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[3.3, 2.06]} />
           <meshPhysicalMaterial
-            color="#08080f"
-            metalness={0.3}
-            roughness={0.6}
+            color="#F0EBD8"
+            metalness={0.2}
+            roughness={0.5}
             transparent
             opacity={0.8}
           />
         </mesh>
 
-        {/* Back: TapTech branding centered */}
+        {/* Back: branding */}
         <mesh position={[0, 0.1, -0.043]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[1.0, 0.14]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.06} />
+          <meshBasicMaterial color="#1a1a1a" transparent opacity={0.08} />
         </mesh>
 
         {/* Back: URL line */}
         <mesh position={[0, -0.15, -0.043]} rotation={[0, Math.PI, 0]}>
           <planeGeometry args={[1.3, 0.04]} />
-          <meshBasicMaterial color="#00e5a0" transparent opacity={0.06} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.1} />
         </mesh>
 
-        {/* Back: NFC icon mirror */}
+        {/* Back: NFC icon */}
         <mesh position={[0, -0.55, -0.043]} rotation={[0, Math.PI, 0]}>
           <ringGeometry args={[0.1, 0.12, 32]} />
-          <meshBasicMaterial color="#00ff88" transparent opacity={0.15} />
+          <meshBasicMaterial color="#D4AF37" transparent opacity={0.2} />
         </mesh>
         <mesh position={[0, -0.55, -0.043]} rotation={[0, Math.PI, 0]}>
           <circleGeometry args={[0.03, 32]} />
-          <meshBasicMaterial color="#00aaff" transparent opacity={0.2} />
+          <meshBasicMaterial color="#B8960C" transparent opacity={0.25} />
         </mesh>
       </group>
     </Float>
   );
 }
 
-function RGBLine({ position, width }: { position: [number, number, number]; width: number }) {
+function GoldLine({ position, width }: { position: [number, number, number]; width: number }) {
   const matRef = useRef<THREE.ShaderMaterial>(null);
 
   const shader = useMemo(() => ({
@@ -497,10 +473,11 @@ function RGBLine({ position, width }: { position: [number, number, number]; widt
       varying vec2 vUv;
       void main() {
         float t = uTime * 0.5 + vUv.x * 3.0;
+        // Gold shimmer
         vec3 col = vec3(
-          0.5 + 0.5 * sin(t),
-          0.5 + 0.5 * sin(t + 2.094),
-          0.5 + 0.5 * sin(t + 4.189)
+          0.83 + 0.1 * sin(t),
+          0.69 + 0.1 * sin(t + 1.0),
+          0.22 + 0.05 * sin(t + 2.0)
         );
         gl_FragColor = vec4(col, 0.8);
       }
@@ -527,10 +504,10 @@ function ParticleField({ scrollProgress }: { scrollProgress: number }) {
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
     const palette = [
-      [1, 0.2, 0.4],
-      [0, 1, 0.53],
-      [0, 0.67, 1],
-      [0.7, 0.53, 1],
+      [0.83, 0.69, 0.22],
+      [0.72, 0.59, 0.05],
+      [0.91, 0.83, 0.55],
+      [0.55, 0.45, 0.33],
     ];
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 16;
@@ -558,7 +535,7 @@ function ParticleField({ scrollProgress }: { scrollProgress: number }) {
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.025} vertexColors transparent opacity={0.5} sizeAttenuation />
+      <pointsMaterial size={0.025} vertexColors transparent opacity={0.4} sizeAttenuation />
     </points>
   );
 }
@@ -574,7 +551,7 @@ function GlowOrb({ position, color, scale = 1 }: { position: [number, number, nu
   return (
     <mesh ref={ref} position={position} scale={scale}>
       <sphereGeometry args={[1, 32, 32]} />
-      <MeshDistortMaterial color={color} transparent opacity={0.1} distort={0.4} speed={2} />
+      <MeshDistortMaterial color={color} transparent opacity={0.06} distort={0.4} speed={2} />
     </mesh>
   );
 }
@@ -594,36 +571,32 @@ function ScrollHandler({ onScroll }: { onScroll: (progress: number) => void }) {
 function Scene({ scrollProgress, fields }: { scrollProgress: number; fields: CardFields }) {
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} />
 
-      {/* RGB point lights */}
-      <pointLight position={[-4, 2, 4]} intensity={0.8} color="#ff3366" />
-      <pointLight position={[4, -1, 4]} intensity={0.6} color="#00aaff" />
-      <pointLight position={[0, 3, 3]} intensity={0.5} color="#00ff88" />
-      <pointLight position={[-2, -2, 3]} intensity={0.3} color="#b388ff" />
+      {/* Warm gold point lights */}
+      <pointLight position={[-4, 2, 4]} intensity={0.6} color="#D4AF37" />
+      <pointLight position={[4, -1, 4]} intensity={0.4} color="#B8960C" />
+      <pointLight position={[0, 3, 3]} intensity={0.5} color="#FFFFFF" />
+      <pointLight position={[-2, -2, 3]} intensity={0.3} color="#E8D48B" />
 
       <Environment preset="city" />
       <NFCCard scrollProgress={scrollProgress} fields={fields} />
       <ParticleField scrollProgress={scrollProgress} />
 
-      {/* RGB glow orbs */}
-      <GlowOrb position={[-3.5, 1, -2]} color="#ff3366" scale={1.3} />
-      <GlowOrb position={[3.5, -1, -3]} color="#00aaff" scale={1.2} />
-      <GlowOrb position={[0, 2, -4]} color="#00ff88" scale={1} />
-      <GlowOrb position={[-2, -2, -3]} color="#b388ff" scale={0.8} />
+      {/* Gold glow orbs */}
+      <GlowOrb position={[-3.5, 1, -2]} color="#D4AF37" scale={1.3} />
+      <GlowOrb position={[3.5, -1, -3]} color="#B8960C" scale={1.2} />
+      <GlowOrb position={[0, 2, -4]} color="#E8D48B" scale={1} />
     </>
   );
 }
 
-// Responsive camera -- adjusts Z distance and FOV so card+signal never clips
 function ResponsiveCamera() {
   const { camera, size } = useThree();
 
   useEffect(() => {
     const cam = camera as THREE.PerspectiveCamera;
-    // Card + signal arcs span ~5.5 units wide. Need generous margins.
-    // Pull camera back further on narrow screens.
     if (size.width < 360) {
       cam.position.z = 8;
       cam.fov = 60;
@@ -679,7 +652,7 @@ export default function Card3D() {
   if (error) {
     return (
       <div className="w-full h-[340px] sm:h-[420px] md:h-[520px] flex items-center justify-center relative">
-        <div className="w-[280px] sm:w-[340px] h-[175px] sm:h-[210px] rounded-2xl bg-bg-card border border-accent/20 relative overflow-hidden rgb-pulse">
+        <div className="w-[280px] sm:w-[340px] h-[175px] sm:h-[210px] rounded-2xl bg-white border border-accent/20 relative overflow-hidden rgb-pulse">
           <div className="absolute top-0 left-0 right-0 rgb-line" />
           <div className="p-6 flex flex-col justify-between h-full">
             <div>
@@ -691,7 +664,7 @@ export default function Card3D() {
               <div className="flex flex-col items-center gap-1">
                 <div className="w-5 h-5 rounded-full border-2 border-accent/50" />
                 <div className="w-3 h-3 rounded-full border border-accent-2/40" />
-                <div className="w-1.5 h-1.5 rounded-full bg-neon-red/60" />
+                <div className="w-1.5 h-1.5 rounded-full bg-accent/60" />
               </div>
             </div>
           </div>
@@ -749,7 +722,7 @@ export default function Card3D() {
               onChange={e => updateField('name', e.target.value)}
               placeholder="John Smith"
               maxLength={30}
-              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+              className="w-full px-3 py-2 rounded-lg bg-white border border-border text-txt text-sm placeholder:text-dim/30 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.02] transition-all"
             />
           </div>
           <div>
@@ -760,7 +733,7 @@ export default function Card3D() {
               onChange={e => updateField('title', e.target.value)}
               placeholder="Owner, Riverside Barbershop"
               maxLength={40}
-              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+              className="w-full px-3 py-2 rounded-lg bg-white border border-border text-txt text-sm placeholder:text-dim/30 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.02] transition-all"
             />
           </div>
           <div>
@@ -771,7 +744,7 @@ export default function Card3D() {
               onChange={e => updateField('phone', e.target.value)}
               placeholder="(951) 555-0123"
               maxLength={20}
-              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+              className="w-full px-3 py-2 rounded-lg bg-white border border-border text-txt text-sm placeholder:text-dim/30 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.02] transition-all"
             />
           </div>
           <div>
@@ -782,7 +755,7 @@ export default function Card3D() {
               onChange={e => updateField('website', e.target.value)}
               placeholder="yourbusiness.com"
               maxLength={30}
-              className="w-full px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.04] transition-all"
+              className="w-full px-3 py-2 rounded-lg bg-white border border-border text-txt text-sm placeholder:text-dim/30 focus:outline-none focus:border-accent/40 focus:bg-accent/[0.02] transition-all"
             />
           </div>
           {hasAnyField && (

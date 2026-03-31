@@ -8,7 +8,7 @@ const testimonials = [
     role: 'Barber',
     location: 'Riverside, CA',
     quote: 'I handed out paper cards for years and maybe got 2 calls. First week with TapTech, I got 6 new bookings and 4 Google reviews. My clients think it\'s the coolest thing.',
-    color: '#00e5a0',
+    color: '#D4AF37',
     initials: 'MT',
   },
   {
@@ -16,7 +16,7 @@ const testimonials = [
     role: 'Realtor',
     location: 'Corona, CA',
     quote: 'At open houses I used to scramble for business cards. Now I just tell people to tap. They get my listings, contact, and can schedule a showing right there.',
-    color: '#00b8ff',
+    color: '#B8960C',
     initials: 'SL',
   },
   {
@@ -24,7 +24,7 @@ const testimonials = [
     role: 'Personal Trainer',
     location: 'Moreno Valley, CA',
     quote: 'People at the gym ask about training and I just hand them the card. They see my transformations, pricing, and book a session before they even leave.',
-    color: '#b388ff',
+    color: '#8B7355',
     initials: 'DK',
   },
 ];
@@ -42,8 +42,8 @@ export default function Testimonials() {
   return (
     <section className="relative py-28 sm:py-36 overflow-hidden">
       {/* Glows */}
-      <div className="absolute top-0 left-1/3 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(0,229,160,0.04),transparent_60%)] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(179,136,255,0.04),transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/3 w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(212,175,55,0.03),transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(184,150,12,0.03),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
@@ -81,7 +81,7 @@ export default function Testimonials() {
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
                 {[...Array(5)].map((_, j) => (
-                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#ffd600">
+                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#D4AF37">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                   </svg>
                 ))}
@@ -120,7 +120,7 @@ export default function Testimonials() {
           {trustPoints.map((tp) => (
             <div key={tp.label} className="flex items-center gap-3 card-premium rounded-xl p-4">
               <div className="w-8 h-8 rounded-lg bg-accent/[0.08] flex items-center justify-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d={tp.icon} />
                 </svg>
               </div>

@@ -7,8 +7,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function MockupCTA() {
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden">
-      {/* RGB glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse,rgba(0,229,160,0.06),transparent_60%)] pointer-events-none" />
+      {/* Glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(ellipse,rgba(212,175,55,0.04),transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
@@ -38,7 +38,7 @@ export default function MockupCTA() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#contact"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full gradient-btn text-bg font-semibold text-base"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full gradient-btn text-white font-semibold text-base"
             >
               Get Your Free Mockup
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -47,7 +47,7 @@ export default function MockupCTA() {
             </a>
             <a
               href="sms:+15105700690?body=Hey%20TapTech%2C%20I%27d%20love%20a%20free%20mockup%20of%20my%20card!"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/[0.08] bg-white/[0.02] text-txt font-semibold text-base hover:border-accent/20 hover:bg-accent/[0.04] transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-border bg-white/60 text-txt font-semibold text-base hover:border-accent/25 hover:bg-accent/[0.04] transition-all duration-300"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
@@ -58,6 +58,11 @@ export default function MockupCTA() {
 
           <p className="text-dim text-xs mt-6">
             Just send your logo and business name. We&apos;ll do the rest.
+          </p>
+
+          <p className="text-dim text-sm mt-4">
+            Need a website too? We build and manage sites for small businesses.{' '}
+            <a href="/websites.html" className="text-accent hover:underline font-medium">See website packages</a>
           </p>
         </motion.div>
       </div>

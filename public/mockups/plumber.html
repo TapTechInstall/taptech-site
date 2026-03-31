@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Inland Empire Plumbing Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f8fc;
+    color: #1a2332;
+    width: 390px;
+    min-height: 844px;
+    overflow-x: hidden;
+  }
+  .top-bar {
+    background: #0b3d91;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  .top-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .nav {
+    background: #fff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .nav .brand {
+    font-weight: 800;
+    font-size: 18px;
+    color: #0b3d91;
+  }
+  .nav .brand span { color: #3b82f6; }
+  .hero {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(11,61,145,0.88) 0%, rgba(59,130,246,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+  }
+  .hero-overlay h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .hero-overlay p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 28px;
+    background: #f59e0b;
+    color: #1a2332;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .trust-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #fff;
+    border-bottom: 3px solid #3b82f6;
+  }
+  .trust-item {
+    text-align: center;
+    padding: 16px 8px;
+    border-right: 1px solid #eee;
+  }
+  .trust-item:last-child { border-right: none; }
+  .trust-icon {
+    width: 36px;
+    height: 36px;
+    background: #eff6ff;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0b3d91;
+  }
+  .trust-item strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0b3d91;
+  }
+  .trust-item span { font-size: 10px; color: #666; }
+  .content { padding: 24px 20px; }
+  .section-header {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0b3d91;
+    margin-bottom: 4px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .service-icon-box {
+    width: 48px;
+    height: 48px;
+    background: #eff6ff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b3d91;
+  }
+  .service-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .service-card p { font-size: 12px; color: #666; line-height: 1.5; }
+  .review-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .review-stars { color: #f59e0b; font-size: 14px; margin-bottom: 8px; }
+  .review-text { font-size: 13px; color: #444; line-height: 1.6; font-style: italic; }
+  .review-author { font-size: 12px; color: #999; margin-top: 8px; font-weight: 600; }
+  .emergency {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin: 0 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+  }
+  .emergency h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+  .emergency p { font-size: 13px; opacity: 0.9; margin-bottom: 12px; }
+  .emergency a {
+    display: inline-block;
+    background: #fff;
+    color: #dc2626;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .footer {
+    background: #0b3d91;
+    color: #fff;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .footer .brand { font-weight: 800; font-size: 18px; margin-bottom: 8px; }
+  .footer p { font-size: 12px; opacity: 0.7; line-height: 1.8; }
+  .footer a { color: #93c5fd; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>24/7 Emergency Service</span>
+  <a href="tel:9515559876">(951) 555-9876</a>
+</div>
+
+<div class="nav">
+  <div class="brand">IE <span>Plumbing</span></div>
+  <div style="display:flex;flex-direction:column;gap:4px;"><span style="width:22px;height:2px;background:#0b3d91;display:block;"></span><span style="width:22px;height:2px;background:#0b3d91;display:block;"></span><span style="width:22px;height:2px;background:#0b3d91;display:block;"></span></div>
+</div>
+
+<div class="hero">
+  <img src="photos/plumber-hero.jpg" alt="Plumber at work">
+  <div class="hero-overlay">
+    <h1>Riverside's Most Trusted Plumbing Team</h1>
+    <p>Fast, reliable service for your home and business. Licensed, bonded, and insured.</p>
+    <a href="tel:9515559876" class="hero-cta">Get a Free Estimate</a>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">L</div>
+    <strong>Licensed</strong>
+    <span>CA #985421</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">I</div>
+    <strong>Insured</strong>
+    <span>Fully Covered</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">24</div>
+    <strong>24/7</strong>
+    <span>Always On Call</span>
+  </div>
+</div>
+
+<div class="content">
+  <h2 class="section-header">Our Services</h2>
+  <p class="section-desc">Full-service plumbing for residential and commercial</p>
+  <div class="service-card">
+    <div class="service-icon-box">W</div>
+    <div><h3>Water Heater Repair</h3><p>Tank and tankless water heater installation, repair, and maintenance.</p></div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon-box">D</div>
+    <div><h3>Drain Cleaning</h3><p>Professional drain and sewer cleaning with camera inspection included.</p></div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon-box">L</div>
+    <div><h3>Leak Detection</h3><p>Advanced leak detection to find hidden leaks and prevent water damage.</p></div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon-box">P</div>
+    <div><h3>Pipe Repair & Repiping</h3><p>Copper, PEX, and PVC pipe repair. Full home repiping services available.</p></div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon-box">T</div>
+    <div><h3>Toilet & Fixture Install</h3><p>Faucet, toilet, garbage disposal, and fixture installation.</p></div>
+  </div>
+</div>
+
+<div class="emergency">
+  <h3>Plumbing Emergency?</h3>
+  <p>Burst pipes, gas leaks, sewer backups -- we respond fast, 24/7.</p>
+  <a href="tel:9515559876">Call Now</a>
+</div>
+
+<div class="content">
+  <h2 class="section-header">Customer Reviews</h2>
+  <p class="section-desc">4.9 stars across 200+ reviews</p>
+  <div class="review-card">
+    <div class="review-stars">5/5 Stars</div>
+    <div class="review-text">"They came out within an hour on a Sunday night for a burst pipe. Professional, fast, and fair pricing. Can't recommend enough."</div>
+    <div class="review-author">-- Maria G., Riverside</div>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">5/5 Stars</div>
+    <div class="review-text">"Installed a new tankless water heater. Clean work, on time, and the price was exactly what they quoted."</div>
+    <div class="review-author">-- James T., Corona</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="brand">Inland Empire Plumbing Co.</div>
+  <p>Serving Riverside, Corona, Moreno Valley & the IE<br>
+  <a href="tel:9515559876">(951) 555-9876</a><br>License #985421</p>
+</div>
+
+</body>
+</html>
